@@ -9,6 +9,22 @@
  */
 
 angular.module('admissionSystemApp')
-  .controller('TabsCtrl', function ($scope, $window) {
+  .controller('TabsCtrl', ['$scope', 'progressBarService', function ($scope, progressBarService) {
 
-  });
+    $scope.$on('valBubble', function (evt, args) {
+
+      if (args.isValid) {
+        progressBarService.value++;
+      }
+
+      else if (progressBarService.value > 0) {
+        progressBarService.value--;
+      }
+      else {
+        progressBarService.number++;
+      }
+
+    });
+
+
+  }]);
