@@ -51,9 +51,7 @@ angular.module('admissionSystemApp')
                       item.eduFormTypeId = eduFormTypeNames[item.eduFormTypeId];
                     });
                     deferred.resolve(rawProposals);
-          console.log(rawProposals)
-
-        })
+               })
       });
       return deferred.promise;
     }
