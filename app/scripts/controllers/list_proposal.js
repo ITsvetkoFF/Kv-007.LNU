@@ -49,7 +49,6 @@ angular.module('admissionSystemApp')
         }
       });
     })
-
   }]);
 
 
