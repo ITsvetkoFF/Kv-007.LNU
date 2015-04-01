@@ -16,8 +16,7 @@ angular.module('admissionSystemApp')
           departmentNames = [],
           timePeriodCourseNames = [],
           specofferTypeNames = [],
-          eduFormTypeNames = [],
-          timePeriodOffersQuantity=[];
+          eduFormTypeNames = [];
 
       SpecofferDictionaryService.getAllSpecoffersByTimePeriodId().then(function(rawProposals) {
 
@@ -48,8 +47,6 @@ angular.module('admissionSystemApp')
                       item.timePeriodCourseId = timePeriodCourseNames[item.timePeriodCourseId];
                       item.specofferTypeId = specofferTypeNames[item.specofferTypeId];
                       item.eduFormTypeId = eduFormTypeNames[item.eduFormTypeId];
-                      timePeriodOffersQuantity.push(item.id);
-                      item.id=timePeriodOffersQuantity.indexOf(item.id)+1;
                     });
                     deferred.resolve(rawProposals);
         })
