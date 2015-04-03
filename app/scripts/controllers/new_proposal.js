@@ -101,10 +101,10 @@ angular.module('admissionSystemApp')
 
     function brosweOrEditSpecoffer (specofferId) {
       SpecoffersService.getEntireSpecoffer(specofferId).then(function(res){
-        console.log('res',res);
+        //console.log('res',res);
         $scope.specOffer = {};
         $scope.specOffer.specialtyId = res.specoffer.specialtyId;
-        // $scope.pecOffer.departmentId = departments[res.specoffer.departmentId - 1].id;
+        //$scope.specOffer.departmentId = departments[res.specoffer.departmentId - 1].id;
         $scope.specOffer.specofferTypeId =  $scope.specofferTypesOptions[res.specoffer.specofferTypeId - 1].id;
         $scope.specOffer.timePeriodCourseId = $scope.timePeriodCourseId[res.specoffer.timePeriodCourseId - 1].id;
         $scope.specOffer.docSeries = res.specoffer.docSeries;

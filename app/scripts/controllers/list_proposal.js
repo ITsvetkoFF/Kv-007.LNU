@@ -8,18 +8,18 @@
  * Controller of the admissionSystemApp
  */
 angular.module('admissionSystemApp')
-  .controller('ListProposalCtrl', ['$scope','$filter','ngTableParams', 'ListProposalGettingService', '$modal', function ($scope, $filter, ngTableParams, ListProposalGettingService, $modal) {
+  .controller('ListProposalCtrl', ['$scope', '$filter', 'ngTableParams', 'ListProposalGettingService', '$modal', function ($scope, $filter, ngTableParams, ListProposalGettingService, $modal) {
 
     $scope.headers = [
-      {name: "id", display: "id", visible: true},
-      {name: "specialtyId", display: "speciality", visible: true},
-      {name: "departmentId", display: "department", visible: true},
-      {name: "timePeriodId", display: "timePeriod", visible: true},
-      {name: "timePeriodCourseId", display: "timePeriodCarousel", visible: true},
-      {name: "specofferTypeId", display: "specofferType", visible: true},
-      {name: "eduFormTypeId", display: "eduFormType", visible: true},
-      {name: "licCount", display: "licCount", visible: true},
-      {name: "stateCount", display: "stateCount", visible: true}
+      {name: "№", visible: true},
+      {name: "specialtyId", visible: true},
+      {name: "departmentId", visible: true},
+      {name: "timePeriodId", visible: true},
+      {name: "timePeriodCourseId", visible: true},
+      {name: "specofferTypeId", visible: true},
+      {name: "eduFormTypeId", visible: true},
+      {name: "licCount", visible: true},
+      {name: "stateCount", visible: true}
     ];
 
     $scope.openFiltersModal = function (size) {
@@ -41,18 +41,32 @@ angular.module('admissionSystemApp')
     ListProposalGettingService.allProposalsDecoded(8).then(function (data) {
       $scope.tableParams = new ngTableParams({
         page: 1,            // show first page
-        count: 10          // count per page
-      }, {
+        count: 20
+          //filter: {
+          //  timePeriodCourseId: '1',
+          //  specialtyId:'ж',
+          //  eduFormTypeId:'д'
+          //}
+      },
+        {
         total: data.length, // length of data
-        getData: function ($defer, params) {
-          $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        getData: function ($defer, params) { // $defer - це obj промісу, що дозволяє відобаржати в ng-table нашу data
+                                             // $params - це ...
+          var orderedData = params.filter() ?
+            $filter('filter')(data, params.filter()) :
+            data;
+
+          $scope.users = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+
+          params.total(orderedData.length); // set total for recalc pagination
+          $defer.resolve($scope.users);
         }
       });
-    })
-
+    });
 
 
   }]);
+
 
 
 

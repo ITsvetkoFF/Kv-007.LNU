@@ -12,7 +12,6 @@
 
       <h4>Фільтрація</h4>
 
-
       <form class="search-around" role="form">
         <div class="form-group">
           <input type="search" class="form-control" id="inputSearch" placeholder="Ключове слово">
@@ -20,36 +19,11 @@
         <button type="submit" class="btn  btn-sm btn-primary">Шукати</button>
       </form>
 
-      <form class="filter-subjects" role="form">
-        <div class="form-group">
-          <label for="name">Предмет </label>
-
-          <div class="checkbox">
-            <label><input type="checkbox" value="">Філологія</label>
-          </div>
-          <div class="checkbox">
-            <label><input type="checkbox" value="">Математика</label>
-          </div>
-        </div>
-      </form>
-
-      <form class="filter-faculty" class="search-around" role="form">
-        <div class="form-group">
-          <label for="name">Струк. підрозділи</label>
-          <select multiple class="form-control">
-            <option>Факультет іноземних мов</option>
-            <option>Факультет кібернетики</option>
-            <option>Факультет кібернетики</option>
-            <option>Інститут прикладної фізики</option>
-            <option>Факультет лав</option>
-          </select>
-        </div>
-      </form>
-
       <p>
         <button type="button" class="btn btn-primary btn-sm">Оновити</button>
         <button type="button" class="btn btn-default btn-sm">Зберегти</button>
       </p>
+
 
     </div>
     <!-- end filter -->
@@ -71,20 +45,47 @@
         <!-- Table -->
         <div>
           <table ng-table="tableParams" show-filter="true" class="table">
-            <thead>
-            <tr>
-              <td ng-repeat="column in headers" data-title="'column.display'" ng-show="column.visible" sortable="column.field">
-                {{column.display}}
-              </td>
-            </tr>
-            </thead>
+
             <tr ng-repeat="prop in $data">
-              <td ng-repeat="column in headers" data-title="'column.display'" ng-show="column.visible" sortable="column.field">
-                {{prop[column.name]}}
+              <td data-title = "'№'" ng-show = "headers[0].visible">
+                {{prop['id']}}
               </td>
-            </tr>
+              <td data-title="'speciality'" ng-show = "headers[1].visible" filter="{'specialtyId': 'text'}" >
+                {{prop['specialtyId']}}
+              </td>
+              <td data-title="'department'" ng-show = "headers[2].visible">
+                {{prop['departmentId']}}
+              </td>
+              <td data-title="'timePeriod'" ng-show = "headers[3].visible">
+                {{prop['timePeriodId']}}
+              </td>
+              <td data-title="'timePeriodCourse'" filter="{'timePeriodCourseId': 'text'}" ng-show = "headers[4].visible">
+                {{prop['timePeriodCourseId']}}
+              </td>
+              <td data-title="'specofferType'" ng-show = "headers[5].visible">
+                {{prop['specofferTypeId']}}
+              </td>
+              <td data-title="'eduFormType'" ng-show = "headers[6].visible" filter="{'eduFormTypeId': 'text'}">
+                {{prop['eduFormTypeId']}}
+              </td>
+              <td data-title="'licCount'" ng-show = "headers[7].visible">
+                {{prop['licCount']}}
+              </td>
+              <td data-title="'stateCount'" ng-show = "headers[8].visible">
+                {{prop['stateCount']}}
+              </td>
+
+              </tr>
+
           </table>
+
+
+
+
+
+
       </div>
+        </div>
     </div>
 
       <div class="footer">
