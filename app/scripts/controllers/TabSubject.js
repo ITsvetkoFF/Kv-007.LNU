@@ -12,7 +12,7 @@ angular.module('admissionSystemApp')
         controller: 'ModalSubjectCtrl',
         size: size,
         scope: $scope.$new(true)
-      }).result.then(function(item) {
+      }).result.then(function (item) {
           var arrayForId = [],
             i;
 
@@ -34,9 +34,9 @@ angular.module('admissionSystemApp')
               weightSubject: item.weightSubject
             });
 
-            console.log('id'+ $scope.entireSpecoffer.subjects[i].enrolmentSubjectId);
+            console.log('id' + $scope.entireSpecoffer.subjects[i].enrolmentSubjectId);
 
-            showSubjectById(arrayForId[i].id,item.mark,item.isMajor,item.alternative,item.weightSubject);
+            showSubjectById(arrayForId[i].id, item.mark, item.isMajor, item.alternative, item.weightSubject);
 
           }
 

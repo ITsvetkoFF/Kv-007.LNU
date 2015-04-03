@@ -19,7 +19,7 @@
           <th></th>
         </tr>
         <tr ng-repeat="subj in viewSubjects">
-          <td> {{ subj.subject}} </td>
+          <td> {{ subj.subject || "&mdash;"}} </td>
           <!--<td> <p ng-repeat = "n in subj.addName track by $index"> {{n}} </p></td>-->
           <td>{{subj.addName}}</td>
           <td> {{subj.isMajor ? 'Так' : 'Нi'}} </td>

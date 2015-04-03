@@ -7,7 +7,6 @@ angular.module('admissionSystemApp')
   }])
 
   .factory('SpecofferDictionaryService', ['$http', '$q', function ($http, $q) {
-
     function requestConfig(item, limit, offset, customParams) {
         var normalParams = {
           limit: limit,
@@ -17,7 +16,7 @@ angular.module('admissionSystemApp')
 
         return {
           method: 'GET',
-          url: 'http://176.36.11.25/api-lnu/' + item,
+          url: 'http://104.236.29.16:8080/is-lnu-rest-api/api/' + item,
           params: normalParams
           // ,cache: true
         };
@@ -75,11 +74,20 @@ angular.module('admissionSystemApp')
         getTimePeriodCourseIds: function () {
           return getLargeDictionary('courses/types');
         },
-        getTimeperiods: function () {
-          return getLargeDictionary('timeperiods');
+        getTimeperiods: function (obj) {
+          return getLargeDictionary('timeperiods', obj);
         },
+        getBenefits: function () {
+          return getLargeDictionary('benefits');
+        },
+
         clearStorage: function () {
           storage = {};
+        },
+        clearStorageByRoute: function (route) {
+          if(storage[route]) {
+            delete storage[route];
+          }
         }
       };
     }]);
