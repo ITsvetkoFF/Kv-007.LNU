@@ -4,13 +4,12 @@
   </button>
 
 
-
   <div class="row">
     <div class="col-md-11 text-center">
 
       <table class="table table-bordered table-hover" ng-show="entireSpecoffer.subjects.length">
         <tr>
-          <th>Назва предмета </th>
+          <th>Назва предмета</th>
           <th class="text-center">Додаткова назва</th>
           <th>Профiльний</th>
           <th>Обов'язковий</th>
@@ -19,14 +18,16 @@
           <th></th>
         </tr>
         <tr ng-repeat="subj in viewSubjects">
-          <td> {{ subj.subject || "&mdash;"}} </td>
-          <!--<td> <p ng-repeat = "n in subj.addName track by $index"> {{n}} </p></td>-->
-          <td>{{subj.addName}}</td>
-          <td> {{subj.isMajor ? 'Так' : 'Нi'}} </td>
-          <td> {{ subj.alternative ? 'Так' : 'Нi'}} </td>
-          <td> {{subj.weightSubject}} </td>
+          <td rowspan=viewSubjects.length> {{ subj.subject}}</td>
+          <!--<td> <p ng-repeat = "n in subj.addName track by $index"> {{n}} </p> </td>-->
+          <td>{{subj.addName || "&mdash;"}}</td>
+          <td> {{subj.isMajor ? 'Так' : 'Нi'}}</td>
+          <td> {{ subj.alternative ? 'Так' : 'Нi'}}</td>
+          <td> {{subj.weightSubject}}</td>
           <td> {{subj.mark }}</td>
-          <td><button class="btn btn-xs btn-danger" ng-click="removeRow($index)"><i class="fa fa-times"></i></button></td>
+          <td>
+            <button class="btn btn-xs btn-danger" ng-click="removeRow($index)"><i class="fa fa-times"></i></button>
+          </td>
         </tr>
 
       </table>

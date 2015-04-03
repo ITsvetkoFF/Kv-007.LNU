@@ -10,7 +10,7 @@ angular.module('admissionSystemApp')
 
         var restAngular =
         Restangular.withConfig(function(Configurer) {
-            Configurer.setBaseUrl('http://104.236.29.16:8080/is-lnu-rest-api/api/');
+            Configurer.setBaseUrl('http://176.36.11.25/api-lnu/');
             Configurer.setDefaultHeaders({
                 Authorization: 'Basic YWRtaW46bmltZGE='
             });

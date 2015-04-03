@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('admissionSystemApp')
 
   .controller('TabSubjectCtrl', ['$scope', '$modal', 'Subjects', function ($scope, $modal, Subjects) {
@@ -36,8 +38,11 @@ angular.module('admissionSystemApp')
 
             console.log('id' + $scope.entireSpecoffer.subjects[i].enrolmentSubjectId);
 
-            showSubjectById(arrayForId[i].id, item.mark, item.isMajor, item.alternative, item.weightSubject);
-
+            showSubjectById($scope.entireSpecoffer.subjects[$scope.entireSpecoffer.subjects.length - 1].enrolmentSubjectId,
+              $scope.entireSpecoffer.subjects[$scope.entireSpecoffer.subjects.length - 1].mark,
+              $scope.entireSpecoffer.subjects[$scope.entireSpecoffer.subjects.length - 1].isMajor,
+              $scope.entireSpecoffer.subjects[$scope.entireSpecoffer.subjects.length - 1].alternative,
+              $scope.entireSpecoffer.subjects[$scope.entireSpecoffer.subjects.length - 1].weightSubject);
           }
 
         });
@@ -47,17 +52,18 @@ angular.module('admissionSystemApp')
     function showSubjectById(id, mark, isMajor, alternative, weight) {
       Subjects.getSubjectsById(id).then(function (result) {
         console.log(result);
+        if (result.name) {
 
-        $scope.viewSubjects.push({
-          subject: result.name,
-          addName: result.additionName,
-          mark: mark,
-          isMajor: isMajor,
-          alternative: alternative,
-          note: '',
-          weightSubject: weight
-        });
-
+          $scope.viewSubjects.push({
+            subject: result.name,
+            addName: result.additionName,
+            mark: mark,
+            isMajor: isMajor,
+            alternative: alternative,
+            note: '',
+            weightSubject: weight
+          });
+        }
       });
     }
 

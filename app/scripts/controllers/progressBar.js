@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('admissionSystemApp')
   .controller('ProgressBarCtrl', ['$scope', 'progressBarService', function ($scope, progressBarService) {
 
