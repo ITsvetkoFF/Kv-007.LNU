@@ -11,7 +11,7 @@ angular.module('admissionSystemApp')
   .controller('ListProposalCtrl', ['$scope', '$filter', 'ngTableParams', 'ListProposalGettingService', '$modal', 'SpecofferDictionaryService', 'valueSendingService', function ($scope, $filter, ngTableParams, ListProposalGettingService, $modal, SpecofferDictionaryService, valueSendingService) {
 
     $scope.headers = [
-        {name: "id", display: "№", visible: true},
+      {name: "num", display: "Номер", visible: true},
       {name: "specialtyId", display: "Спеціальність", visible: true},
       {name: "departmentId", display: "Структурний підрозділ", visible: true},
       {name: "timePeriodCourseId", display: "Курс зарахування", visible: true},
@@ -65,9 +65,10 @@ angular.module('admissionSystemApp')
       }, // length of data
       getData: function ($defer, params) {
         var moreData = getData();
-        moreData.forEach(function(el,index) {el.id=index+1});
+        moreData.forEach(function(el,index) {el.num = index+1});
         params.total(moreData.length);
         $defer.resolve(moreData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+
       }
     });
   }]);
