@@ -25,9 +25,9 @@ angular.module('admissionSystemApp')
         $scope.type = type;
 
         if ($scope.progressBarPercent === 100) {
-          $scope.propositionMessage = "Будь ласка, додайте предмети та пiльги!";
+          $scope.propositionMessage = 'Будь ласка, додайте предмети та пiльги!';
         } else {
-          $scope.propositionMessage = " ";
+          $scope.propositionMessage = ' ';
 
         }
 

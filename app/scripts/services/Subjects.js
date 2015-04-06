@@ -95,6 +95,6 @@ angular.module('admissionSystemApp')
       getSubjectsById: function (id1) {
         return getSubjectsById(id1);
       }
-
-    }
+    };
+    
   }]);
