@@ -12,9 +12,6 @@ angular.module('admissionSystemApp')
     var chiefSubjects = $q.defer();
     var subjectsForParent = $q.defer();
 
-    //var returnName = {};
-
-
     //Get chief subjects function
     var getChiefSubjects = function () {
 
@@ -66,28 +63,19 @@ angular.module('admissionSystemApp')
 
 
     var getSubjectsById = function (id1) {
-      console.log('getSubjectsById', id1);
       var returnNameDefer = $q.defer();
       var returnName = {};
 
       getChiefSubjects().then(function () {
 
         if (data[id1 - 1].hasOwnProperty('parentId')) {
-          //  returnName.name = '';
           var idParent = data[id1 - 1].parentId;
           returnName.name = data[idParent - 1].name;
           returnName.additionName = data[id1 - 1].name;
-          console.log('additionName' + data[id1 - 1].name);
         }
         else if (data[id1 - 1].hasChildren === false) {
-          //  returnName.additionName = '';
-
           returnName.name = data[id1 - 1].name;
-          console.log('name' + data[id1 - 1].name);
         }
-
-        console.log(data);
-
         returnNameDefer.resolve(returnName);
       });
 

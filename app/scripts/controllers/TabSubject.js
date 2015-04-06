@@ -16,7 +16,8 @@ angular.module('admissionSystemApp')
         scope: $scope.$new(true)
       }).result.then(function (item) {
           var arrayForId = [],
-            i;
+            i,
+            SubjectId;
 
           if (item.allSubjects.addName) {
             arrayForId = [item.allSubjects.subject].concat(item.allSubjects.addName);
@@ -28,7 +29,6 @@ angular.module('admissionSystemApp')
           for (i = 0; i < arrayForId.length; i++) {  //forEach
             $scope.entireSpecoffer.subjects.push({
               enrolmentSubjectId: arrayForId[i].id,
-              // addName: $scope.allSubjects.addName.id,
               mark: item.mark,
               isMajor: item.isMajor || false,
               alternative: item.alternative || false,
@@ -36,13 +36,14 @@ angular.module('admissionSystemApp')
               weightSubject: item.weightSubject
             });
 
-            console.log('id' + $scope.entireSpecoffer.subjects[i].enrolmentSubjectId);
+            SubjectId = $scope.entireSpecoffer.subjects[$scope.entireSpecoffer.subjects.length - 1];
 
-            showSubjectById($scope.entireSpecoffer.subjects[$scope.entireSpecoffer.subjects.length - 1].enrolmentSubjectId,
-              $scope.entireSpecoffer.subjects[$scope.entireSpecoffer.subjects.length - 1].mark,
-              $scope.entireSpecoffer.subjects[$scope.entireSpecoffer.subjects.length - 1].isMajor,
-              $scope.entireSpecoffer.subjects[$scope.entireSpecoffer.subjects.length - 1].alternative,
-              $scope.entireSpecoffer.subjects[$scope.entireSpecoffer.subjects.length - 1].weightSubject);
+
+            showSubjectById(SubjectId.enrolmentSubjectId,
+              SubjectId.mark,
+              SubjectId.isMajor,
+              SubjectId.alternative,
+              SubjectId.weightSubject);
           }
 
         });
@@ -51,7 +52,6 @@ angular.module('admissionSystemApp')
 
     function showSubjectById(id, mark, isMajor, alternative, weight) {
       Subjects.getSubjectsById(id).then(function (result) {
-        console.log(result);
         if (result.name) {
 
           $scope.viewSubjects.push({
@@ -94,9 +94,7 @@ angular.module('admissionSystemApp')
     });
 
     $scope.ok = function () {
-
       $scope.$close($scope);
-
     };
 
     $scope.cancel = function () {
