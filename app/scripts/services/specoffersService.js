@@ -141,7 +141,6 @@ angular.module('admissionSystemApp')
         return $q.all(promises);
       }
 
-
       function deleteEntireSpecoffer(objToDelete) {
         var specOfferID = objToDelete.specoffer.id;
         restAngular.one('specoffers', specOfferID).remove();
@@ -161,9 +160,7 @@ angular.module('admissionSystemApp')
         addOrEditSpecoffer: function(obj) {
           return addOrEditSpecoffer(obj);
         },
-        deleteEntireSpecoffer: function(obj) {
-          return deleteEntireSpecoffer(obj);
-        }
+        deleteEntireSpecoffer: deleteEntireSpecoffer(objCopy)
       };
     }
   ]);
