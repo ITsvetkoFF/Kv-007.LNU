@@ -18,6 +18,9 @@ angular.module('admissionSystemApp')
         specofferTypeNames = [],
         eduFormTypeNames = [];
 
+      SpecofferDictionaryService.getGenderTypes().then(function(){
+      console.log(SpecofferDictionaryService.getGenderTypes().$$state.value)});
+
 
       SpecofferDictionaryService.getAllSpecoffers(params).then(function (rawProposals) {
 
@@ -60,5 +63,4 @@ angular.module('admissionSystemApp')
       });
       return deferred.promise;
     };
-
   }]);
