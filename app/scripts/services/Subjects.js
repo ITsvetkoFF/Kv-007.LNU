@@ -1,45 +1,26 @@
-/**
- * Created by kmuzytc on 23.03.2015.
- */
 'use strict';
 
-/**
- * @ngdoc function
- * @name admissionSystemApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the admissionSystemApp
- */
 angular.module('admissionSystemApp')
 
 //http://176.36.11.25/api-lnu/enrolments/subjects
 //http://104.236.29.16:8080/is-lnu-rest-api/api/enrolments/subjects
-  .factory('Subjects', ['$http', '$q', function ($http, $q) {
+  .factory('Subjects', ['$http', '$q', 'SpecofferDictionaryService', function ($http, $q, SpecofferDictionaryService) {
     var flagForFirstFunction = 0;
-    var flagForSecondFunction = 0;
     var data = [];
     var chiefSubjectsArray = [];
     var subjectsForParentArray = [];
     var chiefSubjects = $q.defer();
     var subjectsForParent = $q.defer();
+    var returnName = '';
 
-    //Get subjects query description
-    var req = {
-      method: 'GET',
-      //url: 'http://104.236.29.16:8080/is-lnu-rest-api/api/enrolments/subjects',
-      url: 'http://176.36.11.25/api-lnu/enrolments/subjects' ,
-      headers: {
-        'Authorization': 'Basic YWRtaW46bmltZGE='
-      }
-    };
 
     //Get chief subjects function
     var getChiefSubjects = function () {
 
       if (flagForFirstFunction === 0) {
         flagForFirstFunction += 1;
-        $http(req).then(function (res) {
-          angular.extend(data, res.data.resources);
+        SpecofferDictionaryService.getAllSubjects().then(function (res) {
+          angular.extend(data, res);
 
           for (var i = 0; i < data.length; i++) {
             if (!data[i].hasOwnProperty('hasChildren')) {
@@ -66,22 +47,41 @@ angular.module('admissionSystemApp')
     //Get subjects for chief subject function
     var getSubjectsForParentFunction = function (id) {
 
-        getChiefSubjects().then(function () {
-          subjectsForParentArray.length = 0;
-          if (data[id - 1].hasChildren) {
-            for (var y = 0; y < data.length; y++) {
-              if (data[y].parentId == id) {
-                subjectsForParentArray.push({id: data[y].id, name: data[y].name, parentId: data[y].parentId});
-              }
+      getChiefSubjects().then(function () {
+        subjectsForParentArray.length = 0;
+        if (data[id - 1].hasChildren) {
+          for (var y = 0; y < data.length; y++) {
+            if (data[y].parentId === id) {
+              subjectsForParentArray.push({id: data[y].id, name: data[y].name, parentId: data[y].parentId});
             }
           }
+        }
 
-          subjectsForParent.resolve(subjectsForParentArray);
-        });
-
+        subjectsForParent.resolve(subjectsForParentArray);
+      });
 
       return subjectsForParent.promise;
     };
+
+
+    var getSubjectsById = function (id1) {
+      var returnNameDefer = $q.defer();
+
+      returnName = '';
+      getChiefSubjects().then(function () {
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].id === id1) {
+            returnName = data[i].name;
+            console.log('ghj' + returnName);
+            break;
+          }
+        }
+        returnNameDefer.resolve(returnName);
+      });
+
+      return returnNameDefer.promise;
+    };
+
 
     return {
       //function returns Promise with info about chief subjects (like [{hasChildren: true, id: 3, name: "Іноземна мова"}, etc.])
@@ -90,6 +90,10 @@ angular.module('admissionSystemApp')
       //function returns Promise with info about children-subjects (like [{id: 30, name: "Французька мова", parentId: 3}, etc.])
       getSubjectsForParent: function (id) {
         return getSubjectsForParentFunction(id);
+      },
+
+      getSubjectsById: function (id1) {
+        return getSubjectsById(id1);
       }
-    }
+    };
   }]);

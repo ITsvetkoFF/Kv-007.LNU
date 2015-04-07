@@ -1,7 +1,7 @@
 <div class=" content-header">
   <div class="col-md-6">
     <ol class="breadcrumb">
-      <li><a href="#">Пропозицiї ВУЗу</a></li>
+      <li><a href="#/">Пропозицiї ВУЗу</a></li>
       <li class="active">Нова пропозиція</li>
     </ol>
     <h2 class="content-header-title top-buffer bottom-buffer"><i class="fa fa-graduation-cap text-danger  "></i>
@@ -42,7 +42,8 @@
     </div>
     </div>
     <div class="top-buffer bottom-buffer row">
-      <button type="submit" class="btn btn-primary">Зберегти</button>
+      <button ng-click="sendToServer(entireSpecoffer)" type="submit" class="btn btn-primary">Зберегти</button>
+      <button ng-click="delete(entireSpecoffer)" type="submit" class="btn btn-danger">Видалити</button>
     </div>
   </div>
 </div>
