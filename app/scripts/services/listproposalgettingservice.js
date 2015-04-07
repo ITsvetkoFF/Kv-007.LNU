@@ -56,9 +56,9 @@ angular.module('admissionSystemApp')
           });
           deferred.resolve(rawProposals);
 
-        })
+        });
       });
       return deferred.promise;
-    }
+    };
 
   }]);
