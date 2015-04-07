@@ -22,21 +22,16 @@ angular.module('admissionSystemApp')
         {name: 'stateCount', display: 'Державне замовлення', visible: true}
       ];
 
-      $scope.openFiltersModal = function (size) {
+    $scope.openFiltersModal = function (size) {
+      var modalScope = $scope.$new(true);
+      modalScope.headersLocal = $scope.headers;
 
-        $modal.open({
-          templateUrl: '../views/modal/modalFilter.html',
-          controller: function ($scope, $modalInstance) {
-            $scope.headersLocal = $scope.headers;
-            $scope.apply = function () {
-              $scope.headers = $scope.headersLocal;
-              $modalInstance.close('apply');
-            };
-          },
-          size: size,
-          scope: $scope
-        });
-      };
+      $modal.open({
+        templateUrl: '../views/modal/modalFilter.html',
+        size: size,
+        scope: modalScope
+      });
+    };
 
       $scope.timeperiod = {};
 

@@ -70,3 +70,19 @@ input.ng-invalid.ng-dirty {
 table td a:hover {
   cursor: pointer;
 }
+
+.multiselect {
+  width:20em;
+  height:15em;
+  border:solid 1px #c0c0c0;
+  overflow:auto;
+}
+
+.multiselect label {
+  display:block;
+}
+
+.multiselect-on {
+  color:#ffffff;
+  background-color:#000099;
+}
