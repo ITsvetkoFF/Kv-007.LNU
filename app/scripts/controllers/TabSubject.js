@@ -5,9 +5,8 @@ angular.module('admissionSystemApp')
   .controller('TabSubjectCtrl', ['$scope', '$modal', 'Subjects', function ($scope, $modal, Subjects) {
     $scope.entireSpecoffer.subjects = [];
     $scope.viewSubjects = [];
-    $scope.allSubjects = [];
 
-    $scope.open = function (size) {
+    $scope.open = function (size, idx) {
 
       $modal.open({
         templateUrl: '../views/modal/TabSubject.html',
@@ -26,7 +25,7 @@ angular.module('admissionSystemApp')
             arrayForId = [item.allSubjects.subject];
           }
 
-          for (i = 0; i < arrayForId.length; i++) {  //forEach
+          for (i = 0; i < arrayForId.length; i++) {
             $scope.entireSpecoffer.subjects.push({
               enrolmentSubjectId: arrayForId[i].id,
               mark: item.mark,
@@ -53,14 +52,13 @@ angular.module('admissionSystemApp')
     function showSubjectById(id, mark, isMajor, alternative, weight) {
       Subjects.getSubjectsById(id).then(function (result) {
         if (result.name) {
-
           $scope.viewSubjects.push({
+            id:result.id,
             subject: result.name,
             addName: result.additionName,
             mark: mark,
             isMajor: isMajor,
             alternative: alternative,
-            note: '',
             weightSubject: weight
           });
         }
