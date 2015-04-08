@@ -18,9 +18,7 @@ angular.module('admissionSystemApp')
         specofferTypeNames = [],
         eduFormTypeNames = [];
 
-
       SpecofferDictionaryService.getAllSpecoffers(params).then(function (rawProposals) {
-
         var promise1 = SpecofferDictionaryService.getAllSpecialties().then(function (data) {
           angular.forEach(data, function (item) {
             specialtyNames[item.id] = item.name;
@@ -60,5 +58,4 @@ angular.module('admissionSystemApp')
       });
       return deferred.promise;
     };
-
   }]);
