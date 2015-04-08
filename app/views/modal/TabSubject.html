@@ -8,7 +8,7 @@
       <label for="inputSubject" class="control-label col-xs-2">Предмет</label>
 
       <div class="col-md-10">
-        <ui-select ng-model="allSubjects.subject"
+        <ui-select ng-if='!idx' ng-model="allSubjects.subject"
                    required
                    id="inputSubject">
           <ui-select-match placeholder="Оберiть предмет">{{$select.selected.name}}</ui-select-match>

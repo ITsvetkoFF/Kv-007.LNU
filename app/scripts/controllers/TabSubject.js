@@ -6,7 +6,7 @@ angular.module('admissionSystemApp')
     $scope.entireSpecoffer.subjects = [];
     $scope.viewSubjects = [];
 
-    $scope.open = function (size) {
+    $scope.open = function (size, idx) {
 
       $modal.open({
         templateUrl: '../views/modal/TabSubject.html',
