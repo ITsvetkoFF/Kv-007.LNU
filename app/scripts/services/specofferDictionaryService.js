@@ -51,7 +51,6 @@ angular.module('admissionSystemApp')
         return deferred.promise;
       }
 
-
       return {
         getAllDepartments: function () {
           return getLargeDictionary('departments');
@@ -64,6 +63,9 @@ angular.module('admissionSystemApp')
         },
         getAllSpecialties: function () {
           return getLargeDictionary('specialties');
+        },
+        getSpecialtiesTypes: function () {
+          return getLargeDictionary('specialties/types');
         },
         getSpecoffersTypes: function () {
           return getLargeDictionary('specoffers/types');
@@ -80,33 +82,19 @@ angular.module('admissionSystemApp')
         getBenefits: function () {
           return getLargeDictionary('benefits');
         },
+        getBenefitsTypes: function () {
+          return getLargeDictionary('benefits/types');
+        },
         clearStorageByRoute: function (route) {
           if(storage[route]) {
             delete storage[route];
           }
         },
-        //<--------------------new dictionaries------------------------->
-
+        getTimeperiodsTypes: function () {
+          return getLargeDictionary('timeperiods/types');
+        },
         getPersons: function () {
           return getLargeDictionary('persons');
-        },
-        getPersonsAddress: function (params) {
-          return getLargeDictionary('persons/'+ params + '/addresses', params);
-        },
-        getPersonsContacts: function (params) {
-          return getLargeDictionary('persons/'+ params + '/contacts', params);
-        },
-        getPersonsNames: function (params) {
-          return getLargeDictionary('persons/'+ params + '/names', params);
-        },
-        getPersonsPapers: function (params) {
-          return getLargeDictionary('persons/'+ params + '/papers', params);
-        },
-        getPersonsAwards: function (params) {
-          return getLargeDictionary('persons/'+ params + '/awards', params);
-        },
-        getPersonsEnrolmentSubjects: function (params) {
-          return getLargeDictionary('persons/'+ params + '/enrolmentsubjects', params);
         },
         getPersonsTypes: function () {
           return getLargeDictionary('persons/types');
@@ -119,6 +107,9 @@ angular.module('admissionSystemApp')
         },
         getAdminUnits: function () {
           return getLargeDictionary('adminunits');
+        },
+        getAdminUnitsTypes: function () {
+          return getLargeDictionary('adminunits/types ');
         },
         getAddressTypes: function () {
           return getLargeDictionary('addresstypes');
@@ -138,17 +129,29 @@ angular.module('admissionSystemApp')
         getPaperTypes: function () {
           return getLargeDictionary('papers/types');
         },
+        getPaperUsages: function () {
+          return getLargeDictionary('papers/usages');
+        },
         getHonorsTypes: function () {
           return getLargeDictionary('honors/types');
         },
-        getPublicActivitiesTypes: function () {
+        getPublicActivities: function () {
           return getLargeDictionary('publicactivities');
         },
-        getPublicActivities: function () {
-          return getLargeDictionary('publicactivities/' + params + 'awards');
+        getPublicActivitiesTypes: function () {
+          return getLargeDictionary('publicactivities/types');
+        },
+        getPublicActivitiesAwards: function (params) {
+          return getLargeDictionary('publicactivities/' + params + '/awards');
         },
         getEnrolmentsSubjects: function () {
           return getLargeDictionary('enrolments/subjects');
+        },
+        getEnrolmentsTypes: function () {
+          return getLargeDictionary('enrolments/types');
+        },
+        getEnrolmentsStatusTypes: function () {
+          return getLargeDictionary('enrolments/statustypes');
         }
       };
     }]);

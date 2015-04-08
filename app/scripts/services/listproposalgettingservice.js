@@ -18,12 +18,7 @@ angular.module('admissionSystemApp')
         specofferTypeNames = [],
         eduFormTypeNames = [];
 
-      SpecofferDictionaryService.getGenderTypes().then(function(){
-      console.log(SpecofferDictionaryService.getGenderTypes().$$state.value)});
-
-
       SpecofferDictionaryService.getAllSpecoffers(params).then(function (rawProposals) {
-
         var promise1 = SpecofferDictionaryService.getAllSpecialties().then(function (data) {
           angular.forEach(data, function (item) {
             specialtyNames[item.id] = item.name;
