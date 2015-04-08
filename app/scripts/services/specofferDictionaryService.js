@@ -7,6 +7,7 @@ angular.module('admissionSystemApp')
   }])
 
   .factory('SpecofferDictionaryService', ['$http', '$q', function ($http, $q) {
+
     function requestConfig(item, limit, offset, customParams) {
         var normalParams = {
           limit: limit,
@@ -16,12 +17,11 @@ angular.module('admissionSystemApp')
 
         return {
           method: 'GET',
-          url: 'http://104.236.29.16:8080/is-lnu-rest-api/api/' + item,
+          url: 'http://176.36.11.25/api-lnu/' + item,
           params: normalParams
           // ,cache: true
         };
       }
-
 
       var storage = {};
       function getLargeDictionary (route, customParams) {
@@ -48,6 +48,7 @@ angular.module('admissionSystemApp')
             $http(requestConfig(route, limit, offset, customParams)).success(callBack);
           });
         }
+
         return deferred.promise;
       }
 
@@ -71,16 +72,19 @@ angular.module('admissionSystemApp')
           return getLargeDictionary('specoffers/types');
         },
         getEduformTypes: function () {
-          return getLargeDictionary('eduformtypes');
+          return getLargeDictionary('educations/forms/types');
         },
         getTimePeriodCourseIds: function () {
           return getLargeDictionary('courses/types');
         },
-        getTimeperiods: function (obj) {
-          return getLargeDictionary('timeperiods', obj);
+        getTimeperiods: function (params) {
+          return getLargeDictionary('timeperiods', params);
         },
         getBenefits: function () {
           return getLargeDictionary('benefits');
+        },
+        clearStorage: function () {
+          storage = {};
         },
         getBenefitsTypes: function () {
           return getLargeDictionary('benefits/types');
