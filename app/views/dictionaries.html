@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="row bottom-buffer">
+    <div class="col-md-3">
+      <h2><i class="fa fa-book text-danger"></i> Всі словники</h2>
+    </div>
+    <div class="col-md-3 timeperiod">
+      <select class="form-control"
+      <option value="" disabled selected>Оберіть словник</option>
+      </select>
+    </div>
+    <div class="col-md-3 timeperiod">
+      <button type="button" class="btn btn-primary" ng-click="">Обрати</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="dictionaryTable">
+
+  <table ng-table="tableParams" show-filter="true" class="table table-hover">
+    <thead>
+    <tr>
+      <td ng-repeat="column in headers" data-title="'column.display'" ng-show="column.visible" sortable="column.field">
+        {{column.display}}
+      </td>
+    </tr>
+    </thead>
+    <tr ng-repeat="prop in $data">
+      <td ng-repeat="column in headers" data-title="'column.display'" ng-show="column.visible" sortable="column.field">
+        {{prop[column.name]}}
+      </td>
+      <td>
+        <button class="btn btn-xs btn-warning" ng-click="editeRow($index)"><i class="fa fa-pencil-square-o"></i></button>
+        <button class="btn btn-xs btn-danger" ng-click="removeRow($index)"><i class="fa fa-times"></i></button>
+      </td>
+    </tr>
+  </table>
+</div>
+</div>

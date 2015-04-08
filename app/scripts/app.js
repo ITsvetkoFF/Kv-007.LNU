@@ -37,7 +37,7 @@ angular
       })
       .when('/dictionaries', {
         templateUrl: 'views/dictionaries.html',
-        controller: '*********'
+        controller: 'dictionaryCtrl'
       })
       .otherwise({
         redirectTo: '/list-proposal'
