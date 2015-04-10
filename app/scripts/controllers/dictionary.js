@@ -2,37 +2,45 @@
 
 
 angular.module('admissionSystemApp')
-  .controller('dictionaryCtrl', ['$scope', '$filter', 'ngTableParams', 'ListProposalGettingService', '$modal', 'SpecofferDictionaryService', 'valueSendingService',
-    function ($scope, $filter, NgTableParams, ListProposalGettingService, $modal, SpecofferDictionaryService, valueSendingService) {
+  .controller('dictionaryCtrl', ['$scope', 'ngTableParams', 'SpecofferDictionaryService',
+    function ($scope, NgTableParams, SpecofferDictionaryService) {
 
-      $scope.headers = [
-        {name: 'num', display: 'Номер', visible: true},
-        {name: 'specialtyId', display: 'Спеціальність', visible: true},
-        {name: 'departmentId', display: 'Структурний підрозділ', visible: true},
-        {name: 'timePeriodCourseId', display: 'Курс зарахування', visible: true},
-        {name: 'specofferTypeId', display: 'Тип пропозиції', visible: true},
-        {name: 'eduFormTypeId', display: 'Форма навчання', visible: true},
-        {name: 'licCount', display: 'Ліцензований обсяг', visible: true},
-        {name: 'stateCount', display: 'Державне замовлення', visible: true}
+      $scope.dataNew=[];
+
+      $scope.dictionaries = [
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0, dict},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0},
+        {name: 'num', display: 'Номер', headers: {}, id:0}
       ];
 
-      $scope.openFiltersModal = function (size) {
 
-        $modal.open({
-          templateUrl: '../views/modal/modalFilter.html',
-          controller: function ($scope, $modalInstance) {
-            $scope.headersLocal = $scope.headers;
-            $scope.apply = function () {
-              $scope.headers = $scope.headersLocal;
-              $modalInstance.close('apply');
-            };
-          },
-          size: size,
-          scope: $scope
-        });
-      };
 
-      $scope.timeperiod = {};
+
+
+
+
 
       SpecofferDictionaryService.getTimeperiods({timePeriodTypeId: 1}).then(function (timeperiods) {
         $scope.timeperiods = timeperiods;

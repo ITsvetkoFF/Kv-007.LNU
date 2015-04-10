@@ -5,6 +5,8 @@
     </div>
     <div class="col-md-3 timeperiod">
       <select class="form-control"
+              ng-model="dictionaries"
+              ng-options="opt.id as opt.name for opt in dictionaries">
       <option value="" disabled selected>Оберіть словник</option>
       </select>
     </div>
