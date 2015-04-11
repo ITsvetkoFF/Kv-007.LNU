@@ -70,3 +70,41 @@ input.ng-invalid.ng-dirty {
 table td a:hover {
   cursor: pointer;
 }
+
+
+ /* Modal layout for choosing table fields in /list-person/ */
+
+#myModal .modal-body {
+  height: 340px;
+  overflow-x: scroll;
+}
+#myModal {
+  display: block;
+}
+
+/* Person table direcive  */
+
+.personTable {
+  font-size: 12px;
+}
+
+.ng-hide {
+  display: block!important;
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+.pointer tr {
+  cursor: pointer;
+}
+
+.table-footer .pagination-sm{
+  margin: 0px; 
+}
+
+/* table header */
+.content-data a:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
