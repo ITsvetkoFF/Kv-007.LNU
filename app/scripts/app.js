@@ -17,7 +17,8 @@ angular
     'restangular',
     'ngSanitize',
     'ui.select',
-    'loadingSpinner'
+    'loadingSpinner',
+    'checklist-model'
   ])
 
 
