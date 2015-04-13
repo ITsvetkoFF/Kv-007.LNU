@@ -23,13 +23,13 @@
     <thead>
     <tr>
       <td ng-repeat="column in dictionaries[dictionary-1].headers">
-        {{column}}
+        {{ column }}
       </td>
     </tr>
     </thead>
     <tr ng-repeat="dict in $data">
-      <td ng-repeat="column in dictionaries[dictionary-1].headers">
-        {{dict}}
+      <td ng-repeat="(key, value) in dictionaries[dictionary-1].headers">
+      {{ dict[key] }}
       </td>
     </tr>
   </table>
