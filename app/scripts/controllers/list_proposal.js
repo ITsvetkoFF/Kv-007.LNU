@@ -13,11 +13,11 @@ angular.module('admissionSystemApp')
 
       $scope.headers = [
         {name: 'id', display: '№', visible: true},
-        {name: 'specialtyId', display: 'Спеціальність', visible: true},
+        {name: 'specialtyId', display: 'Спеціальність', visible: true, filter: { 'specialtyId': 'text' }},
         {name: 'departmentId', display: 'Структурний підрозділ', visible: true},
-        {name: 'timePeriodCourseId', display: 'Курс зарахування', visible: true},
+        {name: 'timePeriodCourseId', display: 'Курс зарахування', visible: true, filter: { 'timePeriodCourseId': 'text' }},
         {name: 'specofferTypeId', display: 'Тип пропозиції', visible: true},
-        {name: 'eduFormTypeId', display: 'Форма навчання', visible: true},
+        {name: 'educationFormTypeId', display: 'Форма навчання', visible: true, filter: { 'educationFormTypeId': 'text' }},
         {name: 'licCount', display: 'Ліцензований обсяг', visible: true},
         {name: 'stateCount', display: 'Державне замовлення', visible: true}
       ];
@@ -65,10 +65,16 @@ angular.module('admissionSystemApp')
           return getData().length;
         }, // length of data
         getData: function ($defer, params) {
+
           var moreData = getData();
           moreData.forEach(function (el, index) {
             el.id = index + 1;
           });
+
+          moreData = params.filter ?
+          $filter('filter')(moreData, params.filter()) :
+          moreData;
+
           params.total(moreData.length);
           $defer.resolve(moreData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
