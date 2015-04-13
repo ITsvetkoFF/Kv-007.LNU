@@ -17,21 +17,19 @@
 </div>
 
 
-<div>
-
-  <table ng-table="tableParams" class="table table-hover">
-    <thead>
-    <tr>
-      <td ng-repeat="column in dictionaries[dictionary-1].headers">
-        {{ column }}
-      </td>
-    </tr>
-    </thead>
-    <tr ng-repeat="dict in $data">
-      <td ng-repeat="(key, value) in dictionaries[dictionary-1].headers">
-      {{ dict[key] }}
-      </td>
-    </tr>
-  </table>
-</div>
-</div>
+  <div id="dictionariesTable">
+    <table ng-table="tableParams" class="table table-hover">
+      <thead>
+      <tr>
+        <td ng-repeat="column in dictionaries[dictionary-1].headers">
+          {{ column }}
+        </td>
+      </tr>
+      </thead>
+      <tr ng-repeat="dict in $data">
+        <td ng-repeat="(key, value) in dictionaries[dictionary-1].headers">
+        {{ dict[key] }}
+        </td>
+      </tr>
+    </table>
+  </div>
