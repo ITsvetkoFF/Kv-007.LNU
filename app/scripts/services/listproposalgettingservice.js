@@ -54,5 +54,4 @@ angular.module('admissionSystemApp')
           });
       });
     };
-
   }]);
