@@ -70,3 +70,6 @@ input.ng-invalid.ng-dirty {
 table td a:hover {
   cursor: pointer;
 }
+#dictionariesTable {
+  padding: 0 1% 0 1%
+}
