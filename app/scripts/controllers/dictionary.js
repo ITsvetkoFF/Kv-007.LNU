@@ -44,7 +44,6 @@ angular.module('admissionSystemApp')
       ];
       $scope.dictionary = $scope.dictionaries[0];
 
-
       $scope.pickDictionary = function () {
         $scope.dictionaries[($scope.dictionary)-1].dict()
         };
@@ -64,9 +63,6 @@ angular.module('admissionSystemApp')
         }, // length of data
         getData: function ($defer, params) {
           var moreData = getData();
-
-
-
           params.total(moreData.length);
           $defer.resolve(moreData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
