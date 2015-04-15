@@ -8,7 +8,8 @@
  * Controller of the admissionSystemApp
  */
 angular.module('admissionSystemApp')
-  .controller('ListProposalCtrl', ['$scope', '$filter', 'ngTableParams', 'ListProposalGettingService', '$modal', 'copyTimeperiod','SpecofferDictionaryService', 'valueSendingService', function ($scope, $filter, NgTableParams, ListProposalGettingService, $modal, copyTimeperiod, SpecofferDictionaryService, valueSendingService) {
+  .controller('ListProposalCtrl', ['$scope', '$filter', 'ngTableParams', 'SpecoffersService', 'ListProposalGettingService', '$modal', 'SpecofferDictionaryService', 'Cookies',
+    function ($scope, $filter, NgTableParams, SpecoffersService, ListProposalGettingService, $modal, SpecofferDictionaryService, Cookies) {
 
     //copyTimeperiod.createTimeperiod(2020, 1, 'Всупна компанія 2020', '2011-07-31', '2010-07-31');
     //copyTimeperiod.copyToTimeperiod({timePeriodId: 8}, 29, '1970', '1970');
@@ -26,12 +27,12 @@ angular.module('admissionSystemApp')
 
 
       $scope.headers = [
-        {name: 'id', display: '№', visible: true},
+        {name: 'num', display: '№', visible: true},
         {name: 'specialtyId', display: 'Спеціальність', visible: true},
         {name: 'departmentId', display: 'Структурний підрозділ', visible: true},
         {name: 'timePeriodCourseId', display: 'Курс зарахування', visible: true},
         {name: 'specofferTypeId', display: 'Тип пропозиції', visible: true},
-        {name: 'eduFormTypeId', display: 'Форма навчання', visible: true},
+        {name: 'educationFormTypeId', display: 'Форма навчання', visible: true},
         {name: 'licCount', display: 'Ліцензований обсяг', visible: true},
         {name: 'stateCount', display: 'Державне замовлення', visible: true}
       ];
@@ -53,13 +54,21 @@ angular.module('admissionSystemApp')
       };
 
       $scope.timeperiod = {};
+      $scope.timeperiod.timePeriodId = Cookies.getCookie('timeperiod');
+      $scope.dataNew = [];
 
       SpecofferDictionaryService.getTimeperiods({timePeriodTypeId: 1}).then(function (timeperiods) {
         $scope.timeperiods = timeperiods;
       });
-      $scope.dataNew = [];
+
+      if ($scope.timeperiod.timePeriodId) {
+        ListProposalGettingService.allProposalsDecoded($scope.timeperiod).then(function (data) {
+          $scope.dataNew = data;
+        });
+      }
+
       $scope.pickTimePeriod = function () {
-        valueSendingService.timeperiod = $scope.timeperiod.id;
+        Cookies.setCookie('timeperiod', $scope.timeperiod.timePeriodId, 120);
         SpecofferDictionaryService.clearStorageByRoute('specoffers');
         ListProposalGettingService.allProposalsDecoded($scope.timeperiod).then(function (data) {
           $scope.dataNew = data;
@@ -70,7 +79,7 @@ angular.module('admissionSystemApp')
       };
       $scope.$watch('dataNew', function () {
         $scope.tableParams.reload();
-      });
+      }, true);
       $scope.tableParams = new NgTableParams({
         page: 1,            // show first page
         count: 10          // count per page
@@ -81,12 +90,22 @@ angular.module('admissionSystemApp')
         getData: function ($defer, params) {
           var moreData = getData();
           moreData.forEach(function (el, index) {
-            el.id = index + 1;
+            el.num = index + 1;
           });
           params.total(moreData.length);
           $defer.resolve(moreData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
       });
+
+      $scope.delete = function (id) {
+        SpecoffersService.deleteEntireSpecoffer(id).then(function() {
+          SpecofferDictionaryService.clearStorageByRoute('specoffers');
+          ListProposalGettingService.allProposalsDecoded($scope.timeperiod).then(function (data) {
+            $scope.dataNew = data;
+          });
+        });
+      };
+
     }]);
 
 
