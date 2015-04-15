@@ -148,14 +148,17 @@ angular.module('admissionSystemApp')
       ];
 
       $scope.clearContent = function () {
+        console.log($scope.dictionaries[($scope.dictionary)-1].id, "----");
+        if($scope.dictionaries[($scope.dictionary)-1].id) {
+        $scope.$watch($scope.dictionaries[($scope.dictionary)-1].id,
+        function () {$scope.newData = []}
+        )};
 
-       // put watcher for dict.id change
 
         //$scope.newData = [];
       };
 
       $scope.pickDictionary = function () {
-
         $scope.dictionaries[($scope.dictionary)-1].dict();
         };
 
