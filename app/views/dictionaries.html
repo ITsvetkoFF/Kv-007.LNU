@@ -6,7 +6,8 @@
       <div class="col-md-3 timeperiod">
         <select class="form-control"
                 ng-model="dictionary"
-                ng-options="dict.id as dict.name for dict in dictionaries">
+                ng-options="dict.id as dict.name for dict in dictionaries"
+                ng-click="clearContent()">
         <option value="" disabled selected>Оберіть довідник</option>
         </select>
       </div>
@@ -21,13 +22,13 @@
       <thead>
       <tr>
         <td ng-repeat="column in dictionaries[dictionary-1].headers">
-          {{ column }}
+          {{ column.dictHeader }}
         </td>
       </tr>
       </thead>
       <tr ng-repeat="dict in $data">
-        <td ng-repeat="(key, value) in dictionaries[dictionary-1].headers">
-        {{ dict[key] }}
+        <td ng-repeat="column in dictionaries[dictionary-1].headers">
+        {{ dict[column.dictKey] }}
         </td>
       </tr>
     </table>
