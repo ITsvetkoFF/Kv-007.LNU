@@ -148,9 +148,10 @@ angular.module('admissionSystemApp')
       ];
 
       $scope.clearContent = function () {
-        console.log($scope.dictionaries[($scope.dictionary)-1].id, "----");
+        var idsee = $scope.dictionaries[($scope.dictionary)-1].id;
+        console.log(idsee, "----");
         if($scope.dictionaries[($scope.dictionary)-1].id) {
-        $scope.$watch($scope.dictionaries[($scope.dictionary)-1].id,
+        $scope.$watch('idsee',
         function () {$scope.newData = []}
         )};
 
