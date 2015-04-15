@@ -8,8 +8,22 @@
  * Controller of the admissionSystemApp
  */
 angular.module('admissionSystemApp')
-  .controller('ListProposalCtrl', ['$scope', '$filter', 'ngTableParams', 'ListProposalGettingService', '$modal', 'SpecofferDictionaryService', 'valueSendingService',
-    function ($scope, $filter, NgTableParams, ListProposalGettingService, $modal, SpecofferDictionaryService, valueSendingService) {
+  .controller('ListProposalCtrl', ['$scope', '$filter', 'ngTableParams', 'ListProposalGettingService', '$modal', 'copyTimeperiod','SpecofferDictionaryService', 'valueSendingService', function ($scope, $filter, NgTableParams, ListProposalGettingService, $modal, copyTimeperiod, SpecofferDictionaryService, valueSendingService) {
+
+    //copyTimeperiod.createTimeperiod(2020, 1, 'Всупна компанія 2020', '2011-07-31', '2010-07-31');
+    //copyTimeperiod.copyToTimeperiod({timePeriodId: 8}, 29, '1970', '1970');
+
+    $scope.flag1 = false;
+    $scope.flag1 = false;
+    $scope.thumbler1 = function () {
+      $scope.flag1 = !$scope.flag1;
+    };
+    $scope.thumbler2 = function () {
+      $scope.flag2 = !$scope.flag2;
+    };
+
+    $scope.createNewTimperiod = function (numValueInput, nameInput, begDateInput, endDateInput){};
+
 
       $scope.headers = [
         {name: 'id', display: '№', visible: true},
@@ -45,7 +59,7 @@ angular.module('admissionSystemApp')
       });
       $scope.dataNew = [];
       $scope.pickTimePeriod = function () {
-        valueSendingService.timeperiod = $scope.timeperiod.timePeriodId;
+        valueSendingService.timeperiod = $scope.timeperiod.id;
         SpecofferDictionaryService.clearStorageByRoute('specoffers');
         ListProposalGettingService.allProposalsDecoded($scope.timeperiod).then(function (data) {
           $scope.dataNew = data;

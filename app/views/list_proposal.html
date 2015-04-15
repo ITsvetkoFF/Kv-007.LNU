@@ -10,10 +10,72 @@
         <option value="" disabled selected>Оберіть вступну кампанію</option>
       </select>
     </div>
-    <div class="col-md-3 timeperiod">
-      <button type="button" class="btn btn-primary" ng-click="pickTimePeriod()">Обрати</button>
+    <div class="col-md-4 timeperiod">
+        <button type="button" class="btn btn-primary" ng-click="pickTimePeriod()">Обрати</button>
+    </div>
+    <div class = "col-md-offset-10 timeperiod">
+      <button type="button" class="btn btn-primary" ng-click="thumbler1()">Створити нову</button>
     </div>
   </div>
+
+  <input name="spoilerbtn"
+         class="spoilerbutton show2 btn btn-primary"
+         type="button"
+         value="Show Navigation"
+         onclick="this.value=this.value=='Show Navigation'?'Hide Navigation':'Show Navigation';">
+  <div class="show2 spoiler">
+    <div class="row bottom-buffer">
+      <form name="myForm">
+        <div class="col-md-3">
+          <label for="campaign">Вступна кампанія</label>
+          <input
+            type="number"
+            class="form-control"
+            id="campaign"
+            placeholder="Введіть рік"
+            name="campaign"
+            min="2015"
+            max="2030"
+            required>
+        </div>
+        <div class="col-md-3 timeperiod">
+          <label for="begDate">Дата початку</label>
+          <input type="text"
+                 id = "begDate"
+                 ng-model="entireSpecoffer.specoffer.begDate"
+                 datepicker-popup="yyyy-MM-dd"
+                 is-open="isOpen"
+                 ng-click = "isOpen = true"
+                 ng-required="true"
+                 close-text="Close"
+                 class="form-control"
+                 required
+                 name="begDate"
+                 placeholder="РРРР-MM-ДД" />
+        </div>
+        <div class="col-md-3 timeperiod">
+          <label for="endDate">Дата закінчення</label>
+          <input type="text"
+                 id = "endDate"
+                 ng-model="entireSpecoffer.specoffer.begDate"
+                 datepicker-popup="yyyy-MM-dd"
+                 is-open="isOpen"
+                 ng-click = "isOpen = true"
+                 ng-required="true"
+                 close-text="Close"
+                 class="form-control"
+                 required
+                 name="endDate"
+                 placeholder="РРРР-MM-ДД" />
+        </div>
+      </form>
+      <div class="col-md-1 timeperiod">
+        <button type="button" class="btn btn-primary" ng-click="" ng-disabled="myForm.$invalid">Створити</button>
+      </div>
+    </div>
+  </div>
+
+
   <!-- main content -->
   <div ng-show="timeperiod.timePeriodId" class="row">
     <!-- filter -->

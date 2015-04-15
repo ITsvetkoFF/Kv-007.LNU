@@ -162,6 +162,9 @@ angular.module('admissionSystemApp')
         },
         deleteEntireSpecoffer: function () {
           deleteEntireSpecoffer(objCopy);
+        },
+        clearCopy: function () {
+          objCopy = {};
         }
       };
     }
