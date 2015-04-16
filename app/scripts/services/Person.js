@@ -1,7 +1,5 @@
 'use strict';
 
-angular.module('admissionSystemApp')
-  .constant('_', window._);
 
 angular.module('admissionSystemApp')
   .factory('Person', ['Restangular', '$q', '$filter',
@@ -9,20 +7,6 @@ angular.module('admissionSystemApp')
 
       var restAngular =
         Restangular.withConfig(function (Configurer) {
-          Configurer.setBaseUrl('http://104.236.29.16:8080/is-lnu-rest-api/api/');
-          Configurer.setDefaultHeaders({
-            Authorization: 'Basic YWRtaW46bmltZGE='
-          });
-          Configurer.addResponseInterceptor(function (data, operation) {
-            if (operation === 'get') {
-              delete data.uri;
-            }
-            if (operation === 'getList') {
-              return data.resources;
-            } else {
-              return data;
-            }
-          });
           Configurer.setRequestInterceptor(function (element, operation) {
             if (operation === 'post' || operation === 'put') {
               element.begDate = $filter('date')(element.begDate, 'yyyy-MM-dd');
@@ -36,10 +20,36 @@ angular.module('admissionSystemApp')
 
       var objCopy = {};
 
+      function separateAddresses (arr) {
+        var addresses = {};
+        addresses.regAddresses = arr[0].addressTypeId === 1 ? arr[0] : arr[1];
+        addresses.postAddresses = arr[1].addressTypeId === 2 ? arr[1] : arr[0];
+        addresses.isAdressesMatch = _.isEqual(
+          [arr[0].street, arr[0].zipCode, arr[0].apartment], 
+          [arr[1].street, arr[1].zipCode, arr[1].apartment]);
+        return addresses;
+      }
+
+      function assembleAddresses (obj) {
+        var arr = [];
+        if (obj.isAdressesMatch) {
+          _.forEach(obj.regAddresses, function(value, key) {
+              if (!(key === 'id' || key === 'uri')) {
+                  obj.postAddresses[key] = value;
+              }
+          });
+        }
+        arr.push(obj.regAddresses);
+        arr.push(obj.postAddresses);
+        arr.push(obj.isAdressesMatch);
+        return arr;
+      }
+
       function getEntirePerson(id) {
         var entirePerson = {};
         entirePerson.person = restAngular.one('persons', id).get();
-        entirePerson.addresses = restAngular.one('persons', id).one('addresses').getList();
+        // entirePerson.addresses = restAngular.one('persons', id).one('addresses').getList();
+        entirePerson.addresses = separateAddresses(restAngular.one('persons', id).one('addresses').getList());
         entirePerson.contacts = restAngular.one('persons', id).one('contacts').getList();
         entirePerson.names = restAngular.one('persons', id).one('names').getList();
         entirePerson.papers = restAngular.one('persons', id).one('papers').getList();
@@ -47,6 +57,7 @@ angular.module('admissionSystemApp')
         entirePerson.enrolmentsubjects = restAngular.one('persons', id).one('enrolmentsubjects').getList();
 
         $q.all(entirePerson).then(function (res) {
+          objCopy = {};
           _.merge(objCopy, res);
         });
         return $q.all(entirePerson);
@@ -75,7 +86,8 @@ angular.module('admissionSystemApp')
           return addEntirePerson(currentObj).then(function (personId) {
             currentObj.person.id = personId;
             return $q.all([
-              addArrayOfItems(currentObj.addresses, personId, 'addresses'),
+              // addArrayOfItems(currentObj.addresses, personId, 'addresses'),
+              addArrayOfItems(assembleAddresses(currentObj.addresses), personId, 'addresses'),
               addArrayOfItems(currentObj.contacts, personId, 'contacts'),
               addArrayOfItems(currentObj.names, personId, 'names'),
               addArrayOfItems(currentObj.papers, personId, 'papers'),

@@ -68,7 +68,7 @@
     </p>
 
   </div> <!-- end filter -->
-
+<pre>{{userFilterPick}}</pre>
   <div class="col-sm-12 col-md-10  content-data ">
     <div class="panel panel-default ">
       <div class="panel-heading">
@@ -109,8 +109,14 @@
                   ng-show="column.visible" 
                   ng-click="setSelected = personObj"> {{personObj[column.name]}}  </td>
               <td>
-                <button class="btn btn-xs btn-danger" ng-click=""><i class="fa fa-times"></i></button>
-               </td>
+                <!-- <button class="btn btn-xs btn-danger" ng-click=""><i class="fa fa-times"></i></button> -->
+                <a href="#/edit-person/{{personObj.id}}">
+                  <button class="btn btn-xs btn-warning"><i class="fa fa-pencil-square-o"></i></button>
+                </a>
+                <button class="btn btn-xs btn-danger" ng-click="">
+                  <i class="fa fa-times"></i>
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
