@@ -30,11 +30,13 @@ module.exports = function(config) {
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-ui-select/dist/select.js',
+      'bower_components/checklist-model/checklist-model.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
-      'test/mock/**/*.js',
-      'test/spec/**/*.js'
+      //'test/spec/**/*.js'
+      'test/spec/services/specofferdictionaryservise.js',
+      //'test/spec/services/specoffersservice.js'
     ],
 
     // list of files / patterns to exclude
@@ -70,7 +72,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_INFO
 
     // Uncomment the following lines if you are using grunt's server to run the tests
     // proxies: {

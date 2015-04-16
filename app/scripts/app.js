@@ -17,7 +17,8 @@ angular
     'restangular',
     'ngSanitize',
     'ui.select',
-    'loadingSpinner'
+    'loadingSpinner',
+    'checklist-model'
   ])
 
 
@@ -31,9 +32,17 @@ angular
         templateUrl: 'views/new_proposal.html',
         controller: 'NewProposalCtrl'
       })
+      .when('/edit-proposal/:id', {
+        templateUrl: 'views/new_proposal.html',
+        controller: 'NewProposalCtrl'
+      })
       .when('/list-person', {
         templateUrl: 'views/list_person.html',
         controller: 'ListPersonCtrl'
+      })
+      .when('/new-person', {
+        templateUrl: 'views/new_person.html',
+        controller: 'NewPersonCtrl'
       })
       .when('/dictionaries', {
         templateUrl: 'views/dictionaries.html',
@@ -44,7 +53,7 @@ angular
       });
   })
 
-  .config(function(uiSelectConfig) {
+  .config(function (uiSelectConfig) {
     uiSelectConfig.theme = 'bootstrap';
   });
 
