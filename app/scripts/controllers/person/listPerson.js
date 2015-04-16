@@ -72,8 +72,15 @@ angular.module('admissionSystemApp')
       {
         title: 'серії ОС',
         property: 'docSeries'
-      },
+      }
     ];
+
+    // пошук по заявці:
+    // 1. по ПІБ. 
+    // 2. по id персони
+    // 3. номер серія паспорту
+    // 4. номер серія атестаці
+    //  при пошуку можна вказувтаи peperTypeId - по якому саме документу шуктаи
 
     $scope.headers = [
       { name: 'id', display: 'id', visible: false }, 

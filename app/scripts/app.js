@@ -44,6 +44,14 @@ angular
         templateUrl: 'views/new_person.html',
         controller: 'NewPersonCtrl'
       })
+      .when('/edit-person/:id', {
+        templateUrl: 'views/new_person.html',
+        controller: 'NewPersonCtrl'
+      })
+      .when('/list-enrolments', {
+        templateUrl: 'views/list_enrolments.html',
+        controller: 'ListenrolmentsCtrl'
+      })
       .otherwise({
         redirectTo: '/list-proposal'
       });

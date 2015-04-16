@@ -8,7 +8,11 @@ angular.module('admissionSystemApp')
 		postAddresses: {},
 		isAdressesMatch: true
 	};
-  
+	
+  $scope.$watch('entirePerson.addresses', function (newVal) {
+    console.log('entireSpecofferCopy watch', newVal);
+  }, true);
+
 	$scope.streetsTypesOptions = [
 	{ 'id': 1, 'name': 'вулиця', 'abbrName': 'вул.', 'uri': '/streets/types/1' },
 	{ 'id': 2, 'name': 'бульвар', 'abbrName': 'бульв.', 'uri': '/streets/types/2' },
