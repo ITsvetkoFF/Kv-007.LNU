@@ -31,6 +31,10 @@ angular
         templateUrl: 'views/new_proposal.html',
         controller: 'NewProposalCtrl'
       })
+      .when('/edit-proposal/:id', {
+        templateUrl: 'views/new_proposal.html',
+        controller: 'NewProposalCtrl'
+      })
       .when('/list-person', {
         templateUrl: 'views/list_person.html',
         controller: 'ListPersonCtrl'
@@ -44,7 +48,7 @@ angular
       });
   })
 
-  .config(function(uiSelectConfig) {
+  .config(function (uiSelectConfig) {
     uiSelectConfig.theme = 'bootstrap';
   });
 
