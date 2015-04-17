@@ -147,22 +147,12 @@ angular.module('admissionSystemApp')
           ], id:24, dict: function() {SpecofferDictionaryService.getEnrolmentsStatusTypes().then(function (data){$scope.newData = data;})}}
       ];
 
-      $scope.clearContent = function (item) {
-        //console.log($scope.dictionaries[($scope.dictionary)-1].id);
-        //var idis = $scope.dictionaries[$scope.dictionaries.indexOf(item)];
-      //  //var idis = $scope.dictionaries[($scope.dictionary)-1].id;
-        console.log(item, "----");
-      //  //if($scope.dictionaries[($scope.dictionary)-1].id) {
-      //  $scope.$watch('idis',
-      //  function () {console.log("++++++++")}
-      //  );
-      //
-        //$scope.newData = [];
-      };
 
       $scope.pickDictionary = function () {
-        $scope.dictionaries[($scope.dictionary)-1].dict();
-        };
+        if($scope.dictionaries[($scope.dictionary)-1]) {
+          $scope.dictionaries[($scope.dictionary)-1].dict()
+        }
+      };
 
       var getData = function () {
         return $scope.newData;

@@ -7,12 +7,9 @@
         <select class="form-control"
                 ng-model="dictionary"
                 ng-options="dict.id as dict.name for dict in dictionaries"
-                ng-click="clearContent()">
+                ng-click="pickDictionary()">
         <option value="" disabled selected>Оберіть довідник</option>
         </select>
-      </div>
-      <div class="col-md-3 timeperiod">
-        <button type="button" class="btn btn-primary" ng-click="pickDictionary()">Обрати</button>
       </div>
     </div>
   </div>

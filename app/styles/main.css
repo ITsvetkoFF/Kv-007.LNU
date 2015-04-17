@@ -70,6 +70,35 @@ input.ng-invalid.ng-dirty {
 table td a:hover {
   cursor: pointer;
 }
+
+
+ /* Modal layout for choosing table fields in /list-person/ */
+
+#modalHeaderChooser .modal-body {
+  height: 340px;
+  overflow-x: scroll;
+}
+#modalHeaderChooser {
+  display: block;
+}
+
+/* Person table direcive  */
+
+.pointer tr {
+  cursor: pointer;
+}
+.table-footer .pagination-sm{
+  margin: 0;
+}
+
+/* table header */
+.content-data a:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+#dictionariesTable {
+  padding: 0 1% 0 1%
+}
 #dictionariesTable {
   padding: 0 1% 0 1%
 }

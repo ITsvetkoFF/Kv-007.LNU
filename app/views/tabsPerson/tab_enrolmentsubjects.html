@@ -1,0 +1,32 @@
+<div ng-controller="tabPersonSubjects">
+  <form id="subjectsForm">
+    <div class="form-group">
+
+
+
+
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+                <td ng-repeat="column in subHeaders">
+                {{column.display}}
+                </td>
+            </tr>
+          </thead>
+          <tr ng-repeat=" obj in entirePerson.enrolmentsubjects">
+            <td ng-repeat="(key, value) in entirePerson.enrolmentsubjects">
+              {{obj[key]}}
+            </td>
+
+            <td>
+                <button class="btn btn-xs btn-warning"><i class="fa fa-pencil-square-o"></i></button>
+              <button class="btn btn-xs btn-danger" ng-click="delete(prop.id)"><i class="fa fa-times"></i></button>
+            </td>
+          </tr>
+        </table>
+
+
+    </div>
+  </form>
+</div>
