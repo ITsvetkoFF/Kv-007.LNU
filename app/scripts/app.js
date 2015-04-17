@@ -48,6 +48,22 @@ angular
         templateUrl: 'views/dictionaries.html',
         controller: 'dictionaryCtrl'
       })
+      .when('/edit-person/:id', {
+        templateUrl: 'views/new_person.html',
+        controller: 'NewPersonCtrl'
+      })
+      .when('/list-enrolments', {
+        templateUrl: 'views/list_enrolments.html',
+        controller: 'ListEnrolmentsCtrl'
+      })
+      .when('/new-enrolment', {
+        templateUrl: 'views/new_enrolment.html',
+        controller: 'NewEnrolmentCtrl'
+      })
+      .when('/edit-enrolment/:id', {
+        templateUrl: 'views/new_enrolment.html',
+        controller: 'NewEnrolmentCtrl'
+      })
       .otherwise({
         redirectTo: '/list-proposal'
       });

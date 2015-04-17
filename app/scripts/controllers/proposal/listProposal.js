@@ -8,8 +8,8 @@
  * Controller of the admissionSystemApp
  */
 angular.module('admissionSystemApp')
-  .controller('ListProposalCtrl', ['$scope', '$filter', 'ngTableParams', 'SpecoffersService', 'ListProposalGettingService', '$modal', 'SpecofferDictionaryService', 'Cookies',
-    function ($scope, $filter, NgTableParams, SpecoffersService, ListProposalGettingService, $modal, SpecofferDictionaryService, Cookies) {
+  .controller('ListProposalCtrl', ['$scope', '$filter', 'ngTableParams', 'SpecoffersService', 'decodeSpecofferSvc', '$modal', 'SpecofferDictionaryService', 'Cookies',
+    function ($scope, $filter, NgTableParams, SpecoffersService, decodeSpecofferSvc, $modal, SpecofferDictionaryService, Cookies) {
 
       $scope.headers = [
         {name: 'num', display: '№', visible: true},
@@ -47,7 +47,7 @@ angular.module('admissionSystemApp')
       });
 
       if ($scope.timeperiod.timePeriodId) {
-        ListProposalGettingService.allProposalsDecoded($scope.timeperiod).then(function (data) {
+        decodeSpecofferSvc.allProposalsDecoded($scope.timeperiod).then(function (data) {
           $scope.dataNew = data;
         });
       }
@@ -55,7 +55,7 @@ angular.module('admissionSystemApp')
       $scope.pickTimePeriod = function () {
         Cookies.setCookie('timeperiod', $scope.timeperiod.timePeriodId, 120);
         SpecofferDictionaryService.clearStorageByRoute('specoffers');
-        ListProposalGettingService.allProposalsDecoded($scope.timeperiod).then(function (data) {
+        decodeSpecofferSvc.allProposalsDecoded($scope.timeperiod).then(function (data) {
           $scope.dataNew = data;
         });
       };
@@ -85,7 +85,7 @@ angular.module('admissionSystemApp')
       $scope.delete = function (id) {
         SpecoffersService.deleteEntireSpecoffer(id).then(function() {
           SpecofferDictionaryService.clearStorageByRoute('specoffers');
-          ListProposalGettingService.allProposalsDecoded($scope.timeperiod).then(function (data) {
+          decodeSpecofferSvc.allProposalsDecoded($scope.timeperiod).then(function (data) {
             $scope.dataNew = data;
           });
         });

@@ -2,7 +2,7 @@
 
 angular
 	.module('admissionSystemApp')
-  .directive('personTable', function personTable () {
+  .directive('generalTable', function () {
 
   function personTableController($scope) {
 
@@ -10,30 +10,50 @@ angular
     $scope.userFilterPick = {};
     $scope.oneAtATime = {open : false};  
     $scope.removeFromUserPick = function (property, obj) {
-      console.log('property',property);
-      console.log('obj',obj);
       var index = $scope.userFilterPick[property].indexOf(obj);
       $scope.userFilterPick[property].splice(index, 1);
     };
 
+    // search
+    $scope.startSearch = function (fieldSearchBy, query) {
+      var searchObj = {};
+      searchObj[fieldSearchBy.property] = [{'id':query,'length':2}];
+      $scope.getdata({
+        currentPage: $scope.currentPage, 
+        itemsPerPage: $scope.itemsPerPage, 
+        userFilterPick:searchObj
+      });
+      $scope.userFilterPick = {};      
+    };
+
     // pagination options
     $scope.maxSize = 5;  
-    $scope.totalItems = 123;
     $scope.currentPage = 1;
     
     // item per page chooser
     $scope.itemsPerPageOptions = ['10', '25', '50', '100'];
-    $scope.itemsPerPage = $scope.itemsPerPageOptions[1];
+    $scope.itemsPerPage = $scope.itemsPerPageOptions[0];
 
-    // if page no. changed - do smth
-    $scope.pageChanged = function(pageNumber) {
-      // console.log('page changed to', pageNumber);
+    $scope.itemPerPageChanged = function (option) {
+      $scope.currentPage = 1;
+      $scope.getdata({
+        currentPage:$scope.currentPage, 
+        itemsPerPage:option, 
+        userFilterPick:$scope.userFilterPick
+      });
     };
+
+    $scope.itemPerPageChanged($scope.itemsPerPage);
+
+    // orderBy=назва_поля-asc|desc
 
   }
 
-  function link(scope, element) {
+  function link(scope, element, attr) {
     
+    scope.newItemLinkTitle = attr.newitemlinktitle;
+    scope.linkToNewItem = attr.linktonewitem;
+
     scope.hideFilter = false;
     scope.hideFilterFunc = function () {
       scope.hideFilter = !scope.hideFilter;
@@ -42,18 +62,30 @@ angular
       tableNode.toggleClass('col-sm-12 col-md-12');
     };
     
+    // sotring
     scope.sort = function (columnName, event) {
       scope.descending = !scope.descending;
+      
+      var params = {
+        currentPage: scope.currentPage, 
+        itemsPerPage: scope.itemsPerPage, 
+        userFilterPick: scope.userFilterPick,
+        sort: {}       
+      };
 
       var arrow = angular.element(event.target.getElementsByClassName('fa'));
       arrow.removeClass('fa-sort');
+
       if (scope.descending) {
         arrow.removeClass('fa-caret-up ').addClass('fa-caret-down');
+        params.sort[columnName] = 'desc';
+        scope.getdata(params);
       } else {
         arrow.removeClass('fa-caret-down').addClass('fa-caret-up');
+        params.sort[columnName] = 'asc';
+        scope.getdata(params);
       }
     };
-
   }
 
   var directive = {
@@ -67,12 +99,15 @@ angular
       data: '=?',
       headers: '=?',
       filters: '=?',
-      search: '=?'
+      search: '=?',
+      getdata: '&',
+      total: '@'
     }
   };
   
   return directive;
  });
+
 
 
 

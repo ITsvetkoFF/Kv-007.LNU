@@ -1,29 +1,32 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .constant('_', window._);
+  .config( function (RestangularProvider, Constants) {
+
+    RestangularProvider.setBaseUrl(Constants.basicURL);
+    RestangularProvider.setDefaultHeaders({
+      Authorization: Constants.BasicAuth
+    });
+    RestangularProvider.addResponseInterceptor(function (data, operation) {
+      if (operation === 'get') {
+        delete data.uri;
+      }
+      if (operation === 'getList') {
+        return data.resources;
+      } else {
+        return data;
+      }
+    });
+  });
+
 
 angular.module('admissionSystemApp')
-  .factory('SpecoffersService', ['Restangular', '$q', '$filter', 'Constants',
+  .factory('SpecoffersService', ['Restangular', '$q', '$filter',
 
-    function(Restangular, $q, $filter, Constants) {
+    function (Restangular, $q, $filter) {
 
       var restAngular =
         Restangular.withConfig(function (Configurer) {
-          Configurer.setBaseUrl(Constants.basicURL);
-          Configurer.setDefaultHeaders({
-            Authorization: 'Basic YWRtaW46bmltZGE='
-          });
-          Configurer.addResponseInterceptor(function (data, operation) {
-            if (operation === 'get') {
-              delete data.uri;
-            }
-            if (operation === 'getList') {
-              return data.resources;
-            } else {
-              return data;
-            }
-          });
           Configurer.setRequestInterceptor(function (element, operation) {
             if (operation === 'post' || operation === 'put') {
               element.begDate = $filter('date')(element.begDate, 'yyyy-MM-dd');
