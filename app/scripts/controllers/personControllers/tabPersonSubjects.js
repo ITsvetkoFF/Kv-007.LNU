@@ -65,7 +65,6 @@ angular.module('admissionSystemApp')
           $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
           };
-
         },
         size: size,
         resolve: {
