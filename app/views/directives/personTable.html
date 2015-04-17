@@ -10,20 +10,23 @@
   <div class="form-group">
     <div class="col-sm-12">
       <select class="form-control"
-              ng-init="searchByField = search[0]"
-              ng-model="searchByField"
+              ng-init="fieldSearchBy = search[0]"
+              ng-model="fieldSearchBy"
               ng-options="opt.title for opt in search">
       </select>
     </div>
   </div>
 </form>
-
+ 
     <form>
         <div class="input-group">
-            <input type="text" class="form-control" 
-                   placeholder="Шукати по {{searchByField.title}}&hellip;">
+            <input type="text" class="form-control"
+                   ng-model="querySearchBy" 
+                   placeholder="Шукати по {{fieldSearchBy.title}}&hellip;">
             <span class="input-group-btn">
-                <button type="button" class="btn btn-primary">Ок</button>
+                <button type="button" 
+                        class="btn btn-primary"
+                        ng-click="startSearch(fieldSearchBy, querySearchBy)">Ок</button>
             </span>
         </div>
     </form>
@@ -64,9 +67,16 @@
     </accordion>
 
     <p>
-      <button type="button" class="btn btn-primary btn-sm">Оновити</button>
+      <button type="button" 
+              class="btn btn-primary btn-sm"
+              ng-click="querySearchBy = ''; 
+                        getdata({
+                            currentPage:currentPage, 
+                            itemsPerPage:itemsPerPage, 
+                            userFilterPick:userFilterPick
+                          })"
+              >Оновити</button>  
     </p>
-
   </div> <!-- end filter -->
 
   <div class="col-sm-12 col-md-10  content-data ">
@@ -77,9 +87,8 @@
                 ng-click="hideFilterFunc()" >
                 <i class="fa fa-filter"></i>
         </button>
-        
-        <a href="#/new-person" class="col-md-offset-1">
-          <button type="button" class="btn btn-success "><i class="fa fa-plus"></i> Додати персону</button>
+        <a href="{{linkToNewItem}}" class="col-md-offset-1">
+          <button type="button" class="btn btn-success "><i class="fa fa-plus"></i> {{newItemLinkTitle}}</button>
         </a>
         <button type="button" 
                 class="field-chooser-button pull-right btn btn-primary" 
@@ -92,7 +101,6 @@
            <thead>
             <tr>
               <td><input type="checkbox"></td>
-              <td>№</td>
               <th ng-repeat="column in headers track by $index" ng-show="column.visible">
                 <a ng-click="sort(column.name, $event)">
                   {{column.display}} <i class="fa fa-sort"></i>
@@ -102,26 +110,30 @@
             </tr>
           </thead>
           <tbody class="pointer">
-            <tr ng-repeat="personObj in data track by $index" ng-repeat="no in dataCount">
+            <tr ng-repeat="itemObj in data track by $index" ng-repeat="no in dataCount">
               <td> <input type="checkbox"> </td>
-              <td>{{data.indexOf(personObj)+1}}</td>
               <td ng-repeat="column in headers track by $index" 
                   ng-show="column.visible" 
-                  ng-click="setSelected = personObj"> {{personObj[column.name]}}  </td>
+                  ng-click="setSelected = itemObj"> {{itemObj[column.name]}}  </td>
               <td>
-                <button class="btn btn-xs btn-danger" ng-click=""><i class="fa fa-times"></i></button>
-               </td>
+              
+                <a href="{{linkToNewItem.replace('new', 'edit')}}/{{itemObj.id}}">
+                  <button class="btn btn-xs btn-warning"><i class="fa fa-pencil-square-o"></i></button>
+                </a>
+                <button class="btn btn-xs btn-danger" ng-click="">
+                  <i class="fa fa-times"></i>
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-
     <div class="raw table-footer">
-      <pagination total-items="totalItems" 
+      <pagination total-items="total" 
                   ng-model="currentPage" 
                   items-per-page ="itemsPerPage" 
-                  ng-change="pageChanged(currentPage)"
+                  ng-change="getdata({currentPage:currentPage, itemsPerPage:itemsPerPage, userFilterPick:userFilterPick})"
                   num-pages="numPages"
                   max-size="maxSize" 
                   previous-text="&lsaquo;" 
@@ -136,7 +148,8 @@
         <button  class="btn btn-default"
                 ng-repeat="opt in itemsPerPageOptions"
                 ng-model="$parent.itemsPerPage" 
-                type="button" 
+                type="button"
+                ng-click="itemPerPageChanged(opt);"
                 btn-radio="opt" 
                 >{{opt}}</button >
       </div>
@@ -161,8 +174,10 @@
             <div class="modal-body">
               <ul class="list-group">
                 <li class="list-group-item" ng-repeat = "header in headers track by $index" ng-click = "header.visible = !header.visible">
-                  <label>
-                    <input type= "checkbox" ng-checked="header.visible">
+                  <label for="showHideHeader">
+                    <input  name="showHideHeader" 
+                            type= "checkbox" 
+                            ng-checked="header.visible">
                     <span>{{header.display}}</span>
                   </label>
                 </li>

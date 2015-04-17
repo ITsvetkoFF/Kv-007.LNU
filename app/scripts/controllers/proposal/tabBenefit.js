@@ -3,7 +3,7 @@
 angular.module('admissionSystemApp')
 
 
-  .controller('ModalBenefitCtrl', function ($scope, $modal, Benefits) {
+  .controller('TabBenefitCtrl', function ($scope, $modal, Benefits) {
     // $scope.entireSpecoffer = {};
     // $scope.entireSpecoffer.benefits = [];
     $scope.entireSpecoffer.benefits = [];

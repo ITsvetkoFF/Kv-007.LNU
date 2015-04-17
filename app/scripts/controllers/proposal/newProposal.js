@@ -2,24 +2,9 @@
 
 
 angular.module('admissionSystemApp')
-  .controller('NewProposalCtrl', ['$scope', '$routeParams', '$location', 'SpecoffersService', 'SpecofferDictionaryService', '$q', 'Cookies',
-    function ($scope, $routeParams, $location, SpecoffersService, SpecofferDictionaryService, $q, Cookies) {
+  .controller('NewProposalCtrl', ['$scope', '$routeParams', '$location', 'SpecoffersService', 'SpecofferDictionaryService', '$q', 'progressBarService',
+    function ($scope, $routeParams, $location, SpecoffersService, SpecofferDictionaryService, $q, progressBarService) {
       $scope.entireSpecoffer = {};
-      $scope.entireSpecoffer.specoffer = {};
-      $scope.entireSpecoffer.specoffer.timePeriodId = Cookies.getCookie('timeperiod');
-
-      $q.all([
-        SpecofferDictionaryService.getAllDepartments(),
-        SpecofferDictionaryService.getSpecoffersTypes(),
-        SpecofferDictionaryService.getEduformTypes(),
-        SpecofferDictionaryService.getTimePeriodCourseIds()
-      ])
-        .then(function (promisesResult) {
-          $scope.departmentId = promisesResult[0];
-          $scope.specofferTypesOptions = promisesResult[1];
-          $scope.eduFormTypesOptions = promisesResult[2];
-          $scope.timePeriodCourseId = promisesResult[3];
-        });
 
       $scope.brosweOrEditSpecoffer = function (specofferId) {
         SpecoffersService.getEntireSpecoffer(specofferId).then(function (res) {
@@ -47,6 +32,19 @@ angular.module('admissionSystemApp')
           $location.path('/#/list-proposal');
         });
       };
+
+      // for progress bar
+      $scope.$on('valBubble', function (evt, args) { 
+        if (args.isValid) {                           
+          progressBarService.value++;                 
+        }
+        else if (progressBarService.value > 0) {      
+          progressBarService.value--;
+        }
+        else {
+          progressBarService.inputQuantity++;        
+        }
+      });
 
     }]);
 

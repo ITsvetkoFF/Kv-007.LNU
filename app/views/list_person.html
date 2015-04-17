@@ -1,19 +1,20 @@
 <div class="container-fluid">
   <div class="row bottom-buffer">
     <div class="col-md-3">
-      <h2><i class="fa fa-graduation-cap text-danger"></i> Вступна кампанiя</h2>
-    </div>
-    <div class="col-md-3 timeperiod">
-      <select class="form-control">
-        <option value="" disabled selected>Оберіть вступну кампанію</option>
-      </select>
-    </div>
-    <div class="col-md-3 timeperiod">
-      <button type="button" class="btn btn-primary" ng-click="">Обрати</button>
+      <h2><i class="fa fa-user text-danger"></i> Персони</h2>
     </div>
   </div>
 
   <!-- main content -->
-  <person-table class="personTable" data="dataDecoded" filters="filters" search="search" headers="headers"></person-table>
+  <general-table class="generalTable" 
+                data="personDecoded" 
+                filters="personFilters" 
+                search="personSearch" 
+                headers="headers" 
+                getdata=""
+                newItemLinkTitle ="Додати персону"
+                linkToNewItem="#/new-person"
+                total="">
+  </general-table>
 
 </div>

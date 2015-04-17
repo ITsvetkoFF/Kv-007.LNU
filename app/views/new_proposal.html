@@ -1,4 +1,4 @@
-<div class=" content-header">
+<div class="content-header">
   <div class="col-md-6">
     <ol class="breadcrumb">
       <li><a href="#/">Пропозицiї ВУЗу</a></li>
@@ -24,19 +24,21 @@
   </div>
 
 
-  <div ng-controller="TabsCtrl">
+  <div>
     <div class="row">
     <div class="tabset col-md-9">
-    <tabset > <!-- directive tabs set-->
+    <tabset > 
       <tab heading="Пропозицiї">
-        <div class="top-buffer" ng-include="'views/tabs/tab_proposition.html'"></div>
-        <!--  -->
+        <div class="top-buffer" ng-include="'views/tabsProposal/tab_proposition.html'"></div>
       </tab>
       <tab heading="Предмети">
-        <div class="top-buffer" ng-include="'views/tabs/tab_subject.html'"></div>
+        <div class="top-buffer" ng-include="'views/tabsProposal/tab_subject.html'"></div>
       </tab>
       <tab heading="Пiльги">
-        <div class="top-buffer" ng-include="'views/tabs/tab_benefit.html'"></div>
+        <div class="top-buffer" ng-include="'views/tabsProposal/tab_benefit.html'"></div>
+      </tab>
+      <tab heading="Хвилі">
+        <div class="top-buffer" ng-include="'views/tabsProposal/tab_waves.html'"></div>
       </tab>
     </tabset>
     </div>

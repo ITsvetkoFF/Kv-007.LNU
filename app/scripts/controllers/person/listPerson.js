@@ -2,17 +2,17 @@
 
 
 angular.module('admissionSystemApp')
-  .controller('ListPersonCtrl', function($scope, personDecodeServise, SpecofferDictionaryService) {
+  .controller('ListPersonCtrl', function ($scope, personDecodeServise, SpecofferDictionaryService) {
 
-    $scope.dataDecoded = [];
+    $scope.personDecoded = [];
     
     SpecofferDictionaryService.getPersons().then(function (rawPersons) {
       personDecodeServise.personDecoded(rawPersons).then(function (decodedPersons) {
-        $scope.dataDecoded = decodedPersons;
+        $scope.personDecoded = decodedPersons;
       });
     });
 
-    $scope.filters = [
+    $scope.personFilters = [
       {
         title: 'Стать',
         property: 'genderTypeId',
@@ -60,10 +60,14 @@ angular.module('admissionSystemApp')
       }
     ];
 
-    $scope.search = [
+    $scope.personSearch = [
       {
         title: 'призвіщу',
         property: 'surname'
+      },
+      {
+        title: 'id персони',
+        property: 'id'
       },
       {
         title: 'номеру ОС',
@@ -72,11 +76,12 @@ angular.module('admissionSystemApp')
       {
         title: 'серії ОС',
         property: 'docSeries'
-      },
+      }
     ];
 
+
     $scope.headers = [
-      { name: 'id', display: 'id', visible: false }, 
+      { name: 'id', display: '№', visible: true }, 
       { name: 'name', display: 'ПІБ', visible: true }, 
       { name: 'firstName', display: 'Ім’я', visible: false }, 
       { name: 'fatherName', display: 'По-батькові', visible: false }, 

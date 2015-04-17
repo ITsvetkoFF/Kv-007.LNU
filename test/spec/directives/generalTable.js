@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: personTable', function () {
+describe('Directive: generalTable', function () {
 
   // load the directive's module
   beforeEach(module('admissionSystemApp'));
@@ -13,8 +13,8 @@ describe('Directive: personTable', function () {
   }));
 
   xit('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<person-table></person-table>');
+    element = angular.element('<general-table></general-table>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the personTable directive');
+    expect(element.text()).toBe('this is the generalTable directive');
   }));
 });
