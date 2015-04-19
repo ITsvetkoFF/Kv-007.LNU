@@ -80,23 +80,42 @@
         <!-- Table -->
         <div id="mainTable">
           <table ng-table="tableParams" show-filter="true" class="table table-hover">
-            <thead>
-            <tr>
-              <td ng-repeat="column in headers" data-title="'column.display'" ng-show="column.visible" sortable="column.field">
-                {{column.display}}
-              </td>
-            </tr>
-            </thead>
+
+
             <tr ng-repeat="prop in $data">
-              <td ng-repeat="column in headers" data-title="'column.display'" ng-show="column.visible" sortable="column.field">
-                {{prop[column.name]}}
-              </td>
+
+            <td data-title = "headers[0].display" ng-show = "headers[0].visible">
+              {{prop[headers[0].name]}}
+            </td>
+            <td data-title="headers[1].display" ng-show = "headers[1].visible" filter="headers[1].filter">
+              {{prop[headers[1].name]}}
+            </td>
+            <td data-title="headers[2].display" ng-show = "headers[2].visible" >
+              {{prop[headers[2].name]}}
+            </td>
+            <td data-title="headers[3].display" ng-show = "headers[3].visible" filter="headers[3].filter">
+              {{prop[headers[3].name]}}
+            </td>
+            <td data-title="headers[4].display" ng-show = "headers[4].visible">
+              {{prop[headers[4].name]}}
+            </td>
+            <td data-title="headers[5].display" ng-show = "headers[5].visible" filter="headers[5].filter">
+              {{prop[headers[5].name]}}
+            </td>
+            <td data-title="headers[6].display" ng-show = "headers[6].visible">
+              {{prop[headers[6].name]}}
+            </td>
+            <td data-title="headers[7].display" ng-show = "headers[7].visible">
+              {{prop[headers[7].name]}}
+            </td>
+
               <td>
                 <a href="#/edit-proposal/{{prop.id}}">
                 <button class="btn btn-xs btn-warning"><i class="fa fa-pencil-square-o"></i></button>
                 </a>
                 <button class="btn btn-xs btn-danger" ng-click="delete(prop.id)"><i class="fa fa-times"></i></button>
               </td>
+
             </tr>
           </table>
       </div>
