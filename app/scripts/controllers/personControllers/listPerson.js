@@ -2,10 +2,14 @@
 
 
 angular.module('admissionSystemApp')
-  .controller('ListPersonCtrl', function($scope, personDecodeServise, SpecofferDictionaryService) {
+  .controller('ListPersonCtrl', function($scope, personDecodeServise, SpecofferDictionaryService, personsService) {
+
+    personsService.getPersons(5,3).then(function(getReturn){
+      $scope.getReturn = getReturn;
+    });
 
     $scope.dataDecoded = [];
-    
+
     SpecofferDictionaryService.getPersons().then(function (rawPersons) {
       personDecodeServise.personDecoded(rawPersons).then(function (decodedPersons) {
         $scope.dataDecoded = decodedPersons;
@@ -76,22 +80,22 @@ angular.module('admissionSystemApp')
     ];
 
     $scope.headers = [
-      { name: 'id', display: 'id', visible: false }, 
-      { name: 'name', display: 'ПІБ', visible: true }, 
-      { name: 'firstName', display: 'Ім’я', visible: false }, 
-      { name: 'fatherName', display: 'По-батькові', visible: false }, 
-      { name: 'surname', display: 'Прізвище', visible: false }, 
+      { name: 'id', display: 'id', visible: false },
+      { name: 'name', display: 'ПІБ', visible: true },
+      { name: 'firstName', display: 'Ім’я', visible: false },
+      { name: 'fatherName', display: 'По-батькові', visible: false },
+      { name: 'surname', display: 'Прізвище', visible: false },
       { name: 'personTypeId', display: 'Тип персони', visible: true },
-      { name: 'genderTypeId', display: 'Стать', visible: true }, 
-      { name: 'marriedTypeId', display: 'Сімейний стан', visible: true }, 
-      { name: 'citizenCountryId',  display: 'Громад-во',  visible: true }, 
-      { name: 'docSeries',  display: 'Серія ОС',  visible: true }, 
-      { name: 'docNum',  display: 'Номер ОС',  visible: true }, 
-      { name: 'resident',  display: 'Резидент',  visible: true }, 
-      { name: 'birthPlace',  display: 'Місце народж.',  visible: true }, 
-      { name: 'begDate', display: 'Дата народж.', visible: true }, 
-      { name: 'isMilitary', display: 'ВЗ', visible: true }, 
-      { name: 'isHostel', display: 'Гуртожиток', visible: true }, 
+      { name: 'genderTypeId', display: 'Стать', visible: true },
+      { name: 'marriedTypeId', display: 'Сімейний стан', visible: true },
+      { name: 'citizenCountryId',  display: 'Громад-во',  visible: true },
+      { name: 'docSeries',  display: 'Серія ОС',  visible: true },
+      { name: 'docNum',  display: 'Номер ОС',  visible: true },
+      { name: 'resident',  display: 'Резидент',  visible: true },
+      { name: 'birthPlace',  display: 'Місце народж.',  visible: true },
+      { name: 'begDate', display: 'Дата народж.', visible: true },
+      { name: 'isMilitary', display: 'ВЗ', visible: true },
+      { name: 'isHostel', display: 'Гуртожиток', visible: true },
       { name: 'identifier', display: 'Мат. відп', visible: false }
     ];
 
