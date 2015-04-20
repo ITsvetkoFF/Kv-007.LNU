@@ -109,7 +109,7 @@ angular.module('admissionSystemApp')
           return getLargeDictionary('marriedtypes');
         },
         getAdminUnits: function () {
-          return getLargeDictionary('adminunitsDELETE');
+          return getLargeDictionary('adminunits');
         },
         getAdminUnitsTypes: function () {
           return getLargeDictionary('adminunits/types ');

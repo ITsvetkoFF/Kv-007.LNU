@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-.controller('tabPersonSubjects', ['$scope', '$modal','$rootScope', function($scope, $modal, $rootScope) {
+.controller('tabPersonSubjects', ['$scope', '$modal','$rootScope', 'SpecofferDictionaryService', function($scope, $modal, $rootScope, SpecofferDictionaryService) {
+
 
     // temp data --------begin---------
     $scope.entirePerson.enrolmentsubjects = [
@@ -18,9 +19,23 @@ angular.module('admissionSystemApp')
     ];
     // temp data --------end---------
 
+    $scope.entirePerson.enrolmentsubjectsDecoded = $scope.entirePerson.enrolmentsubjects;
+
+    $scope.enrolSubjIds = SpecofferDictionaryService.getEnrolmentsSubjects().then(function(subjs) {
+      $scope.subjs = subjs;
+      $scope.arr = [];
+      angular.forEach(subjs, function(subjs){
+        $scope.arr[subjs.id] = subjs.name;
+      });
+      angular.forEach($scope.entirePerson.enrolmentsubjectsDecoded, function () {
+        $scope.entirePerson.enrolmentsubjectsDecoded.enrolmentSubjectId = $scope.arr[$scope.entirePerson.enrolmentsubjects.enrolmentSubjectId];
+      });
+
+    });
+
+
     $scope.subHeaders = [
       {name: 'id', display: '№'},
-      {name: 'personPaperId', display: 'Сертифікат ЗНО'},
       {name: 'enrolmentSubjectId', display: 'Предмет ЗНО'},
       {name: 'mark', display: 'Бал предмету ЗНО'}
     ];
@@ -29,8 +44,8 @@ angular.module('admissionSystemApp')
       var newSubj = {};
       newSubj.id = $scope.entirePerson.enrolmentsubjects.length+1;
       newSubj.personId = $scope.entirePerson.enrolmentsubjects.personId || 11; // to delete "|| 11" when restang is ready
-      newSubj.personPaperId = document.getElementById('personPaperId').value;
-      newSubj.enrolmentSubjectId = document.getElementById('enrolmentSubjectId').value;
+      newSubj.personPaperId = $scope.entirePerson.enrolmentsubjects.personPaperId || 11;
+      newSubj.enrolmentSubjectId = $scope.enrolmentsubject.name;
       newSubj.mark = document.getElementById('mark').value;
       $scope.entirePerson.enrolmentsubjects.push(newSubj);
     };
@@ -46,7 +61,6 @@ angular.module('admissionSystemApp')
       //  $scope.entirePerson.enrolmentsubjects[i].id = i+1;
       //}
     };
-
     $scope.open = function (size, id) {
 
       $modal.open({
@@ -55,9 +69,9 @@ angular.module('admissionSystemApp')
         controller: function ($rootScope, $scope, $modalInstance, id) {
           $scope.id = id;
 
+          console.log(document.getElementById('modalEnrolmentSubjectId'));
           $scope.ok = function (id) {
-            $scope.entirePerson.enrolmentsubjects[id-1].personPaperId = document.getElementById('modalPersonPaperId').value;
-            $scope.entirePerson.enrolmentsubjects[id-1].enrolmentSubjectId = document.getElementById('modalEnrolmentSubjectId').value;
+            $scope.entirePerson.enrolmentsubjects[id-1].enrolmentSubjectId = $scope.subjs[(document.getElementById('modalEnrolmentSubjectId').value)].name;
             $scope.entirePerson.enrolmentsubjects[id-1].mark = document.getElementById('modalMark').value;
             $modalInstance.close();
           };
