@@ -89,7 +89,7 @@ table td a:hover {
   cursor: pointer;
 }
 .table-footer .pagination-sm{
-  margin: 0px;
+  margin: 0;
 }
 
 /* table header */
@@ -102,4 +102,7 @@ table td a:hover {
 }
 #dictionariesTable {
   padding: 0 1% 0 1%
+}
+#subjPlus {
+  top: 25px
 }
