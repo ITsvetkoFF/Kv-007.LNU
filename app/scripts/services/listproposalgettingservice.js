@@ -9,7 +9,7 @@ angular.module('admissionSystemApp')
         timePeriodCourseNames = [],
         specofferTypeNames = [],
         eduFormTypeNames = [];
-        
+
       function pushData (data, array) {
         angular.forEach(data, function (item) {
           array[item.id] = item.name;
