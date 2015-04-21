@@ -10,7 +10,7 @@
                 </td>
             </tr>
           </thead>
-          <tr ng-repeat=" obj in entirePerson.enrolmentsubjectsDecoded">
+          <tr ng-repeat=" obj in decodedSubjects">
             <td ng-repeat="column in subHeaders">
               {{obj[column.name]}}
             </td>
