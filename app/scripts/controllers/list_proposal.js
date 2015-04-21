@@ -8,22 +8,52 @@
  * Controller of the admissionSystemApp
  */
 angular.module('admissionSystemApp')
-  .controller('ListProposalCtrl', ['$scope', '$filter', 'ngTableParams', 'SpecoffersService', 'ListProposalGettingService', '$modal', 'SpecofferDictionaryService', 'Cookies',
-    function ($scope, $filter, NgTableParams, SpecoffersService, ListProposalGettingService, $modal, SpecofferDictionaryService, Cookies) {
+  .controller('ListProposalCtrl', ['$scope', '$filter', 'ngTableParams', 'copyTimeperiod', 'SpecoffersService', 'ListProposalGettingService', '$modal', 'SpecofferDictionaryService', 'Cookies',
+    function ($scope, $filter, NgTableParams, copyTimeperiod, SpecoffersService, ListProposalGettingService, $modal, SpecofferDictionaryService, Cookies) {
 
-    //copyTimeperiod.createTimeperiod(2020, 1, 'Всупна компанія 2020', '2011-07-31', '2010-07-31');
-    //copyTimeperiod.copyToTimeperiod({timePeriodId: 8}, 29, '1970', '1970');
+      $scope.flag = 0;
+      $scope.sweeper = function () {
+        $scope.flag++;
+        if ($scope.flag % 2 === 0) {
+          $scope.numValue = undefined;
+          $scope.begDate = undefined;
+          $scope.endDate = undefined;
+        }
+      };
 
-    $scope.flag1 = false;
-    $scope.flag1 = false;
-    $scope.thumbler1 = function () {
-      $scope.flag1 = !$scope.flag1;
-    };
-    $scope.thumbler2 = function () {
-      $scope.flag2 = !$scope.flag2;
-    };
+      $scope.createNewTimeperiod = function (size) {
+        copyTimeperiod.createTimeperiod($scope.numValue, 'Вступна кампанія' + $scope.numValue, $scope.begDate, $scope.endDate).then(function(data){
+          $scope.createdTimeperiodId = data;
+        });
 
-    $scope.createNewTimperiod = function (numValueInput, nameInput, begDateInput, endDateInput){};
+        $modal.open({
+          templateUrl: '../views/modal/modalCopyTimeperiod.html',
+          scope: $scope,
+          controller: function ($scope, $modalInstance) {
+
+            $scope.switch = false;
+            $scope.switcher = function () {
+              $scope.switch = !$scope.switch;
+              $scope.selectedTimeperiod = undefined;
+              $scope.begDateCopy = undefined;
+              $scope.endDateCopy = undefined;
+            };
+
+            $scope.ok = function () {
+              console.log($scope.selectedTimeperiod);
+              console.log($scope.createdTimeperiodId);
+              copyTimeperiod.copyToTimeperiod($scope.selectedTimeperiod, $scope.createdTimeperiodId, $scope.begDateCopy, $scope.endDateCopy);
+              $modalInstance.close();
+            };
+
+            $scope.cancel = function () {
+              $modalInstance.dismiss('cancel');
+            };
+
+          },
+          size: size
+        });
+      };
 
 
       $scope.headers = [
@@ -54,11 +84,13 @@ angular.module('admissionSystemApp')
       };
 
       $scope.timeperiod = {};
+      $scope.timeperiodsForCopy = {};
       $scope.timeperiod.timePeriodId = Cookies.getCookie('timeperiod');
       $scope.dataNew = [];
 
       SpecofferDictionaryService.getTimeperiods({timePeriodTypeId: 1}).then(function (timeperiods) {
         $scope.timeperiods = timeperiods;
+        $scope.timeperiodsForCopy = timeperiods;
       });
 
       if ($scope.timeperiod.timePeriodId) {

@@ -3,9 +3,8 @@
 angular.module('admissionSystemApp')
 
 
-  .controller('ModalBenefitCtrl', function ($scope, $modal, Benefits) {
-    // $scope.entireSpecoffer = {};
-    // $scope.entireSpecoffer.benefits = [];
+  .controller('ModalBenefitCtrl', function ($scope, $modal, $location, Benefits) {
+
     $scope.entireSpecoffer.benefits = [];
 
     //Internal object for rendering data in table
@@ -16,26 +15,35 @@ angular.module('admissionSystemApp')
     $scope.allBenefits = {};
     $scope.allBenefits.benefit = '';
 
-    //Get data from server
-    Benefits.getBenefits().then(function (data) {
-      $scope.benefits = data.subjectsArray;
-      $scope.everything.allInformationArray = data.subjectsMainArray;
+    if ($location.url() === '/new-proposal') {
 
-      for (var y = 0; y < $scope.everything.allInformationArray.length; y++) {
-        $scope.entireSpecoffer.benefits.push({benefitId: $scope.everything.allInformationArray[y].id, note: ''});
-      }
+      //Get data from server
+      Benefits.getBenefits().then(function (data) {
+        $scope.benefits = data.benefitsArray;
+        $scope.everything.allInformationArray = data.benefitsMainArray;
 
-      //Render data from server to table
-      for (var i = 0; i < $scope.entireSpecoffer.benefits.length; i++) {
-        for (var x = 0; x < $scope.benefits.length; x++) {
-          if ($scope.entireSpecoffer.benefits[i].benefitId === $scope.benefits[x].id) {
-            $scope.everything.allInformationArray.push($scope.benefits[x]);
-            break;
+        for (var y = 0; y < $scope.everything.allInformationArray.length; y++) {
+          $scope.entireSpecoffer.benefits.push({benefitId: $scope.everything.allInformationArray[y].id, note: ''});
+        }
+      });
+    }
+    else {
+      Benefits.getBenefits().then(function (data) {
+        var array1 = data.benefitsArray;
+        var array2 = data.benefitsMainArray;
+        $scope.benefits = array1.concat(array2);
+
+        //Render data from server to table
+        for (var i = 0; i < $scope.entireSpecoffer.benefits.length; i++) {
+          for (var x = 0; x < $scope.benefits.length; x++) {
+            if ($scope.entireSpecoffer.benefits[i].benefitId === $scope.benefits[x].id) {
+              $scope.everything.allInformationArray.push($scope.benefits[x]);
+              break;
+            }
           }
         }
-      }
-
-    });
+      });
+    }
 
     //Function opens modal window
     $scope.open = function (size) {

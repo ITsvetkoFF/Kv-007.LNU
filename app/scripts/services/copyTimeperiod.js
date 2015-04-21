@@ -3,6 +3,8 @@
 angular.module('admissionSystemApp')
   .factory('copyTimeperiod', ['$http', '$q', 'SpecofferDictionaryService', 'SpecoffersService', function ($http, $q, SpecofferDictionaryService, SpecoffersService) {
 
+    var createdTimeperiodId = $q.defer();
+
     //This var modifies request
     var req = {
       method: 'POST',
@@ -17,13 +19,18 @@ angular.module('admissionSystemApp')
     //Method creates new timeperiod
     var createTimeperiod = function (numValueInput, nameInput, begDateInput, endDateInput) {
       req.data = {numValue : numValueInput, timePeriodTypeId: 1, name : nameInput, begDate : begDateInput, endDate : endDateInput};
-      $http(req);
+      $http(req).then(function (data) {
+        createdTimeperiodId.resolve(data.data.id);
+      }) ;
+
+      return createdTimeperiodId.promise;
     };
 
     //Method copy data from current timeperiod to selected timeperiod
     var copyToTimeperiod = function (oldTimeperiod, newTimeperiod, begDate, endDate) {
       SpecofferDictionaryService.getAllSpecoffers(oldTimeperiod).then(function (specoffers) {
         var specofferArray = specoffers;
+        console.log(specoffers);
         var x = 0;
 
         for (x; x < 5; x++) {
@@ -66,7 +73,7 @@ angular.module('admissionSystemApp')
 
       //Method creates new timeperiod
       createTimeperiod: function (numValueInput, nameInput, begDateInput, endDateInput) {
-        return createTimeperiod(numValueInput, timePeriodIdTypeInput, nameInput, begDateInput, endDateInput);
+        return createTimeperiod(numValueInput, nameInput, begDateInput, endDateInput);
       },
 
       //Method copy data from current timeperiod to selected timeperiod
