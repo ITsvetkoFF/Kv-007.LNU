@@ -10,7 +10,7 @@
                 </td>
             </tr>
           </thead>
-          <tr ng-repeat=" obj in decodedSubjects">
+          <tr ng-repeat=" obj in decodedSubjects track by $index">
             <td ng-repeat="column in subHeaders">
               {{obj[column.name]}}
             </td>

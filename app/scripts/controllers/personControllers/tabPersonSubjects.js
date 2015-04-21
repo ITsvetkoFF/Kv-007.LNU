@@ -22,7 +22,7 @@ angular.module('admissionSystemApp')
 
 
       $scope.decodedSubjects = [];
-      $scope.decodedObj = {};
+      //$scope.decodedObj = {};
 
     // create dictionary with subjects
     $scope.enrolSubjIds = SpecofferDictionaryService.getEnrolmentsSubjects().then(function(subjs) {
@@ -35,11 +35,12 @@ angular.module('admissionSystemApp')
 
       if ($scope.entirePerson.enrolmentsubjects) {
         angular.forEach($scope.entirePerson.enrolmentsubjects, function (decodedObj) {
-          $scope.decodedObj.id = $scope.entirePerson.enrolmentsubjects.id;
-          $scope.decodedObj.personPaperId = $scope.entirePerson.enrolmentsubjects.personPaperId;
-          $scope.decodedObj.enrolmentSubjectId = $scope.arr[$scope.entirePerson.enrolmentsubjects.enrolmentSubjectId];
-          $scope.decodedObj.mark = $scope.entirePerson.enrolmentsubjects.mark;
-          $scope.decodedSubjects.push(decodedObj);
+          var temp = {};
+          temp.id = decodedObj.id;
+          temp.personPaperId = decodedObj.personPaperId;
+          temp.enrolmentSubjectId = $scope.arr[decodedObj.enrolmentSubjectId];
+          temp.mark = decodedObj.mark;
+          $scope.decodedSubjects.push(temp);
         });
       }
     });
@@ -67,13 +68,14 @@ angular.module('admissionSystemApp')
 
     $scope.deleteSubj = function (id) {
       $scope.entirePerson.enrolmentsubjects.splice(id-1, 1);
+      $scope.decodedSubjects.splice(id-1, 1);
       $scope.entirePerson.enrolmentsubjects.forEach(function (subj, index){
         subj.id = index+1;
       });
-      //OR ???
-      // for (var i=0, ii=$scope.entirePerson.enrolmentsubjects.length; i<=ii; i++) {
-      //  $scope.entirePerson.enrolmentsubjects[i].id = i+1;
-      //}
+      $scope.decodedSubjects.forEach(function (subj, index){
+        subj.id = index+1;
+      });
+
     };
     $scope.open = function (size, id) {
 
