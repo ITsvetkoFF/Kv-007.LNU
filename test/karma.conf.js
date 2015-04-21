@@ -23,7 +23,6 @@ module.exports = function(config) {
       'bower_components/angular/angular.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
       'bower_components/angular-resource/angular-resource.js',
-      'bower_components/angular-route/angular-route.js',
       'bower_components/lodash/dist/lodash.compat.js',
       'bower_components/restangular/dist/restangular.js',
       'bower_components/ng-table/dist/ng-table.min.js',
@@ -31,12 +30,13 @@ module.exports = function(config) {
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-ui-select/dist/select.js',
       'bower_components/checklist-model/checklist-model.js',
+      'bower_components/ui-router/release/angular-ui-router.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
-      // 'test/mock/**/*.js',
-      'test/spec/**/*.js'
-      //'test/spec/services/specofferdictionaryservise.js'
+      //'test/spec/**/*.js'
+      'test/spec/services/specofferdictionaryservise.js',
+      //'test/spec/services/specoffersservice.js'
     ],
 
     // list of files / patterns to exclude

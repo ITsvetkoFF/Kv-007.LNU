@@ -85,7 +85,7 @@ table td a:hover {
 
 
 
- /* Modal layout for choosing table fields in /list-person/ */
+ /* Modal layout for choosing table fields in general-table */
 
 #modalHeaderChooser .modal-body {
   height: 340px;
@@ -95,7 +95,7 @@ table td a:hover {
   display: block;
 }
 
-/* Person table direcive  */
+/* general-table  table direcive  */
 
 .pointer tr {
   cursor: pointer;
@@ -108,4 +108,10 @@ table td a:hover {
 .content-data a:hover {
   cursor: pointer;
   text-decoration: none;
+}
+#dictionariesTable {
+  padding: 0 1% 0 1%
+}
+#dictionariesTable {
+  padding: 0 1% 0 1%
 }

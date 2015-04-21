@@ -1,17 +1,9 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name admissionSystemApp
- * @description
- * # admissionSystemApp
- *
- * Main module of the application.
- */
 angular
   .module('admissionSystemApp', [
     'ngResource',
-    'ngRoute',
+    'ui.router',
     'ui.bootstrap',
     'ngTable',
     'restangular',
@@ -22,34 +14,65 @@ angular
   ])
 
 
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/list-proposal', {
-        templateUrl: 'views/list_proposal.html',
-        controller: 'ListProposalCtrl'
+  .config(function ($stateProvider, $urlRouterProvider) {
+    $stateProvider
+      .state('list-specoffer', {
+        url: '/list-specoffer',
+        templateUrl: '../views/specoffer/list_specoffer.html',
+        controller: 'ListSpecofferCtrl'
       })
-      .when('/new-proposal', {
-        templateUrl: 'views/new_proposal.html',
-        controller: 'NewProposalCtrl'
+      .state('new-specoffer', {
+        url: '/new-specoffer',
+        templateUrl: '../views/specoffer/new_specoffer.html',
+        controller: 'NewSpecofferCtrl'
       })
-      .when('/edit-proposal/:id', {
-        templateUrl: 'views/new_proposal.html',
-        controller: 'NewProposalCtrl'
+      .state('edit-specoffer', {
+        url: '/edit-specoffer/:id',
+        templateUrl: '../views/specoffer/new_specoffer.html',
+        controller: 'NewSpecofferCtrl'
       })
-      .when('/list-person', {
-        templateUrl: 'views/list_person.html',
+      .state('list-person', {
+        url: '/list-person',
+        templateUrl: '../views/person/list_person.html',
         controller: 'ListPersonCtrl'
       })
-      .when('/new-person', {
-        templateUrl: 'views/new_person.html',
+      .state('new-person', {
+        url: '/new-person',
+        templateUrl: '../views/person/new_person.html',
         controller: 'NewPersonCtrl'
       })
-      .otherwise({
-        redirectTo: '/list-proposal'
+      .state('dictionaries', {
+        url: '/dictionaries',
+        templateUrl: 'views/dictionaries.html',
+        controller: 'dictionaryCtrl'
+      })
+      .state('edit-person', {
+        url: '/edit-person/:id',
+        templateUrl: '../views/person/new_person.html',
+        controller: 'NewPersonCtrl'
+      })
+      .state('list-enrolments', {
+        url: '/list-enrolments',
+        templateUrl: '../views/enrolment/list_enrolments.html',
+        controller: 'ListEnrolmentsCtrl'
+      })
+      .state('new-enrolment', {
+        url: '/new-enrolment',
+        templateUrl: '../views/enrolment/new_enrolment.html',
+        controller: 'NewEnrolmentCtrl'
+      })
+      .state('edit-enrolment', {
+        url: '/edit-enrolment/:id',
+        templateUrl: '../views/enrolment/new_enrolment.html',
+        controller: 'NewEnrolmentCtrl'
       });
+    $urlRouterProvider.otherwise('/list-specoffer');
   })
 
   .config(function (uiSelectConfig) {
     uiSelectConfig.theme = 'bootstrap';
-  });
+  })
 
+  .config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.headers.get = { 'Authorization' : 'Basic YWRtaW46bmltZGE=' };
+  }]);

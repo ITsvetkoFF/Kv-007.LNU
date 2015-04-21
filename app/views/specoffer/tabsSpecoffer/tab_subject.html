@@ -1,0 +1,39 @@
+<div ng-controller="TabSubjectCtrl">
+  <button class="btn btn-default top-buffer bottom-buffer" ng-click="open('lg')">
+    <i class="fa fa-plus text-success"></i> Додати предмет
+  </button>
+
+
+  <div class="row">
+    <div class="col-md-11 text-center">
+
+      <table class="table table-bordered table-hover" ng-show="viewSubjects.length">
+        <tr>
+          <th>Назва предмета</th>
+          <th class="text-center">Додаткова назва</th>
+          <th>Профiльний</th>
+          <th>Обов'язковий</th>
+          <th>Вага предмета</th>
+          <th>Мiнiмальний бал ЗНО</th>
+          <th></th>
+        </tr>
+        <tr ng-repeat="subj in viewSubjects">
+          <td> {{ subj.subject}}</td>
+          <td>{{subj.addName || "&mdash;"}}</td>
+          <td> {{subj.isMajor ? 'Так' : 'Нi'}}</td>
+          <td> {{ subj.alternative ? 'Так' : 'Нi'}}</td>
+          <td> {{subj.weightSubject}}</td>
+          <td> {{subj.mark }}</td>
+          <td>
+            <button class="btn btn-xs btn-danger" ng-click="removeRow($index)"><i class="fa fa-times"></i></button>
+            <button class="btn btn-xs btn-warning" ng-click="open('lg', subj, $index )"><i class="fa fa-pencil"></i>
+            </button>
+
+          </td>
+        </tr>
+
+      </table>
+    </div>
+  </div>
+</div>
+
