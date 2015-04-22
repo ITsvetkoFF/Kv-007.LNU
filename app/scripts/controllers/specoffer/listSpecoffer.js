@@ -7,6 +7,7 @@ angular.module('admissionSystemApp')
       $scope.flag = 0;
       $scope.sweeper = function () {
         $scope.flag++;
+        console.log($scope.collapse);
         if ($scope.flag % 2 === 0) {
           $scope.numValue = undefined;
           $scope.begDate = undefined;
@@ -28,14 +29,14 @@ angular.module('admissionSystemApp')
             $scope.switcher = function () {
               $scope.switch = !$scope.switch;
               $scope.selectedTimeperiod = undefined;
-              $scope.begDateCopy = undefined;
-              $scope.endDateCopy = undefined;
+              //$scope.begDateCopy = undefined;
+              //$scope.endDateCopy = undefined;
             };
 
             $scope.ok = function () {
               console.log($scope.selectedTimeperiod);
               console.log($scope.createdTimeperiodId);
-              copyTimeperiod.copyToTimeperiod($scope.selectedTimeperiod, $scope.createdTimeperiodId, $scope.begDateCopy, $scope.endDateCopy);
+              copyTimeperiod.copyToTimeperiod($scope.selectedTimeperiod, $scope.createdTimeperiodId, $scope.begDate, $scope.endDate);
               $modalInstance.close();
             };
 

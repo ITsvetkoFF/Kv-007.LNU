@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .factory('copyTimeperiod', ['$http', '$q', 'SpecofferDictionaryService', 'SpecoffersService', function ($http, $q, SpecofferDictionaryService, SpecoffersService) {
+  .factory('copyTimeperiod', ['$http', '$q', 'DictionariesSvc', 'SpecoffersService', function ($http, $q, DictionariesSvc, SpecoffersService) {
 
     var createdTimeperiodId = $q.defer();
 
@@ -28,9 +28,8 @@ angular.module('admissionSystemApp')
 
     //Method copy data from current timeperiod to selected timeperiod
     var copyToTimeperiod = function (oldTimeperiod, newTimeperiod, begDate, endDate) {
-      SpecofferDictionaryService.getAllSpecoffers(oldTimeperiod).then(function (specoffers) {
+      DictionariesSvc.getAllSpecoffers(oldTimeperiod).then(function (specoffers) {
         var specofferArray = specoffers;
-        console.log(specoffers);
         var x = 0;
 
         for (x; x < 5; x++) {
