@@ -8,7 +8,7 @@
 
         <div class="col-md-3">
           <label for="modalEnrolmentSubjectId">Предмет ЗНО</label>
-          <select ng-model="enrolmentsubject"
+          <select ng-model="modalEnrolmentSubject"
                   ng-options="opt as opt.name for opt in subjs"
                   id="modalEnrolmentSubjectId"
                   class="form-control"
@@ -19,12 +19,13 @@
 
         <div class="col-md-3">
           <label for="modalMark">Бал предмету ЗНО</label>
-          <input id="modalMark"
+          <input ng-model="modalMark"
+                 id="modalMark"
                  type="text"
                  class="form-control"
                  placeholder="Бал"
                  name="modalMark"
-                 value="{{entirePerson.enrolmentsubjects[id-1].mark}}">
+                 value="{{decodedSubjects[id-1].mark}}">
         </div>
 
       </div>

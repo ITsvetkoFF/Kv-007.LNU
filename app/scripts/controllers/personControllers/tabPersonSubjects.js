@@ -56,13 +56,22 @@ angular.module('admissionSystemApp')
 
     $scope.addPersonSubject = function () {
       var newSubj = {};
-      newSubj.id = $scope.entirePerson.enrolmentsubjects.length+1;
+      newSubj.id = $scope.decodedSubjects.length+1;
       newSubj.personId = $scope.entirePerson.enrolmentsubjects.personId || 11; // to delete "|| 11" when restang is ready
       newSubj.personPaperId = $scope.entirePerson.enrolmentsubjects.personPaperId || 11;
       newSubj.enrolmentSubjectId = $scope.enrolmentsubject.id;
-      newSubj.mark = document.getElementById('mark').value;
+      newSubj.mark = $scope.subjectMark;
+      $scope.entirePerson.enrolmentsubjects.push(angular.copy(newSubj));
+      console.log('subject before decoded', $scope.enrolmentsubject.id);
+
+
+
+      newSubj.enrolmentSubjectId = $scope.enrolmentsubject.name;
       $scope.decodedSubjects.push(newSubj);
-      console.log('subject added', $scope.decodedSubjects);
+
+      console.log('subject after decoded', $scope.enrolmentsubject.name);
+      console.log('subject in decoded', $scope.decodedSubjects);
+      console.log('subject in entirePerson', $scope.entirePerson.enrolmentsubjects);
     };
 
 
@@ -85,10 +94,14 @@ angular.module('admissionSystemApp')
         controller: function ($rootScope, $scope, $modalInstance, id) {
           $scope.id = id;
 
-          console.log(document.getElementById('modalEnrolmentSubjectId'));
           $scope.ok = function (id) {
-            $scope.entirePerson.enrolmentsubjects[id-1].enrolmentSubjectId = $scope.subjs[(document.getElementById('modalEnrolmentSubjectId').value)].id;
-            $scope.entirePerson.enrolmentsubjects[id-1].mark = document.getElementById('modalMark').value;
+            $scope.entirePerson.enrolmentsubjects[id-1].enrolmentSubjectId = $scope.modalEnrolmentSubject.id;
+            $scope.entirePerson.enrolmentsubjects[id-1].mark = $scope.modalMark;
+            $scope.decodedSubjects[id-1].enrolmentSubjectId = $scope.modalEnrolmentSubject.name;
+            $scope.decodedSubjects[id-1].mark = $scope.modalMark;
+            console.log('entirePerson', $scope.entirePerson.enrolmentsubjects);
+            console.log('decoded', $scope.decodedSubjects);
+
             $modalInstance.close();
           };
 
