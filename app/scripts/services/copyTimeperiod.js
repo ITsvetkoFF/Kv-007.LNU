@@ -3,36 +3,43 @@
 angular.module('admissionSystemApp')
   .factory('copyTimeperiod', ['$http', '$q', 'DictionariesSvc', 'SpecoffersService', function ($http, $q, DictionariesSvc, SpecoffersService) {
 
-    var createdTimeperiodId = $q.defer();
 
     //This var modifies request
     var req = {
-      method: 'POST',
-      url: 'http://104.236.29.16:8080/is-lnu-rest-api/api/timeperiods',
-      headers: {
-        'Authorization': 'Basic YWRtaW46bmltZGE=',
-        'Content-Type' : 'application/json'
-      },
-      data : {}
-    };
+    method: 'POST',
+    url: 'http://104.236.29.16:8080/is-lnu-rest-api/api/timeperiods',
+    headers: {
+    'Authorization': 'Basic YWRtaW46bmltZGE=',
+    'Content-Type': 'application/json'
+  },
+    data: {}
+  };
 
     //Method creates new timeperiod
     var createTimeperiod = function (numValueInput, nameInput, begDateInput, endDateInput) {
-      req.data = {numValue : numValueInput, timePeriodTypeId: 1, name : nameInput, begDate : begDateInput, endDate : endDateInput};
+      var createdTimeperiodId = $q.defer();
+      req.data = {
+        numValue: numValueInput,
+        timePeriodTypeId: 1,
+        name: nameInput,
+        begDate: begDateInput,
+        endDate: endDateInput
+      };
       $http(req).then(function (data) {
         createdTimeperiodId.resolve(data.data.id);
-      }) ;
+      });
 
       return createdTimeperiodId.promise;
     };
 
     //Method copy data from current timeperiod to selected timeperiod
     var copyToTimeperiod = function (oldTimeperiod, newTimeperiod, begDate, endDate) {
+      DictionariesSvc.clearStorageByRoute('specoffers');
       DictionariesSvc.getAllSpecoffers(oldTimeperiod).then(function (specoffers) {
         var specofferArray = specoffers;
         var x = 0;
 
-        for (x; x < 5; x++) {
+        for (x; x < 2; x++) {
           var y = 0;
           var z = 0;
 
@@ -76,8 +83,8 @@ angular.module('admissionSystemApp')
       },
 
       //Method copy data from current timeperiod to selected timeperiod
-      copyToTimeperiod : function (oldTimeperiod, newTimeperiod, begDate, endDate) {
+      copyToTimeperiod: function (oldTimeperiod, newTimeperiod, begDate, endDate) {
         return copyToTimeperiod(oldTimeperiod, newTimeperiod, begDate, endDate);
       }
     };
-}]);
+  }]);

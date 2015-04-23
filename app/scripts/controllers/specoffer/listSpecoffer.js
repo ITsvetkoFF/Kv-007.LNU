@@ -4,11 +4,10 @@ angular.module('admissionSystemApp')
   .controller('ListSpecofferCtrl', ['$scope', '$filter', 'ngTableParams', 'copyTimeperiod', 'SpecoffersService', 'decodeSpecofferSvc', '$modal', 'DictionariesSvc', 'Cookies',
     function ($scope, $filter, NgTableParams, copyTimeperiod, SpecoffersService, decodeSpecofferSvc, $modal, DictionariesSvc, Cookies) {
 
-      $scope.flag = 0;
+      $scope.isCollapsed = true;
       $scope.sweeper = function () {
-        $scope.flag++;
-        console.log($scope.collapse);
-        if ($scope.flag % 2 === 0) {
+        $scope.isCollapsed = !$scope.isCollapsed;
+        if ($scope.isCollapsed) {
           $scope.numValue = undefined;
           $scope.begDate = undefined;
           $scope.endDate = undefined;
@@ -18,7 +17,14 @@ angular.module('admissionSystemApp')
       $scope.createNewTimeperiod = function (size) {
         copyTimeperiod.createTimeperiod($scope.numValue, 'Вступна кампанія' + $scope.numValue, $scope.begDate, $scope.endDate).then(function(data){
           $scope.createdTimeperiodId = data;
+
+          DictionariesSvc.clearStorageByRoute('timeperiods');
+          DictionariesSvc.getTimeperiods({timePeriodTypeId: 1}).then(function (timeperiods) {
+            $scope.timeperiods = timeperiods;
+          });
         });
+
+
 
         $modal.open({
           templateUrl: '../views/modal/modalCopyTimeperiod.html',
@@ -29,8 +35,6 @@ angular.module('admissionSystemApp')
             $scope.switcher = function () {
               $scope.switch = !$scope.switch;
               $scope.selectedTimeperiod = undefined;
-              //$scope.begDateCopy = undefined;
-              //$scope.endDateCopy = undefined;
             };
 
             $scope.ok = function () {

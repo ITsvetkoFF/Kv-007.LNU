@@ -36,6 +36,6 @@
 </div>
 
 <div class="modal-footer">
-  <button class="btn btn-primary" ng-click="ok()" ng-disabled="modalCopyTimeperiod.$invalid" ng-show="switch">Імпортувати</button>
-  <button class="btn btn-danger" ng-click="cancel()">Завершити</button>
+  <button class="btn btn-primary" ng-click="ok(); sweeper();" ng-disabled="modalCopyTimeperiod.$invalid" ng-show="switch">Імпортувати</button>
+  <button class="btn btn-danger" ng-click="cancel(); sweeper();">Завершити</button>
 </div>
