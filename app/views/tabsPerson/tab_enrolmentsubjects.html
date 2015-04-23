@@ -10,7 +10,7 @@
                 </td>
             </tr>
           </thead>
-          <tr ng-repeat=" obj in entirePerson.enrolmentsubjects">
+          <tr ng-repeat=" obj in decodedSubjects track by $index">
             <td ng-repeat="column in subHeaders">
               {{obj[column.name]}}
             </td>
@@ -27,28 +27,22 @@
       <h3>Додавання предмету</h3>
       <div class="row">
 
-        <div class="col-xs-3" >
-          <label for="personPaperId">Сертифікат ЗНО</label>
-          <input id="personPaperId"
-                 type="text"
-                 class="form-control"
-                 placeholder="Сертифікат"
-                 name="personPaperId">
-        </div>
 
         <div class="col-xs-3">
           <label for="enrolmentSubjectId">Предмет ЗНО</label>
-          <input  id="enrolmentSubjectId"
-                  type="text"
+          <select ng-model="enrolmentsubject"
+                  ng-options="opt as opt.name for opt in viewDictionary"
                   class="form-control"
-                  placeholder="Предмет"
-                  name="enrolmentSubjectId">
-          </input>
+                  name="enrolmentSubjectId"
+                  id="enrolmentSubjectId">
+          </select>
         </div>
+
 
         <div class="col-xs-3">
           <label for="mark">Бал предмету ЗНО</label>
-          <input id="mark"
+          <input ng-model="subjectMark"
+                 id="mark"
                  type="text"
                  class="form-control"
                  placeholder="Бал"

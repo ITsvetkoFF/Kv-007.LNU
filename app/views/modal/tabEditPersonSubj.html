@@ -6,35 +6,25 @@
     <div class="row">
       <div class="form-group">
 
-        <div class="col-md-3" >
-          <label for="modalPersonPaperId">Сертифікат ЗНО</label>
-          <input id="modalPersonPaperId"
-                 type="text"
-                 class="form-control"
-                 placeholder="Сертифікат"
-                 name="personPaperId"
-                 value="{{entirePerson.enrolmentsubjects[id-1].personPaperId}}">
-        </div>
-
         <div class="col-md-3">
           <label for="modalEnrolmentSubjectId">Предмет ЗНО</label>
-          <input  id="modalEnrolmentSubjectId"
-                  type="text"
+          <select ng-model="modalEnrolmentSubject"
+                  ng-options="opt as opt.name for opt in subjs"
+                  id="modalEnrolmentSubjectId"
                   class="form-control"
-                  placeholder="Предмет"
-                  name="enrolmentSubjectId"
-                  value="{{entirePerson.enrolmentsubjects[id-1].enrolmentSubjectId}}">
-          </input>
+                  name="modalEnrolmentSubjectId">
+          </select>
         </div>
 
         <div class="col-md-3">
           <label for="modalMark">Бал предмету ЗНО</label>
-          <input id="modalMark"
+          <input ng-model="modalMark"
+                 id="modalMark"
                  type="text"
                  class="form-control"
                  placeholder="Бал"
                  name="modalMark"
-                 value="{{entirePerson.enrolmentsubjects[id-1].mark}}">
+                 value="{{decodedSubjects[id-1].mark}}">
         </div>
 
       </div>
