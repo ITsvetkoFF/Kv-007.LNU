@@ -31,7 +31,7 @@ angular.module('admissionSystemApp')
         $scope.dictionaryArr[subjs.id] = subjs.name;
       });
       $scope.viewDictionary = angular.copy($scope.subjs);
-      console.log('viewDictionary:',$scope.dictionaryArr);
+      //console.log('viewDictionary:',$scope.dictionaryArr);
 
       if ($scope.entirePerson.enrolmentsubjects) {
         angular.forEach($scope.entirePerson.enrolmentsubjects, function (decodedObj) {
@@ -44,7 +44,7 @@ angular.module('admissionSystemApp')
 
           $scope.viewDictionary.splice($scope.dictionaryArr.indexOf(temp.enrolmentSubjectId)-1, 1);
           //console.log('subj:', $scope.dictionaryArr.indexOf(temp.enrolmentSubjectId));
-          console.log('viewDict', $scope.viewDictionary);
+          //console.log('viewDict', $scope.viewDictionary);
         });
 
       }
@@ -73,12 +73,15 @@ angular.module('admissionSystemApp')
       $scope.decodedSubjects.push(newSubj);
 
       // problem is here
-      $scope.viewDictionary.splice($scope.dictionaryArr.indexOf($scope.enrolmentsubject.name), 1);
+      var objIndx = $scope.viewDictionary.map(function(obj, index) {
+        if(obj.name === $scope.enrolmentsubject.name) {console.log(index); return index}
+      }).filter(isFinite);
 
-          console.log('AAAAAAAA---', $scope.dictionaryArr.indexOf($scope.enrolmentsubject.name));
-          console.log('viewDict', $scope.viewDictionary);
+      $scope.viewDictionary.splice(objIndx[0], 1);
 
 
+       //console.log('AAAAAAAA---', $scope.dictionaryArr.indexOf($scope.enrolmentsubject.name));
+       //console.log('viewDict', $scope.viewDictionary);
       //console.log('subject after decoded', $scope.enrolmentsubject.name);
       //console.log('subject in decoded', $scope.decodedSubjects);
       console.log('subject in entirePerson', $scope.entirePerson.enrolmentsubjects);
@@ -94,6 +97,8 @@ angular.module('admissionSystemApp')
       $scope.decodedSubjects.forEach(function (subj, index){
         subj.id = index+1;
       });
+
+      //$scope.viewDictionary.push($scope.subjs[]);
 
     };
     $scope.open = function (size, id) {
