@@ -24,8 +24,6 @@ angular.module('admissionSystemApp')
           });
         });
 
-
-
         $modal.open({
           templateUrl: '../views/modal/modalCopyTimeperiod.html',
           scope: $scope,
@@ -38,8 +36,6 @@ angular.module('admissionSystemApp')
             };
 
             $scope.ok = function () {
-              console.log($scope.selectedTimeperiod);
-              console.log($scope.createdTimeperiodId);
               copyTimeperiod.copyToTimeperiod($scope.selectedTimeperiod, $scope.createdTimeperiodId, $scope.begDate, $scope.endDate);
               $modalInstance.close();
             };
@@ -52,7 +48,6 @@ angular.module('admissionSystemApp')
           size: size
         });
       };
-
 
       $scope.headers = [
         {name: 'num', display: '№', visible: true},
