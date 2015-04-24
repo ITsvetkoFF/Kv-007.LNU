@@ -1,8 +1,129 @@
-<div>
-  <h3>Документи</h3>
-  <form id="PaperForm">
+<div ng-controller="tabPersonPapers">
 
-    <person-papers></person-papers>
+<form >
 
-  </form>
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <td ng-repeat="head in headers">
+              {{head.display}}
+            </td>
+          </tr>
+          </thead>
+          <tr ng-repeat="item in inputDataDecoded track by $index">
+            <td>{{item.abbrName}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.docSeries}}</td>
+            <td>{{item.docNum}}</td>
+            <td>{{item.dataIssued}}</td>
+            <td>{{item.dataDate}}</td>
+
+            <td>
+              <button class="btn btn-xs btn-warning" ng-click="editData(item.name)"><i class="fa fa-pencil-square-o"></i></button>
+              <button class="btn btn-xs btn-danger" ng-click="deleteData(item.name)"><i class="fa fa-times"></i></button>
+            </td>
+          </tr>
+        </table>
+        <hr/>
+<!--is editing-->
+  <div class="row">
+    <div class="col-xs-2">
+      <button class="btn btn-xl btn-primary " ng-click="isCreating = !isCreating">  Додати предмет </button>
+    </div>
+  </div>
+
+  <div collapse="isCreating">
+        <div class="row">
+          <div class="form-horizontal" name="formSubjects">
+
+          <div class="col-xs-4">
+            <label for="enrolmentSubjectId">Категорії документів</label>
+            <select ng-model="someObj.abbrName"
+                    ng-options="opt.id as opt.abbrName for opt in paperUsage"
+                    class="form-control"
+                    name="enrolmentSubjectId"
+                    id="enrolmentSubjectId"
+                    ng-change="setNewData(someObj.abbrName)">
+            </select>
+          </div>
+
+          <div class="col-xs-4">
+            <label for="inputStreetType">Назва документу</label>
+            <select ng-model="someObj.name"
+                    ng-options="opt.id as opt.name for opt in newData"
+                    class="form-control"
+                    name="inputStreetType"
+                    ng-change = "addInput()"
+              >
+            </select><br/>
+          </div>
+
+            <div class="col-xs-4">
+              <label for="inputStreet" ng-show="showPassword">Password</label>
+              <input ng-model="someObj.docSeries"
+                     type="text"
+                     class="form-control"
+                     ng-show="showPassword"
+                     name="inputStreet">
+            </div>
+            </div>
+
+          </div>
+
+        <div class="row">
+
+          <div class="col-xs-4">
+            <label for="inputStreet">Серія документу</label>
+            <input ng-model="someObj.docSeries"
+                   type="text"
+                   class="form-control"
+                   placeholder="серія"
+                   name="inputStreet">
+          </div>
+
+          <div class="col-xs-4">
+            <label for="inputStreet">Номер документу</label>
+            <input ng-model="someObj.docNum"
+                   type="text"
+                   class="form-control"
+                   placeholder="номер"
+                   name="inputStreet"><br/>
+          </div>
+
+        </div>
+
+    <div class="row">
+
+      <div class="col-xs-4">
+        <label for="inputStreet">Дата видачі</label>
+        <input ng-model="someObj.dataIssued"
+               type="text"
+               class="form-control"
+               placeholder="серія"
+               name="inputStreet">
+      </div>
+
+      <div class="col-xs-4">
+        <label for="inputStreet">Дата завершення</label>
+        <input ng-model="someObj.dataDate"
+               type="text"
+               class="form-control"
+               placeholder="номер"
+               name="inputStreet"><br/>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-xs-2" id="subjPlus">
+        <button class="btn btn-xl btn-success"  ng-show = "isAddToTable" ng-click="addToTable()"><i class="fa fa-plus"></i> Додати</button>
+        <button class="btn btn-xl btn-success" ng-show = "isSaveToTable" ng-click="saveData(someObj.name)"><i class="fa fa-plus"></i> Зберегти</button>
+
+
+      </div>
+    </div>
+  </div>
+
+
+    </form>
 </div>
