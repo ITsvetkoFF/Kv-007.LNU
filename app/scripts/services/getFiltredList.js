@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-.factory('getListEnrolmentsSvc', ['$http', '$q', 'decodeEnrolmentsSvc', 'Constants',
-  function($http, $q, decodeEnrolmentsSvc, Constants) {
+.factory('getFiltredListSvc', ['$http', '$q', 'decodeEnrolmentsSvc', 'Constants', 'personDecodeSvc',
+  function ($http, $q, decodeEnrolmentsSvc, Constants, personDecodeSvc) {
 
     function makeFiltersPretty (rawFilters) {
       var readyToUseFiltres = {};
@@ -15,6 +15,11 @@ angular.module('admissionSystemApp')
       });
       return readyToUseFiltres;
     }
+
+    var decodeSvcs = {
+      enrolments: decodeEnrolmentsSvc.enrolmentsDecoded,
+      persons: personDecodeSvc.personDecoded
+    };
 
     function getData(route, pageNumber, perPage, filters, sort) {
       var deferred = $q.defer();
@@ -32,7 +37,7 @@ angular.module('admissionSystemApp')
 
       $http(requestParams).success(function(data) {
         
-        decodeEnrolmentsSvc.enrolmentsDecoded(data.resources).then(function(decodedItems) {
+        decodeSvcs[route](data.resources).then(function(decodedItems) {
           var dataToReturn = {
             data: decodedItems,
             total: data.count
@@ -48,7 +53,7 @@ angular.module('admissionSystemApp')
         return getData('enrolments', pageNumber, perPage, filters, sort);
       },
       getListPersons: function(pageNumber, perPage, filters, sort) {
-        return getData('person', pageNumber, perPage, filters, sort);
+        return getData('persons', pageNumber, perPage, filters, sort);
       }
     };
   }]);

@@ -1,5 +1,10 @@
 'use strict';
 
+/* 1) lister an event from personSelector directive 
+   (if peson ID change - get new list of person papers) 
+  2) get personPaperId from outside (ng-model) (if it's availible: e.g. enrolment are editing)
+	 read person ID from attr and pass it to getPersonPapers Svc */
+
 angular.module('admissionSystemApp')
 	.directive('paperSelector', function() {
 
@@ -11,9 +16,8 @@ angular.module('admissionSystemApp')
 				getPersonPapersSvc.setRightPersonPapers(personId);
 	    };
 			
-			/*lister an event from personSelector directive 
-			  (if peson ID change - get new list of person papers) */
-			$scope.$on('person-papers-changed', function(event, args) {
+
+			$scope.$on('person-papers-changed', function(event, args) { // (1)
 				$scope.enrolment.personPaperId = undefined;
 				getPersonPapersSvc.setRightPersonPapers(args.personId);
 			});
@@ -28,10 +32,9 @@ angular.module('admissionSystemApp')
 			controller: paperSelectorDirectiveCtrl,
 			link: function postLink(scope, element, attrs, ngModel) {
 				
-			/* get personPaperId from outside (ng-model) (if it's availible: e.g. enrolment are editing)
-				 read person ID from attr and pass it to getPersonPapers Svc */
+
 				scope.enrolment = {};
-        ngModel.$render = function() {
+        ngModel.$render = function() { // (2)
           var personPaperId = ngModel.$modelValue;
           if (personPaperId) {
           	scope.personid = attrs.personid;          	

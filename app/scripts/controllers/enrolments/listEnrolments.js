@@ -2,11 +2,11 @@
 
 
 angular.module('admissionSystemApp')
-	.controller('ListEnrolmentsCtrl', ['$scope', 'getListEnrolmentsSvc', 'DictionariesSvc', 'baseListData', '$q',
-    function ($scope, getListEnrolmentsSvc, SpecofferDictionaryService, baseListData, $q) {
+	.controller('ListEnrolmentsCtrl', ['$scope', 'getFiltredListSvc', 'DictionariesSvc', 'baseListData', '$q',
+    function ($scope, getFiltredListSvc, SpecofferDictionaryService, baseListData, $q) {
 
       $scope.getEnrolments = function (pageNumber, perPage, filters, sort) {
-        getListEnrolmentsSvc.getListEnrolments(pageNumber, perPage, filters, sort).then(function(res) {
+        getFiltredListSvc.getListEnrolments(pageNumber, perPage, filters, sort).then(function(res) {
           $scope.enrolDecoded = res.data;
           $scope.totalEnrol = res.total;
         });
