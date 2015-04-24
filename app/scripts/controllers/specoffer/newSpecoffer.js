@@ -16,20 +16,22 @@ angular.module('admissionSystemApp')
 
       if ($stateParams.id) {
         $scope.brosweOrEditSpecoffer($stateParams.id);
+      } else {
+        SpecoffersService.clearCopy();
       }
 
       $scope.sendToServer = function (entireSpecoffer) {
         $scope.entireSpecoffer.specoffer.note = 'some note';
         SpecoffersService.addOrEditSpecoffer(entireSpecoffer).then(function () {
           DictionariesSvc.clearStorageByRoute('specoffers');
-          $location.path('/#/list-specoffer');
+          $location.path('/list-specoffer');
         });
       };
 
       $scope.delete = function () {
         SpecoffersService.deleteEntireSpecoffer().then(function () {
           DictionariesSvc.clearStorageByRoute('specoffers');
-          $location.path('/#/list-specoffer');
+          $location.path('/list-specoffer');
         });
       };
 

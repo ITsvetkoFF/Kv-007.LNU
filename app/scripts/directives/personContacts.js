@@ -13,9 +13,10 @@ angular.module('admissionSystemApp')
 
         scope.contacts = [];
 
-        ctrl.$render = function () {
+        scope.$watch(function() { return ctrl.$modelValue }, function (personContacts) {
+
           for (var i = 1; i < 9; i++) {
-            angular.forEach(ctrl.$modelValue, function (el) {
+            angular.forEach(personContacts, function (el) {
               if (el.contactTypeId === i) {
                 scope.contacts[i] = {
                   id: el.id,
@@ -31,7 +32,7 @@ angular.module('admissionSystemApp')
               };
             }
           }
-        };
+        }, true);
 
         scope.$watch('contacts', function (newContacts) {
           ctrl.$setViewValue(newContacts.filter(function (contact) {

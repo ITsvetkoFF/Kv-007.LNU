@@ -160,7 +160,7 @@ angular.module('admissionSystemApp')
         });
 
         _.forEach(objToDelete.subjects, function (subject) {
-          promises.push(restAngular.one('specoffers', specOfferID).one('benefits', subject.id).remove());
+          promises.push(restAngular.one('specoffers', specOfferID).one('subjects', subject.id).remove());
         });
 
         return $q.all(promises).then(function () {
@@ -183,6 +183,9 @@ angular.module('admissionSystemApp')
 
         deleteEntireSpecoffer: function (id) {
           return deleteEntireSpecoffer(objCopy, id);
+        },
+        clearCopy: function () {
+          objCopy = {};
         }
       };
     }]);
