@@ -2,27 +2,32 @@
 
 angular.module('admissionSystemApp')
   .controller('TabEnrolmentCtrl',
-	  	function ($scope, DictionariesSvc, baseEnrolmentData, basePersonData) {
+	  	function ($scope, DictionariesSvc, baseFormData, basePersonData, $q, baseSpecofferData) {
 
-			DictionariesSvc.getAllDepartments({departmentTypeId: 1}).then(function (departments) {
-				$scope.departmentId = departments;
-			});
-
-			DictionariesSvc.getEnrolmentsTypes().then(function (enrolmentsTypes) {
-				$scope.enrolmentTypeId = enrolmentsTypes;
-			});
+      $q.all([
+        DictionariesSvc.getAllDepartments({departmentTypeId: 1}),
+        DictionariesSvc.getEnrolmentsTypes(),
+        DictionariesSvc.getSpecoffersTypes()
+      ])
+        .then(function (promisesResult) {
+          $scope.departmentId = promisesResult[0];
+          $scope.enrolmentTypeId = promisesResult[1];
+          $scope.specofferTypes = promisesResult[2];
+        });
 
 			$scope.entireEnrolment.enrolment = {};
+			$scope.entireEnrolment.enrolment.specOfferId = 141;
 
-	    // watch entirePerson
-	    $scope.$watch('entireEnrolment.enrolment', function(newVal) {
-	     console.log('entireEnrolment.enrolment watch', newVal);
-	    }, true);
+			$scope.entireEnrolment.enrolment.personId = 33;
+			$scope.entireEnrolment.enrolment.personPaperId = 35; //22
 
 	    $scope.fieldSearchBy = [];
 
-	    $scope.personSearch = baseEnrolmentData.searchPerson;
+	    console.log('baseFormData.isedustateOpt', baseFormData.isedustateOpt);
+	    $scope.personSearch = baseFormData.searchPerson;
+	    $scope.isedustateOpt = baseFormData.isedustateOpt;
+	    $scope.isinterviewOpt = baseFormData.isinterviewOpt;
 	    $scope.personHeaders = basePersonData.headers;
-
-
+	    $scope.specofferHeaders = baseSpecofferData.headers;
+	    
 	  });
