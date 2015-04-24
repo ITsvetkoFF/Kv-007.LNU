@@ -26,9 +26,9 @@ angular.module('admissionSystemApp')
       $scope.ok = function (obj) {
         modalInstance.close();
         if (obj) {
-	        $scope.selected = [obj]; //(1)
+	        $scope.selected = [obj]; // (1)
 	        $scope.sendValueOutside(obj.id); // (2)
-	        $rootScope.$broadcast('person-papers-changed', { personId: obj.id });  // (3)   	
+	        $rootScope.$broadcast('person-id-changed', { personId: obj.id });  // (3)   	
         }
       };
 
@@ -37,7 +37,7 @@ angular.module('admissionSystemApp')
 	    };	
 
 	    $scope.parsePerson = function (personId) {
-	      searchPersonSvc.searchPersons(personId, 'id', 'persons');
+	      searchPersonSvc.parseSinglePersons(personId);
 	    };	
   	}
 

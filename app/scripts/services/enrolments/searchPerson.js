@@ -32,7 +32,7 @@ angular.module('admissionSystemApp')
 
       if (prop === 'id') {
         Restangular.one('persons', query).get().then(function (singlePerson) {
-          decodePersons('selectedPerson', [singlePerson]);
+          decodePersons('searchResult', [singlePerson]);
         });
         return;
       }
@@ -49,8 +49,15 @@ angular.module('admissionSystemApp')
       });
     }
 
+    function getSinglePerson (id) {
+      Restangular.one('persons', id).get().then(function (singlePerson) {
+        decodePersons('selectedPerson', [singlePerson]);
+      });
+    }
+
     return {
       searchPersons: searchPerson,
+      parseSinglePersons: getSinglePerson,
       searchResult: data.searchResult,
       selectedPerson: data.selectedPerson
     };

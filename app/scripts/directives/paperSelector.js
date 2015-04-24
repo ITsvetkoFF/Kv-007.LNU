@@ -17,7 +17,7 @@ angular.module('admissionSystemApp')
 	    };
 			
 
-			$scope.$on('person-papers-changed', function(event, args) { // (1)
+			$scope.$on('person-id-changed', function(event, args) { // (1)
 				$scope.enrolment.personPaperId = undefined;
 				getPersonPapersSvc.setRightPersonPapers(args.personId);
 			});
