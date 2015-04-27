@@ -11,7 +11,7 @@ angular.module('admissionSystemApp')
     $scope.entirePerson.papers = [];
     $scope.entirePerson.names[0] = {
       languageId: 2,
-      fatherName: ""
+      fatherName: ''
     };
 
     $scope.brosweOrEditPerson = function (personId) {
@@ -35,14 +35,14 @@ angular.module('admissionSystemApp')
 
     $scope.sendToServerPerson = function (entirePerson) {
       $scope.entirePerson.names[0].name = $scope.entirePerson.names[0].firstName +
-      " " + $scope.entirePerson.names[0].surname +
-      " " + $scope.entirePerson.names[0].fatherName;
+      ' ' + $scope.entirePerson.names[0].surname +
+      ' ' + $scope.entirePerson.names[0].fatherName;
       $scope.entirePerson.person.name = $scope.entirePerson.person.firstName +
-      " " + $scope.entirePerson.person.surname +
-      " " + $scope.entirePerson.person.fatherName;
+      ' ' + $scope.entirePerson.person.surname +
+      ' ' + $scope.entirePerson.person.fatherName;
 
       if (!$scope.entirePerson.person.photo) {
-        $scope.entirePerson.person.photo = "/"
+        $scope.entirePerson.person.photo = '/';
       }
       $scope.entirePerson.person.isMilitary = ($scope.entirePerson.person.isMilitary) ? 1 : 0;
       $scope.entirePerson.person.isHostel = ($scope.entirePerson.person.isHostel) ? 1 : 0;

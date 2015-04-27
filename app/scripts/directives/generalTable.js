@@ -48,14 +48,14 @@ angular
     $scope.deleteItem = function(item) {
       $scope.onDelete({
         id: item.id
-      })
+      });
     };
 
     $scope.changeItem = function(item) {
       $scope.onEdit({
         id: item.id
-      })
-    }
+      });
+    };
   }
 
   function link(scope, element, attr) {

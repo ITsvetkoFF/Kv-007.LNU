@@ -13,18 +13,18 @@ angular.module('admissionSystemApp')
 
         scope.contacts = [];
 
-        scope.$watch(function() { return ctrl.$modelValue }, function (personContacts) {
+        scope.$watch(function() { return ctrl.$modelValue; }, function (personContacts) {
 
           for (var i = 1; i < 9; i++) {
-            angular.forEach(personContacts, function (el) {
-              if (el.contactTypeId === i) {
+            for (var j = 0; j < personContacts.length; j++) {
+              if (personContacts[j].contactTypeId === i) {
                 scope.contacts[i] = {
-                  id: el.id,
+                  id: personContacts[j].id,
                   contactTypeId: i,
-                  value: el.value
+                  value: personContacts[j].value
                 };
               }
-            });
+            }
             if (!scope.contacts[i]) {
               scope.contacts[i] = {
                 contactTypeId: i,
@@ -36,7 +36,7 @@ angular.module('admissionSystemApp')
 
         scope.$watch('contacts', function (newContacts) {
           ctrl.$setViewValue(newContacts.filter(function (contact) {
-              return !(contact.value === '');
+              return contact.value !== '';
             })
           );
         }, true);
