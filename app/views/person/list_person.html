@@ -14,6 +14,8 @@
                 getdata="getPersons(currentPage, itemsPerPage, userFilterPick, sort)"
                 newItemLinkTitle ="Додати персону"
                 linkToNewItem="#/new-person"
+                on-delete="deletePerson(id)"
+                on-edit="changePerson(id)"
                 total="{{totalPersons}}">
   </general-table>
 
