@@ -1,24 +1,29 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .service('decodeSpecofferSvc', ['$http', '$q', 'DictionariesSvc', function ($http, $q, DictionariesSvc) {
+  .factory('decodeSpecofferSvc', ['$q', 'DictionariesSvc', function ($q, DictionariesSvc) {
 
-    this.allProposalsDecoded = function (params) {
+    function allSpecofferDecoded (rawSpecoffers) {
       var specialtyNames = [],
         departmentNames = [],
         timePeriodCourseNames = [],
         specofferTypeNames = [],
-        eduFormTypeNames = [];
+        eduFormTypeNames = [],
+        ciphers = [];
 
       function pushData (data, array) {
         angular.forEach(data, function (item) {
-          array[item.id] = item.name;
+            array[item.id] = item.name;
         });
       }
-      return  DictionariesSvc.getAllSpecoffers(params).then(function (proposals) {
-        var rawProposals = angular.copy(proposals);
 
-        return $q.all([
+      function pushChiphers (data) {
+        angular.forEach(data, function (item) {
+            ciphers[item.id] = item.cipher;
+        });
+      }
+
+      return $q.all([
           DictionariesSvc.getAllSpecialties(),
           DictionariesSvc.getAllDepartments({departmentTypeId: 1}),
           DictionariesSvc.getTimePeriodCourseIds(),
@@ -31,16 +36,23 @@ angular.module('admissionSystemApp')
             pushData(res[2], timePeriodCourseNames);
             pushData(res[3], specofferTypeNames);
             pushData(res[4], eduFormTypeNames);
+            pushChiphers(res[0]);
 
-          angular.forEach(rawProposals, function (item) {
+          angular.forEach(rawSpecoffers, function (item) {
+            item.cipher = ciphers[item.specialtyId];
             item.specialtyId = specialtyNames[item.specialtyId];
             item.departmentId = departmentNames[item.departmentId];
             item.timePeriodCourseId = timePeriodCourseNames[item.timePeriodCourseId];
             item.specofferTypeId = specofferTypeNames[item.specofferTypeId];
             item.educationFormTypeId = eduFormTypeNames[item.educationFormTypeId];
           });
-         return rawProposals;
+         return rawSpecoffers;
         });
-      });
+    }
+
+    return {
+      specofferDecoded: function (rawData) {
+        return allSpecofferDecoded(rawData);
+      }
     };
   }]);
