@@ -1,0 +1,97 @@
+{
+  "excludeFiles": ["node_modules/**", "bower_components/**"],
+
+  "requireCurlyBraces": [
+    "if",
+    "else",
+    "for",
+    "while",
+    "do",
+    "try",
+    "catch"
+  ],
+
+  "requireOperatorBeforeLineBreak": true,
+  "requireCamelCaseOrUpperCaseIdentifiers": true,
+  "maximumLineLength": {
+    "value": 120,
+    "allowComments": true,
+    "allowRegex": true
+  },
+  "validateIndentation": 2,
+  "validateQuoteMarks": "'",
+  "validateParameterSeparator": ", ",
+
+  "disallowMultipleLineStrings": true,
+  "disallowMixedSpacesAndTabs": true,
+  "disallowTrailingWhitespace": true,
+  "disallowSpaceAfterPrefixUnaryOperators": true,
+
+  "disallowMultipleVarDecl": null,
+  "requireDotNotation": "except_snake_case",
+  "requireMultipleVarDecl": "onevar",
+
+  "requireSpaceAfterKeywords": [
+    "if",
+    "else",
+    "for",
+    "while",
+    "do",
+    "switch",
+    "return",
+    "try",
+    "catch"
+  ],
+
+  "requireSpaceBeforeBinaryOperators": [
+    "=", "+=", "-=", "*=", "/=", "%=", "<<=", ">>=", ">>>=",
+    "&=", "|=", "^=", "+=",
+
+    "+", "-", "*", "/", "%", "<<", ">>", ">>>", "&",
+    "|", "^", "&&", "||", "===", "==", ">=",
+    "<=", "<", ">", "!=", "!=="
+  ],
+
+  "requireSpacesInFunctionDeclaration": {
+    "beforeOpeningCurlyBrace": true
+  },
+
+  "requireSpacesInFunctionExpression": {
+    "beforeOpeningRoundBrace": true,
+    "beforeOpeningCurlyBrace": true
+  },
+
+  "requireSpaceAfterBinaryOperators": true,
+  "requireSpacesInConditionalExpression": true,
+  "requireSpacesInForStatement": true,
+  "requireSpaceBetweenArguments": true,
+  "requireSpaceBeforeBlockStatements": true,
+  "requireSpaceBeforeObjectValues": true,
+  "disallowSpacesInsideObjectBrackets": "all",
+  "disallowSpacesInsideArrayBrackets": "all",
+  "disallowSpacesInsideParentheses": true,
+
+  "validateJSDoc": {
+    "checkParamNames": true,
+    "requireParamTypes": true
+  },
+
+  "disallowMultipleLineBreaks": true,
+  "disallowDanglingUnderscores": true,
+  "disallowEmptyBlocks": true,
+
+  "disallowCommaBeforeLineBreak": null,
+  "requireCommaBeforeLineBreak": true,
+  "disallowTrailingComma": true,
+
+  "requireParenthesesAroundIIFE": true,
+  "requireCapitalizedConstructors": true,
+
+  "requireSemicolons": true,
+
+  "requireBlocksOnNewline": 1,
+  "requirePaddingNewLinesInObjects": true,
+  "requirePaddingNewLineAfterVariableDeclaration": true,
+  "requireLineBreakAfterVariableAssignment": true,
+  "requireLineFeedAtFileEnd": true
+}

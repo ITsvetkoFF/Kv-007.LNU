@@ -158,6 +158,9 @@ angular.module('admissionSystemApp')
         },
         getEnrolmentsStatusTypes: function () {
           return getLargeDictionary('enrolments/statustypes');
+        },
+        getWavesTypes: function () {
+          return getLargeDictionary('wave/types');
         }
       };
     }]);
