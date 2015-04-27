@@ -1,6 +1,5 @@
 'use strict';
 
-
 angular.module('admissionSystemApp')
   .factory('personDecodeSvc', function ($q, DictionariesSvc) {
 
