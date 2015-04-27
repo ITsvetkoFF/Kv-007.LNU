@@ -1,48 +1,45 @@
 'use strict';
 
+ /* 1) pass selected obj (person id) to view; 
+    2) send selected obj (person id) id to ng-model;
+    3) broadcast that another\new person has choosen by user */
+
 angular.module('admissionSystemApp')
   .directive('personSelector', function () {
 
-  	function personSelectorDirectiveCtrl ($scope, $modal, DictionariesSvc, personDecodeSvc) {
+  	function personSelectorDirectiveCtrl ($scope, $modal, $rootScope, searchPersonSvc) {
   		
+	  	$scope.data = searchPersonSvc.searchResult;
+	  	$scope.selected = searchPersonSvc.selectedPerson;
+
   		var modalInstance;
-	    $scope.openModalSpecialty = function (size) {
+	    $scope.openModalPeson = function (size) {
 	      modalInstance = $modal.open({
-	        templateUrl: '../views/modal/modalPersonChooser.html',
+	        templateUrl: '../views/modal/modalChooser.html',
 	        size: size,
-	        scope:$scope
+	        scope: $scope
 	      });
-
-	      var params = {};
-
-	      params[$scope.fieldSearchBy.property] = $scope.querySearchBy;
-	      console.log('params', params);
-
-	      DictionariesSvc.getPersons(params).then(function (rawPersons) {
-	      	personDecodeSvc.personDecoded(rawPersons).then(function (personsDecoded) {
-	      		$scope.data = personsDecoded;
-	      		console.log('$scope.data', $scope.data);
-	      	});
-	      	
-	      	
-	      });
+	      
+	      searchPersonSvc.searchPersons($scope.querySearchBy, $scope.fieldSearchBy.property, $scope.fieldSearchBy.route);
 	    };
-
-	    // DictionariesSvc.getPersons({property: string})
-	    // DictionariesSvc.getAllPapers({})
-			
 
       $scope.ok = function (obj) {
         modalInstance.close();
-        $scope.selected = obj;
-        console.log('$scope.selected', $scope.selected);
+        if (obj) {
+	        $scope.selected = [obj]; // (1)
+	        $scope.sendValueOutside(obj.id); // (2)
+	        $rootScope.$broadcast('person-id-changed', { personId: obj.id });  // (3)   	
+        }
       };
+
 	    $scope.cancel = function () {
 	      modalInstance.dismiss('cancel');
+	    };	
 
+	    $scope.parsePerson = function (personId) {
+	      searchPersonSvc.parseSinglePersons(personId);
 	    };	
   	}
-
 
     return {
       restrict: 'E',
@@ -56,9 +53,16 @@ angular.module('admissionSystemApp')
       controller: personSelectorDirectiveCtrl,
       link: function postLink(scope, element, attrs, ngModel) {
       	 
-      	 var personId = ngModel.$modelValue;
-      	 console.log('personId', personId);
+        ngModel.$render = function() {
+          var personId = ngModel.$modelValue;
+          if (personId) {
+          	scope.parsePerson(personId);
+          }
+        };
 
+	      scope.sendValueOutside = function (value) {
+					ngModel.$setViewValue(value);
+	      };
       }
     };
   });
