@@ -6,7 +6,7 @@ angular.module('admissionSystemApp')
     function ($scope, getFiltredListSvc, SpecofferDictionaryService, baseListData, $q) {
 
       $scope.getEnrolments = function (pageNumber, perPage, filters, sort) {
-        getFiltredListSvc.getListEnrolments(pageNumber, perPage, filters, sort).then(function(res) {
+        getFiltredListSvc.getListEnrolments(pageNumber, perPage, filters, sort).then(function (res) {
           $scope.enrolDecoded = res.data;
           $scope.totalEnrol = res.total;
         });

@@ -65,7 +65,7 @@
 			        <div class="radio-inline" ng-repeat="opt in isedustateOpt">
 			          <label>
 			            <input type="radio" 
-			            			 name="chickenEgg" 
+			            			 name="isedustate" 
 			            			 ng-value="opt.value" 
 			            			 ng-model="entireEnrolment.enrolment.isedustate">
 			              {{opt.title}}
@@ -84,7 +84,7 @@
 			        <div class="radio-inline" ng-repeat="opt in isinterviewOpt">
 			          <label>
 			            <input type="radio" 
-			            			 name="chickenEgg" 
+			            			 name="isinterview" 
 			            			 ng-value="opt.value" 
 			            			 ng-model="entireEnrolment.enrolment.isinterview">
 			              {{opt.title}}
@@ -168,13 +168,23 @@
 
 		<div class="form-group">
 			<div class="row">
+				<div class="col-xs-3">
+							<label for="inputChiefEnrolTypes">Тип поступлення1</label>
+							<select class="form-control"
+							ng-model="enrolmentTypes.chiefEnrolTypes"
+							ng-options="opt.id as opt.name for opt in chiefEnrolTypes"
+							name="inputChiefEnrolTypes"
+							id="inputChiefEnrolTypes"
+							ng-change="updateChildsEnrolTypes(enrolmentTypes.chiefEnrolTypes)">
+						</select>
+				</div>
 				<div class="col-xs-4">
-							<label for="inputenrolmentTypeId">Тип поступлення</label>
+							<label for="inputEnrolmentTypeId">Тип поступлення2</label>
 							<select class="form-control"
 							ng-model="entireEnrolment.enrolment.enrolmentTypeId"
 							ng-options="opt.id as opt.name for opt in enrolmentTypeId"
-							name="inputenrolmentTypeId"
-							id="inputenrolmentTypeId">
+							name="inputeEnrolmentTypeId"
+							id="inputEnrolmentTypeId">
 						</select>
 				</div>
 			</div>

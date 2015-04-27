@@ -11,19 +11,28 @@ angular.module('admissionSystemApp')
       ])
         .then(function (promisesResult) {
           $scope.departmentId = promisesResult[0];
-          $scope.enrolmentTypeId = promisesResult[1];
           $scope.specofferTypes = promisesResult[2];
+          var enrolmentTypes = promisesResult[1];
+
+          $scope.chiefEnrolTypes = _.filter(enrolmentTypes, function (n) {
+          	return !n.parentId;
+          });
+
+          $scope.updateChildsEnrolTypes = function (chiefID) {
+          	$scope.enrolmentTypeId = _.filter(enrolmentTypes, function (n) {
+          		return n.parentId === chiefID;
+          	});
+          };
         });
 
 			$scope.entireEnrolment.enrolment = {};
 			$scope.entireEnrolment.enrolment.specOfferId = 141;
 
 			$scope.entireEnrolment.enrolment.personId = 33;
-			$scope.entireEnrolment.enrolment.personPaperId = 35; //22
+			$scope.entireEnrolment.enrolment.personPaperId = 35; // 22
 
 	    $scope.fieldSearchBy = [];
 
-	    console.log('baseFormData.isedustateOpt', baseFormData.isedustateOpt);
 	    $scope.personSearch = baseFormData.searchPerson;
 	    $scope.isedustateOpt = baseFormData.isedustateOpt;
 	    $scope.isinterviewOpt = baseFormData.isinterviewOpt;
