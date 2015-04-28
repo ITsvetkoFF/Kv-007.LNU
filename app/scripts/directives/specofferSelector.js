@@ -1,11 +1,10 @@
 'use strict';
 
-
-angular.module('admissionSystemApp')
+angular
+  .module('admissionSystemApp')
   .directive('specofferSelector', function () {
 
-  	function specofferSelectorDirectiveCtrl ($scope, $modal, DictionariesSvc, decodeSpecofferSvc, Restangular) {
-  
+    function specofferSelectorDirectiveCtrl ($scope, $modal, DictionariesSvc, decodeSpecofferSvc, Restangular) {
       $scope.searchBy = {};
       var modalInstance;
 
@@ -18,13 +17,13 @@ angular.module('admissionSystemApp')
         startSearchSpecoffers();
       };
 
-  		function startSearchSpecoffers () {
+      function startSearchSpecoffers () {
         DictionariesSvc.getAllSpecoffers($scope.searchBy).then(function (rawSpecoffer) {
           decodeSpecofferSvc.specofferDecoded(rawSpecoffer).then(function (decodedSpecoffer) {
             $scope.data = decodedSpecoffer;
           });
         });
-  		}
+      }
 
       $scope.ok = function (obj) {
         modalInstance.close();
@@ -32,9 +31,9 @@ angular.module('admissionSystemApp')
         $scope.sendValueOutside(obj.id);
       };
 
-	    $scope.cancel = function () {
-	      modalInstance.dismiss('cancel');
-	    };
+      $scope.cancel = function () {
+        modalInstance.dismiss('cancel');
+      };
 
       $scope.parseSpecOffer = function (specOfferId) {
         Restangular.one('specoffers', specOfferId).get().then(function (rawSpecOffer) {
@@ -44,7 +43,7 @@ angular.module('admissionSystemApp')
         });
       };
 
-  	}
+    }
 
     return {
       restrict: 'E',
@@ -52,24 +51,24 @@ angular.module('admissionSystemApp')
       require: 'ngModel',
       replace: true,
       scope: {
-      	departments: '=?',
-      	specoffertypes: '=?',
-      	headers: '=?'
+        departments: '=?',
+        specoffertypes: '=?',
+        headers: '=?'
       },
       controller: specofferSelectorDirectiveCtrl,
-      link: function postLink(scope, element, attrs, ngModel) {
-      
-        ngModel.$render = function() {
-          var specOfferId = ngModel.$modelValue;
+      link: function postLink (scope, element, attrs, ngModel) {
+        var specOfferId;
+
+        ngModel.$render = function () {
+          specOfferId = ngModel.$modelValue;
           if (specOfferId) {
             scope.parseSpecOffer(specOfferId);
           }
         };
 
         scope.sendValueOutside = function (value) {
-  				ngModel.$setViewValue(value);
+          ngModel.$setViewValue(value);
         };
-      
       }
     };
   });

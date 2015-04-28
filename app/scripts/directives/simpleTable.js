@@ -8,8 +8,8 @@ angular.module('admissionSystemApp')
       restrict: 'E',
       replace: true,
       scope: {
-      	data: '=',
-      	headers: '='
+        data: '=',
+        headers: '='
       }
     };
   });

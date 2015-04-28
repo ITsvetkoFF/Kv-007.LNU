@@ -1,14 +1,14 @@
 'use strict';
 
-
-angular.module('admissionSystemApp')
+angular
+  .module('admissionSystemApp')
   .controller('ListPersonCtrl', ['$scope', 'personDecodeSvc', 'DictionariesSvc', 'basePersonData', 'Person', '$state', 'getFiltredListSvc',
     function ($scope, personDecodeSvc, DictionariesSvc, basePersonData, Person, $state, getFiltredListSvc) {
 
       $scope.personDecoded = [];
 
       $scope.getPersons = function (pageNumber, perPage, filters, sort) {
-        getFiltredListSvc.getListPersons(pageNumber, perPage, filters, sort).then(function(res) {
+        getFiltredListSvc.getListPersons(pageNumber, perPage, filters, sort).then(function (res) {
           $scope.personDecoded = res.data;
           $scope.totalPersons = res.total;
         });
@@ -30,7 +30,9 @@ angular.module('admissionSystemApp')
       };
 
       $scope.changePerson = function (id) {
-        $state.go('edit-person', {id: id});
+        $state.go('edit-person', {
+          id: id
+        });
       };
 
     }]);

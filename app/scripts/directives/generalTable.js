@@ -124,11 +124,7 @@ angular
         onEdit: '&?'
       }
     };
+    
     return directive;
- });
-
-
-
-
-
+  });
 
