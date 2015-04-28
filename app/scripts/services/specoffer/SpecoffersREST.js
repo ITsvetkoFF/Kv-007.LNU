@@ -26,7 +26,9 @@ angular
 
     function (Restangular, $q, $filter) {
 
-      var restAngular =
+      var restAngular, objCopy;
+
+      restAngular =
         Restangular.withConfig(function (Configurer) {
           Configurer.setRequestInterceptor(function (element, operation) {
             if (operation === 'post' || operation === 'put') {
@@ -38,10 +40,11 @@ angular
           });
         });
 
-      var objCopy = {};
+      objCopy = {};
 
       function getEntireSpecoffer(id) {
         var entireSpecoffer = {};
+
         entireSpecoffer.specoffer = restAngular.one('specoffers', id).get();
         entireSpecoffer.subjects = restAngular.one('specoffers', id).one('subjects').getList();
         entireSpecoffer.benefits = restAngular.one('specoffers', id).one('benefits').getList();
@@ -55,10 +58,12 @@ angular
       }
 
       function addArrayOfItems(itemsArr, specOfferId, route) {
-        var promises = [];
-        for (var i = 0; i < itemsArr.length; i += 1) {
+        var promises, benefitPromise, i;
+
+        promises = [];
+        for (i = 0; i < itemsArr.length; i += 1) {
           itemsArr[i].specOfferId = specOfferId;
-          var benefitPromise = restAngular.one('specoffers', specOfferId).one(route).post('', itemsArr[i]);
+          benefitPromise = restAngular.one('specoffers', specOfferId).one(route).post('', itemsArr[i]);
           promises.push(benefitPromise);
         }
         return $q.all(promises);
@@ -66,6 +71,7 @@ angular
 
       function addEntireSpecoffer(obj) {
         var id = $q.defer();
+
         restAngular.all('specoffers').post(obj.specoffer).then(function (response) {
           id.resolve(response.id);
         });
@@ -81,11 +87,6 @@ angular
               addArrayOfItems(currentObj.benefits, specOfferID, 'benefits'),
               addArrayOfItems(currentObj.waves, specOfferID, 'waves')
             ]);
-            //.then(function () {
-            //  return getEntireSpecoffer(specOfferID).then(function (newEntireSpecoffer) {
-            //    _.merge(currentObj, newEntireSpecoffer);
-            //  });
-            //});
           });
         } else {
           return editEntireSpecoffer(currentObj);
@@ -93,9 +94,9 @@ angular
       }
 
       function editEntireSpecoffer(newOnj) {
-        var specOfferID = objCopy.specoffer.id,
-          promiseSpecoffer;
+        var specOfferID, promiseSpecoffer;
 
+        specOfferID = objCopy.specoffer.id;
         if (!angular.equals(newOnj.specoffer, objCopy.specoffer)) {
           promiseSpecoffer = restAngular.one('specoffers', specOfferID).customPUT(newOnj.specoffer);
         }
@@ -108,9 +109,6 @@ angular
         ])
           .then(function () {
             objCopy = {};
-            //return getEntireSpecoffer(specOfferID).then(function (res) {
-            //  _.merge(newOnj, res);
-            //});
           });
       }
 
@@ -121,8 +119,7 @@ angular
         var promises = [];
 
         _.forEach(newArr, function (item) {
-          var promise,
-            oldItem;
+          var promise, oldItem;
 
           if (!item.specOfferId) {
             item.specOfferId = specOfferID;
@@ -141,6 +138,7 @@ angular
 
         _.forEach(oldArr, function (item) {
           var promise;
+
           if (!_.some(newArr, {
               'id': item.id
             })) {

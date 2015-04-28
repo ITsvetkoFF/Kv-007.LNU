@@ -11,27 +11,27 @@ angular.module('admissionSystemApp')
         eduFormTypeNames = [],
         ciphers = [];
 
-      function pushData (data, array) {
+      function pushData(data, array) {
         angular.forEach(data, function (item) {
           array[item.id] = item.name;
         });
       }
 
-      function pushChiphers (data) {
+      function pushChiphers(data) {
         angular.forEach(data, function (item) {
           ciphers[item.id] = item.cipher;
         });
       }
 
       return $q.all([
-          DictionariesSvc.getAllSpecialties(),
-          DictionariesSvc.getAllDepartments({
-            departmentTypeId: 1
-          }),
-          DictionariesSvc.getTimePeriodCourseIds(),
-          DictionariesSvc.getSpecoffersTypes(),
-          DictionariesSvc.getEduformTypes()
-        ])
+        DictionariesSvc.getAllSpecialties(),
+        DictionariesSvc.getAllDepartments({
+          departmentTypeId: 1
+        }),
+        DictionariesSvc.getTimePeriodCourseIds(),
+        DictionariesSvc.getSpecoffersTypes(),
+        DictionariesSvc.getEduformTypes()
+      ])
         .then(function (res) {
           pushData(res[0], specialtyNames);
           pushData(res[1], departmentNames);
@@ -48,7 +48,7 @@ angular.module('admissionSystemApp')
             item.specofferTypeId = specofferTypeNames[item.specofferTypeId];
             item.educationFormTypeId = eduFormTypeNames[item.educationFormTypeId];
           });
-        return rawSpecoffers;
+          return rawSpecoffers;
         });
     }
 
