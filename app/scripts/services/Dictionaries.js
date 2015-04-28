@@ -1,42 +1,42 @@
 'use strict';
 
-angular.module('admissionSystemApp')
-
+angular
+  .module('admissionSystemApp')
   .factory('DictionariesSvc', ['$http', '$q', 'Constants', function ($http, $q, Constants) {
 
     function requestConfig(item, limit, offset, customParams) {
       var normalParams = {
-        limit: limit,
-        offset: offset
-      };
+          limit: limit,
+          offset: offset
+        };
 
       angular.extend(normalParams, customParams);
 
       return {
-        method: 'GET',
-        url: Constants.basicURL + item,
-        params: normalParams
-      };
+          method: 'GET',
+          url: Constants.basicURL + item,
+          params: normalParams
+        };
     }
 
     var storage = {};
 
-    function getLargeDictionary(route, customParams, ifCache) {
-      var deferred, limit, offset;
+    function getLargeDictionary (route, customParams, ifCache) {
+      var deferred = $q.defer(),
+        limit,
+        offset,
+        i;
 
-      deferred = $q.defer();
       ifCache = (ifCache === undefined) ? true : ifCache;
 
       if (storage[route] && ifCache) {
         deferred.resolve(storage[route]);
       } else {
         storage[route] = [];
-
-        limit = 300;
+        limit = 300,
         offset = 0;
 
         $http(requestConfig(route, limit, offset, customParams)).success(function callBack (data) {
-          var i;
 
           for (i = 0; i < data.resources.length; i += 1) {
             storage[route].push(data.resources[i]);
@@ -54,11 +54,14 @@ angular.module('admissionSystemApp')
     }
 
     return {
+      getAllItems: function (route, params, ifCache) {
+        return getLargeDictionary(route, params, ifCache);
+      },
       getAllDepartments: function (params) {
         return getLargeDictionary('departments', params);
       },
       getAllSpecoffers: function (params) {
-        return getLargeDictionary('specoffers', params);
+        return getLargeDictionary('specoffers', params, false);
       },
       getAllSubjects: function () {
         return getLargeDictionary('enrolments/subjects');
@@ -86,6 +89,9 @@ angular.module('admissionSystemApp')
       },
       getBenefitsTypes: function () {
         return getLargeDictionary('benefits/types');
+      },
+      clearStorage: function () {
+        storage = {};
       },
       clearStorageByRoute: function (route) {
         if (storage[route]) {
@@ -119,11 +125,20 @@ angular.module('admissionSystemApp')
       getStreetsTypes: function () {
         return getLargeDictionary('streets/types');
       },
+      getAssets: function () {
+        return getLargeDictionary('assets');
+      },
+      getLanguages: function () {
+        return getLargeDictionary('languages');
+      },
       getContactsTypes: function () {
         return getLargeDictionary('contacts/types');
       },
-      getPaperTypes: function () {
-        return getLargeDictionary('papers/types');
+      getPaperTypes: function (params) {
+        return getLargeDictionary('papers/types', params, false);
+      },
+      getAllPapers: function (params) {
+        return getLargeDictionary('persons/papers', params, false);
       },
       getPaperUsages: function () {
         return getLargeDictionary('papers/usages');
@@ -137,8 +152,8 @@ angular.module('admissionSystemApp')
       getPublicActivitiesTypes: function () {
         return getLargeDictionary('publicactivities/types');
       },
-      getPublicActivitiesAwards: function () {
-        return getLargeDictionary('publicactivities/awards');
+      getPublicActivitiesAwards: function (params) {
+        return getLargeDictionary('publicactivities/awards', params);
       },
       getEnrolmentsSubjects: function () {
         return getLargeDictionary('enrolments/subjects');

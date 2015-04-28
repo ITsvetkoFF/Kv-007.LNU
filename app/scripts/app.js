@@ -55,16 +55,59 @@ angular
         templateUrl: '../views/enrolment/list_enrolments.html',
         controller: 'ListEnrolmentsCtrl'
       })
+
+      /** ----- new-enrolment view ----- **/
       .state('new-enrolment', {
         url: '/new-enrolment',
         templateUrl: '../views/enrolment/new_enrolment.html',
         controller: 'NewEnrolmentCtrl'
       })
+        .state('new-enrolment.tab-enrolment', {
+          url: '/tab-enrolment',
+          templateUrl: '../views/enrolment/tabsEnrolment/tab_enrolment.html',
+          controller: 'TabEnrolmentCtrl'
+        })
+        .state('new-enrolment.tab-benefits', {
+          url: '/tab-benefits',
+          templateUrl: '../views/enrolment/tabsEnrolment/tab_benefits.html',
+          controller: ''
+        })
+        .state('new-enrolment.tab-enrolmentsubjects', {
+          url: '/tab-enrolmentsubjects',
+          templateUrl: '../views/enrolment/tabsEnrolment/tab_enrolmentsubjects.html',
+          controller: ''
+        })
+        .state('new-enrolment.tab-statuses', {
+          url: '/tab-statuses',
+          templateUrl: '../views/enrolment/tabsEnrolment/tab_statuses.html',
+          controller: ''
+        })
+      /** ----- edit-enrolment view ----- **/
       .state('edit-enrolment', {
         url: '/edit-enrolment/:id',
         templateUrl: '../views/enrolment/new_enrolment.html',
         controller: 'NewEnrolmentCtrl'
-      });
+      })
+        .state('edit-enrolment.tab-enrolment', {
+          url: '/tab-enrolment',
+          templateUrl: '../views/enrolment/tabsEnrolment/tab_enrolment.html',
+          controller: 'TabEnrolmentCtrl'
+        })
+        .state('edit-enrolment.tab-benefits', {
+          url: '/tab-benefits',
+          templateUrl: '../views/enrolment/tabsEnrolment/tab_benefits.html',
+          controller: ''
+        })
+        .state('edit-enrolment.tab-enrolmentsubjects', {
+          url: '/tab-enrolmentsubjects',
+          templateUrl: '../views/enrolment/tabsEnrolment/tab_enrolmentsubjects.html',
+          controller: ''
+        })
+        .state('edit-enrolment.tab-statuses', {
+          url: '/tab-statuses',
+          templateUrl: '../views/enrolment/tabsEnrolment/tab_statuses.html',
+          controller: ''
+        });
     $urlRouterProvider.otherwise('/list-specoffer');
   })
 
@@ -74,6 +117,6 @@ angular
 
   .config(['$httpProvider', function ($httpProvider) {
     $httpProvider.defaults.headers.get = {
-      'Authorization': 'Basic YWRtaW46bmltZGE='
+      'Authorization' : 'Basic YWRtaW46bmltZGE='
     };
   }]);
