@@ -1,6 +1,5 @@
 'use strict';
 
-
 angular.module('admissionSystemApp')
   .controller('ListPersonCtrl', ['$scope', 'personDecodeSvc', 'DictionariesSvc', 'basePersonData', 'Person', '$state',
     function ($scope, personDecodeSvc, DictionariesSvc, basePersonData, Person, $state) {
@@ -29,7 +28,9 @@ angular.module('admissionSystemApp')
       };
 
       $scope.changePerson = function (id) {
-        $state.go('edit-person', {id: id});
+        $state.go('edit-person', {
+          id: id
+        });
       };
 
     }]);

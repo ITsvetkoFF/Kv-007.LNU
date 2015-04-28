@@ -13,7 +13,6 @@ angular
     'checklist-model'
   ])
 
-
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('list-specoffer', {
@@ -73,6 +72,8 @@ angular
     uiSelectConfig.theme = 'bootstrap';
   })
 
-  .config(['$httpProvider', function($httpProvider) {
-    $httpProvider.defaults.headers.get = { 'Authorization' : 'Basic YWRtaW46bmltZGE=' };
+  .config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.defaults.headers.get = {
+      'Authorization': 'Basic YWRtaW46bmltZGE='
+    };
   }]);
