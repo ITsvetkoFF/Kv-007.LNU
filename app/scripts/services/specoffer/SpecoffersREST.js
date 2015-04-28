@@ -150,10 +150,8 @@ angular.module('admissionSystemApp')
       }
 
       function deleteSpecoffer(objToDelete) {
-        var promises, specOfferID;
-
-        promises = [];
-        specOfferID = objToDelete.specoffer.id;
+        var promises = [],
+          specOfferID = objToDelete.specoffer.id;
 
         promises.push(restAngular.one('specoffers', specOfferID).remove());
 

@@ -111,9 +111,8 @@ angular.module('admissionSystemApp')
       }
 
       function addAward(item, personId) {
-        var awardToPut;
+        var awardToPut = {};
 
-        awardToPut = {};
         _.merge(awardToPut, item.award);
         delete item.award;
         awardToPut.personId = personId;
@@ -222,7 +221,6 @@ angular.module('admissionSystemApp')
       }
 
       function compareSubjectArrays(newArr, oldArr, personId, personPaperId) {
-
         var promises = [];
 
         _.forEach(newArr, function (item) {
@@ -322,10 +320,8 @@ angular.module('admissionSystemApp')
       }
 
       function deletePerson(objToDelete) {
-        var promises, personId;
-
-        promises = [];
-        personId = objToDelete.person.id;
+        var promises = [],
+          personId = objToDelete.person.id;
 
         promises.push(restAngular.one('persons', personId).remove());
 

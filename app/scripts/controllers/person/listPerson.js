@@ -2,7 +2,8 @@
 
 angular.module('admissionSystemApp')
   .controller('ListPersonCtrl', ['$scope', 'personDecodeSvc', 'DictionariesSvc', 'basePersonData', 'Person', '$state',
-    function ($scope, personDecodeSvc, DictionariesSvc, basePersonData, Person, $state) {
+    'getFiltredListSvc',
+    function ($scope, personDecodeSvc, DictionariesSvc, basePersonData, Person, $state, getFiltredListSvc) {
 
       $scope.personDecoded = [];
 
