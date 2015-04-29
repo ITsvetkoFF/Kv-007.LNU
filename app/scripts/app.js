@@ -75,7 +75,7 @@ angular
         .state('new-enrolment.tab-enrolmentsubjects', {
           url: '/tab-enrolmentsubjects',
           templateUrl: '../views/enrolment/tabsEnrolment/tab_enrolmentsubjects.html',
-          controller: ''
+          controller: 'enrolmentSubjects'
         })
         .state('new-enrolment.tab-statuses', {
           url: '/tab-statuses',
@@ -101,7 +101,7 @@ angular
         .state('edit-enrolment.tab-enrolmentsubjects', {
           url: '/tab-enrolmentsubjects',
           templateUrl: '../views/enrolment/tabsEnrolment/tab_enrolmentsubjects.html',
-          controller: ''
+          controller: 'enrolmentSubjects'
         })
         .state('edit-enrolment.tab-statuses', {
           url: '/tab-statuses',

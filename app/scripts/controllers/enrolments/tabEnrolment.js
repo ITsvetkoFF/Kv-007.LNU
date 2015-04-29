@@ -4,6 +4,7 @@ angular.module('admissionSystemApp')
   .controller('TabEnrolmentCtrl',
     function ($scope, DictionariesSvc, baseFormData, basePersonData, $q, baseSpecofferData) {
 
+
       $q.all([
         DictionariesSvc.getAllDepartments({
           departmentTypeId: 1
