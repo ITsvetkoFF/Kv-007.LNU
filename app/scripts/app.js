@@ -47,7 +47,7 @@ angular
         template: '<ui-view/>'
       })
         .state('person.list', {
-          url: '/list?count',
+          url: '/list',
           templateUrl: '../views/person/list_person.html',
           controller: 'ListPersonCtrl'
         })
@@ -133,7 +133,7 @@ angular
         template: '<ui-view/>'
       })
         .state('enrolment.list', {
-          url: '/list?count',
+          url: '/list',
           templateUrl: '../views/enrolment/list_enrolments.html',
           controller: 'ListEnrolmentsCtrl'
         })
@@ -194,7 +194,8 @@ angular
           });
     $urlRouterProvider
       .when('/person', '/person/list')
-      .when('/enrolment', '/enrolment/list');
+      .when('/enrolment', '/enrolment/list')
+      .otherwise('/list-specoffer');
   })
 
   .config(function (uiSelectConfig) {

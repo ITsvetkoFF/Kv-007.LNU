@@ -1,9 +1,10 @@
 'use strict';
 
+
 angular.module('admissionSystemApp')
 	.controller('ListEnrolmentsCtrl', ['$scope', 'getFiltredListSvc', 'DictionariesSvc',
-    'baseListData', '$q', 'toaster', '$state',
-    function ($scope, getFiltredListSvc, DictionariesSvc, baseListData, $q, toaster, $state) {
+    'baseListData', '$q', '$state',
+    function ($scope, getFiltredListSvc, DictionariesSvc, baseListData, $q, $state) {
 
       $scope.getEnrolments = function (pageNumber, perPage, filters, sort) {
         getFiltredListSvc.getListEnrolments(pageNumber, perPage, filters, sort).then(function (res) {
@@ -37,3 +38,4 @@ angular.module('admissionSystemApp')
       };
     }]);
 
+	}]);
