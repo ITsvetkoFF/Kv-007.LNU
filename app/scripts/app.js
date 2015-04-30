@@ -47,7 +47,7 @@ angular
         template: '<ui-view/>'
       })
         .state('person.list', {
-          url: '/list',
+          url: '/list?count',
           templateUrl: '../views/person/list_person.html',
           controller: 'ListPersonCtrl'
         })
@@ -138,7 +138,7 @@ angular
         template: '<ui-view/>'
       })
         .state('enrolment.list', {
-          url: '/list',
+          url: '/list?count',
           templateUrl: '../views/enrolment/list_enrolments.html',
           controller: 'ListEnrolmentsCtrl'
         })
