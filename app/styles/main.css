@@ -11,7 +11,7 @@ input.ng-invalid.ng-dirty {
   background-color: #ffcccc;
 }
 
-.tabset {
+.tabset, .view-form {
   border: 1px solid grey;
   padding: 10px;
 }

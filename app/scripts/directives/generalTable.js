@@ -113,7 +113,9 @@ angular
         getdata: '&?',
         total: '@?',
         onDelete: '&?',
-        onChange: '&?'
+        onChange: '&?',
+        onView: '&?',
+        isView: '='
       }
     };
 

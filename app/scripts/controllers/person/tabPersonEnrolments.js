@@ -13,7 +13,8 @@ angular.module('admissionSystemApp')
             $scope.enrolments = enrolments;
           });
         });
-        $scope.headers = baseListData.cutHeaders;
+        $scope.headers = _.clone(baseListData.headers);
+        $scope.headers[1].visible = false;
       }
 
       $scope.newEnrolment = function () {

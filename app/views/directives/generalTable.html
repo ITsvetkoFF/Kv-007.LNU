@@ -114,17 +114,21 @@
               <td ng-repeat="column in headers track by $index"
                   ng-show="column.visible"
                   ng-click="setSelected = itemObj"> {{itemObj[column.name]}}  </td>
-             
+
               <td class="content-data_manage-buttons">
 
+                <button class="btn btn-xs btn-primary"
+                        ng-show="isView"
+                        ng-click="onView({id: itemObj.id})">
+                  <i class="fa fa-search"></i>
+                </button>
+
                 <button class="btn btn-xs btn-warning"
-                        ng-show="onChange"
                         ng-click="onChange({id: itemObj.id})">
                   <i class="fa fa-pencil-square-o"></i>
                 </button>
 
                 <button class="btn btn-xs btn-danger"
-                        ng-show="onDelete"
                         ng-click="onDelete({id: itemObj.id})">
                   <i class="fa fa-times"></i>
                 </button>
