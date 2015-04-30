@@ -47,7 +47,7 @@ angular
         }).then(function (specoffers) {
           var specofferArray = specoffers,
             promises = [],
-            x, y, z;
+            x, y, z, i = 0;
 
           for (x = 0; x < 5; x++) {
             promises.push(SpecoffersService.getEntireSpecoffer(specofferArray[x].id).then(function (specoffer) {
@@ -79,8 +79,9 @@ angular
               //post redacted specoffer to server
               SpecoffersService.clearCopy();
               return SpecoffersService.addOrEditSpecoffer(obj).then(function () {
-                percentComplete = ((x + 1) / specofferArray.length) * 100;
+                percentComplete = (i / specofferArray.length) * 100;
                 deffered.notify(percentComplete);
+                i++;
               });
             }));
           }

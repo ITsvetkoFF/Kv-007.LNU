@@ -69,7 +69,14 @@ angular.module('admissionSystemApp')
             }).result;
           })
           .then(function (sourceTimeperiodId) {
-            copyTimeperiod.copyToTimeperiod(sourceTimeperiodId, timePeriod.id, timePeriod.begDate, timePeriod.endDate);
+            copyTimeperiod.copyToTimeperiod(sourceTimeperiodId, timePeriod.id, timePeriod.begDate, timePeriod.endDate).then(function (result) {
+              // success
+            }, function (error) {
+              // error
+            }, function (percentComplete) {
+              $scope.progress = percentComplete;
+              console.log($scope.progress);
+            });
           })
           .finally(function () {
             $scope.sweeper();
