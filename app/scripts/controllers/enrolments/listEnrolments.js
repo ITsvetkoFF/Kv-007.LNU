@@ -1,7 +1,7 @@
 'use strict';
 
-
-angular.module('admissionSystemApp')
+angular
+  .module('admissionSystemApp')
 	.controller('ListEnrolmentsCtrl', ['$scope', 'getFiltredListSvc', 'DictionariesSvc',
     'baseListData', '$q', '$state',
     function ($scope, getFiltredListSvc, DictionariesSvc, baseListData, $q, $state) {
@@ -38,4 +38,3 @@ angular.module('admissionSystemApp')
       };
     }]);
 
-	}]);

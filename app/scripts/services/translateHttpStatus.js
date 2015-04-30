@@ -4,6 +4,14 @@ angular.module('admissionSystemApp')
   .factory('translHttpStatusSvc', ['toaster', function (toaster) {
 
     function translator (obj) {
+      if (obj.message === 'Entity doesn\'t exist') {
+        return {
+          type: 'error',
+          title: 'Помилка пошуку!',
+          body: 'За даним запитом нічого не знайдено.' +
+                'Будь-ласка, перевірте правильність запиту'
+        };
+      }
       switch (obj.httpCode) {
       case 401:
         return {
