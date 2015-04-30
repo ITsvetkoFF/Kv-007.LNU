@@ -3,14 +3,12 @@
 angular.module('admissionSystemApp')
 	.controller('ListEnrolmentsCtrl', ['$scope', 'getFiltredListSvc', 'DictionariesSvc',
     'baseListData', '$q', 'toaster', '$state',
-    function ($scope, getFiltredListSvc, SpecofferDictionaryService, baseListData, $q, toaster, $state) {
+    function ($scope, getFiltredListSvc, DictionariesSvc, baseListData, $q, toaster, $state) {
 
       $scope.getEnrolments = function (pageNumber, perPage, filters, sort) {
         getFiltredListSvc.getListEnrolments(pageNumber, perPage, filters, sort).then(function (res) {
           $scope.enrolDecoded = res.data;
           $scope.totalEnrol = res.total;
-        }, function (resp) {
-          toaster.pop('error', resp.messageType, resp.message);
         });
       };
       $scope.demoClickedToasts = [];
@@ -20,8 +18,8 @@ angular.module('admissionSystemApp')
       $scope.enrolFilters = baseListData.filters;
 
       $q.all([
-        SpecofferDictionaryService.getEnrolmentsTypes(),
-        SpecofferDictionaryService.getAllDepartments({
+        DictionariesSvc.getEnrolmentsTypes(),
+        DictionariesSvc.getAllDepartments({
           departmentTypeId: 1
         })
       ])
