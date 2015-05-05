@@ -6,6 +6,7 @@ angular.module('admissionSystemApp')
     function ($scope, DictionariesSvc, $stateParams, $state, baseListData, decodeEnrolmentsSvc) {
 
       if ($stateParams.id) {
+        $scope.personId = $stateParams.id;
         DictionariesSvc.getEnrolments({
           personId: $stateParams.id
         }).then(function (rawEnrolments) {
@@ -18,13 +19,13 @@ angular.module('admissionSystemApp')
       }
 
       $scope.newEnrolment = function () {
-        $state.go('new-enrolment.tab-enrolment', {
+        $state.go('enrolment.new.main', {
           personId: $stateParams.id
         });
       };
 
       $scope.editEnrolment = function (id) {
-        $state.go('edit-enrolment.tab-enrolment', {
+        $state.go('enrolment.edit.main', {
           id: id
         });
       };

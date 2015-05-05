@@ -127,7 +127,7 @@ angular
         .state('person.view', {
           url: '/view/:id',
           templateUrl: '../views/person/view_person.html',
-          controller: 'NewPersonCtrl'
+          controller: 'ViewPersonCtrl'
         })
       //////////////////////////////////////////////////////////
       // ----------------ENROLMENTS--------------------------///

@@ -1,5 +1,5 @@
 <div class="form-group">
-  <button ng-show="$stateParams.id" class="btn btn-success top-buffer bottom-buffer" ng-click="newEnrolment()">
+  <button ng-show="personId" class="btn btn-success top-buffer bottom-buffer" ng-click="newEnrolment()">
     <i class="fa fa-plus"></i> Додати заяву
   </button>
 
@@ -8,6 +8,6 @@
                 headers="headers"
                 is-change="true"
                 on-change="editEnrolment(id)"></simple-table>
-  <h4 ng-show="$stateParams.id" ng-show="!enrolments.length">У даної персони немає заяв</h4>
-  <h4 ng-show="!$stateParams.id">Вам потрібно спочатку зберегти персону</h4>
+  <h4 ng-show="personId && !enrolments.length">У даної персони немає заяв</h4>
+  <h4 ng-show="!personId">Вам потрібно спочатку зберегти персону</h4>
 </div>

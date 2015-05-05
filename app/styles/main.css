@@ -16,6 +16,10 @@ input.ng-invalid.ng-dirty {
   padding: 10px;
 }
 
+.photo {
+  margin: 10px;
+}
+
 .inputSpecialtyName {
   width: 70% !important;
 }
@@ -108,7 +112,7 @@ table td a:hover {
 }
 
 .content-data_manage-buttons {
-  min-width: 70px;
+  min-width: 93px;
 }
 
 /* table header */

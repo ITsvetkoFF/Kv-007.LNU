@@ -16,18 +16,67 @@
     <div class="row">
       <div class="col-md-9 view-form">
 
-        <div class="row form-group">
+        <div class="row form-group container">
           <div class="col-md-3">
-            <img width="170px" src="../images/no-photo.jpg">
+            <img class="photo" width="170px" src="../images/no-photo.jpg">
           </div>
           <div class="col-md-7">
             <h2 class="text-primary">{{entirePerson.person.name}}</h2>
 
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-9 bottom-buffer">
                 <h4>{{entirePerson.names[0].name}}</h4>
               </div>
             </div>
+
+            <div class="row">
+              <div class="col-md-9">
+                <p><b>Серія особової справи:</b> {{entirePerson.person.docSeries}}</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-9">
+                <p><b>Номер особової справи:</b> {{entirePerson.person.docNum}}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col-md-4">
+            <p><b>Тип персони:</b> {{personsTypes[entirePerson.person.personTypeId]}}</p>
+          </div>
+          <div class="col-md-4">
+            <p><b>Стать:</b> {{genderTypes[entirePerson.person.genderTypeId]}}</p>
+          </div>
+          <div class="col-md-4">
+            <p><b>Громадянство:</b> {{adminUnits[entirePerson.person.citizenCountryId]}}</p>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col-md-4">
+            <p><b>Дата народження:</b> {{entirePerson.person.begDate | date:"dd.MM.yyyy' р.'"}}</p>
+          </div>
+          <div class="col-md-4">
+            <p><b>Сімейний стан:</b> {{marriedTypes[entirePerson.person.marriedTypeId]}}</p>
+          </div>
+          <div class="col-md-4">
+            <p><b>Індекс матеріально відповідального:</b> {{entirePerson.person.identifier}}</p>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col-md-4">
+            <p><b>Резидент:</b> {{entirePerson.person.resident | checkmark}}</p>
+          </div>
+          <div class="col-md-4">
+            <p><b>Військовозобовязаний:</b> {{entirePerson.person.isMilitary | checkmark}}</p>
+          </div>
+          <div class="col-md-4">
+            <p><b>Гуртожиток:</b> {{entirePerson.person.isHostel | checkmark}}</p>
           </div>
         </div>
 
