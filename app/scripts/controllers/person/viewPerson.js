@@ -19,6 +19,7 @@ angular.module('admissionSystemApp')
       $scope.genderTypes = [];
       $scope.marriedTypes = [];
       $scope.adminUnits = [];
+      $scope.streetsTypes = [];
 
       function pushData(data, array) {
         angular.forEach(data, function (item) {
@@ -32,13 +33,15 @@ angular.module('admissionSystemApp')
         DictionariesSvc.getMarriedTypes(),
         DictionariesSvc.getAdminUnits({
           adminUnitTypeId: 6
-        })
+        }),
+        DictionariesSvc.getStreetsTypes()
       ])
         .then(function (res) {
           pushData(res[0], $scope.personsTypes);
           pushData(res[1], $scope.genderTypes);
           pushData(res[2], $scope.marriedTypes);
           pushData(res[3], $scope.adminUnits);
+          pushData(res[4], $scope.streetsTypes);
         });
 
     }])

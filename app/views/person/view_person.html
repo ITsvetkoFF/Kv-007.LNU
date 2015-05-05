@@ -100,16 +100,76 @@
             <adminunits-selector ng-model="entirePerson.addresses.regAddresses.adminUnitId">
             </adminunits-selector>
           </div>
+
+          <div class="form-group col-md-10">
+            <div class="row">
+              <div class="col-xs-2">
+                <label for="inputZipCodeReg">Індекс</label>
+                <div id="inputZipCodeReg">{{entirePerson.addresses.regAddresses.zipCode}}</div>
+              </div>
+
+              <div class="col-xs-2">
+                <label for="inputStreetTypeReg">Тип</label>
+                <div id="inputStreetTypeReg">{{streetsTypes[entirePerson.addresses.regAddresses.streetTypeId]}}</div>
+              </div>
+
+              <div class="col-xs-4">
+                <label for="inputStreetReg">Вулиця</label>
+                <div id="inputStreetReg">{{entirePerson.addresses.regAddresses.street}}</div>
+              </div>
+
+              <div class="col-xs-2">
+                <label for="inputHouseReg">Будинок</label>
+                <div id="inputHouseReg">{{entirePerson.addresses.regAddresses.house}}</div>
+              </div>
+
+              <div class="col-xs-2">
+                <label for="inputApartmentReg">Квартира</label>
+                <div id="inputApartmentReg">{{entirePerson.addresses.regAddresses.apartment}}</div>
+              </div>
+            </div>
+          </div>
+
           <div class="form-group col-md-10">
             <label class="control-label">
               <input type="checkbox"
                      ng-model="entirePerson.addresses.isAdressesMatch">
               Поштова адреса та адреса реєстрації співпадають </label>
           </div>
+
           <div class="col-md-10" collapse="entirePerson.addresses.isAdressesMatch">
             <label>Поштова адреса</label>
             <adminunits-selector ng-model="entirePerson.addresses.postAddresses.adminUnitId">
             </adminunits-selector>
+          </div>
+
+          <div class="form-group col-md-10" collapse="entirePerson.addresses.isAdressesMatch">
+            <div class="row">
+              <div class="col-xs-2">
+                <label for="inputZipCodePost">Індекс</label>
+                <div id="inputZipCodePost">{{entirePerson.addresses.postAddresses.zipCode}}</div>
+              </div>
+
+              <div class="col-xs-2">
+                <label for="inputStreetTypePost">Тип</label>
+                <div id="inputStreetTypePost">{{streetsTypes[entirePerson.addresses.postAddresses.streetTypeId]}}</div>
+              </div>
+
+              <div class="col-xs-4">
+                <label for="inputStreetPost">Вулиця</label>
+                <div id="inputStreetPost">{{entirePerson.addresses.postAddresses.street}}</div>
+              </div>
+
+              <div class="col-xs-2">
+                <label for="inputHousePost">Будинок</label>
+                <div id="inputHousePost">{{entirePerson.addresses.postAddresses.house}}</div>
+              </div>
+
+              <div class="col-xs-2">
+                <label for="inputApartmentPost">Квартира</label>
+                <div id="inputApartmentPost">{{entirePerson.addresses.postAddresses.apartment}}</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -130,7 +190,6 @@
   </div>
 
 </div>
-
 
 <div class="footer">
 </div>
