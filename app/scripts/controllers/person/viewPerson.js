@@ -5,6 +5,7 @@ angular.module('admissionSystemApp')
     function ($scope, DictionariesSvc, $q, $stateParams, Person) {
 
       $scope.entirePerson = {};
+      $scope.entirePerson.contacts = [];
 
       $scope.brosweOrEditPerson = function (personId) {
         Person.getEntirePerson(personId).then(function (res) {
