@@ -13,7 +13,7 @@ angular.module('admissionSystemApp')
 
     return {
       restrict: 'E',
-      templateUrl: changeView(),
+      templateUrl: changeView,
       require: 'ngModel',
       replace: false,
       scope: {},
