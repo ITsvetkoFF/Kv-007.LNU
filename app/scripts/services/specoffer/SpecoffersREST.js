@@ -5,9 +5,9 @@ angular
   .config(function (RestangularProvider, Constants) {
 
     RestangularProvider.setBaseUrl(Constants.basicURL);
-    RestangularProvider.setDefaultHeaders({
-      Authorization: Constants.BasicAuth
-    });
+    // RestangularProvider.setDefaultHeaders({
+      // Authorization: Constants.BasicAuth
+    // });
     RestangularProvider.addResponseInterceptor(function (data, operation) {
       if (operation === 'get') {
         delete data.uri;
@@ -45,7 +45,7 @@ angular
       function getEntireSpecoffer(id) {
         var entireSpecoffer = {};
 
-        entireSpecoffer.specoffer = restAngular.one('specoffers', id).get();
+        entireSpecoffer.specoffer =   
         entireSpecoffer.subjects = restAngular.one('specoffers', id).one('subjects').getList();
         entireSpecoffer.benefits = restAngular.one('specoffers', id).one('benefits').getList();
         entireSpecoffer.waves = restAngular.one('specoffers', id).one('waves').getList();
