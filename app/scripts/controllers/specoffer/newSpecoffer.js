@@ -50,7 +50,7 @@ angular.module('admissionSystemApp')
           progressBarService.value--;
         }
 
-        else if ($state.is('new-specoffer')) {
+        else if ($state.is('root.new-specoffer')) {
           progressBarService.inputQuantity++;
         }
 
