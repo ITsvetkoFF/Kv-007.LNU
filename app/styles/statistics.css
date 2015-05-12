@@ -1,0 +1,94 @@
+/*--------barChart--------*/
+bar-chart svg {
+  font-size: 14px;
+}
+
+bar-chart rect.background {
+  fill: none;
+  pointer-events: all;
+}
+
+bar-chart .axis {
+  shape-rendering: crispEdges;
+}
+
+bar-chart .axis path, bar-chart .axis line {
+  fill: none;
+  stroke: #000;
+  stroke-width: .5px;
+}
+
+/*--------sunChart--------*/
+sun-chart .node rect {
+  cursor: pointer;
+  fill: #fff;
+  fill-opacity: .5;
+  stroke: #3182bd;
+  stroke-width: 1.5px;
+}
+
+sun-chart .node text {
+  font: 10px sans-serif;
+  pointer-events: none;
+}
+sun-chart path{
+  stroke: #feb24c;
+  stroke-width : 2;
+  stroke-opacity: 1;
+}
+sun-chart path.link {
+  fill: none;
+  stroke: #9ecae1;
+  stroke-width: 1.5px;
+}
+
+/*-------dashed chart---------*/
+dash-board-chart path {  stroke: #fff; }
+dash-board-chart path:hover {  opacity:0.9; }
+dash-board-chart rect:hover {  fill:blue; }
+dash-board-chart .axis {  font: 10px sans-serif; }
+dash-board-chart .legend tr{    border-bottom:1px solid grey; }
+dash-board-chart .legend tr:first-child{    border-top:1px solid grey; }
+
+dash-board-chart .axis path,
+dash-board-chart .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+dash-board-chart .x.axis path {  display: none; }
+dash-board-chart .legend{
+  margin-bottom:76px;
+  display:inline-block;
+  border-collapse: collapse;
+  border-spacing: 0px;
+}
+dash-board-chart .legend td{
+  padding:4px 5px;
+  vertical-align:bottom;
+}
+dash-board-chart .legendFreq, .legendPerc{
+  align:right;
+  width:50px;
+}
+/*--------tree colapsablle--------*/
+tree-col-chart .node {
+  cursor: pointer;
+}
+
+tree-col-chart .node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 3px;
+}
+
+tree-col-chart .node text {
+  font: 12px sans-serif;
+}
+
+tree-col-chart .link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}

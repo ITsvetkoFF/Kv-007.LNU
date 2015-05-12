@@ -1,0 +1,32 @@
+<script src="scripts/modules/d3.js"></script>
+<link rel="stylesheet" href="styles/statistics.css">
+
+<div class="container-fluid">
+  <div class="row bottom-buffer">
+    <div class="col-md-3">
+      <h2><i class="fa fa-bar-chart text-danger"></i> Статистика</h2>
+    </div>
+    <!--<div class="col-md-3 timeperiod">-->
+      <!--<select class="form-control"-->
+              <!--ng-model="timeperiod.timePeriodId"-->
+              <!--ng-options="opt.id as opt.name for opt in timeperiods"-->
+              <!--ng-click="pickTimePeriod()">-->
+        <!--<option value="" disabled selected>Оберіть вступну кампанію</option>-->
+      <!--</select>-->
+    <!--</div>-->
+  </div>
+  <!--<div class="row"><h3>Tree chart</h3><tree-chart data="chart"></tree-chart></div>-->
+  <div class="row"><h3>Dash board chart</h3>
+    <dash-board-chart data="chartForDashBoard"></dash-board-chart>
+  </div>
+  <div class="row"><h3>Bar chart</h3>
+    <bar-chart data="chart"></bar-chart>
+  </div>
+  <div class="row"><h3>Sun chart</h3>
+    <sun-chart data="chart"></sun-chart>
+  </div>
+  <div class="row"><h3>Tree chart</h3>
+    <tree-col-chart data="chart"></tree-col-chart>
+  </div>
+
+</div>

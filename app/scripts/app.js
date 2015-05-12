@@ -37,6 +37,11 @@ angular
         templateUrl: 'views/dictionaries.html',
         controller: 'dictionaryCtrl'
       })
+      .state('statistics', {
+        url: '/statistics',
+        templateUrl: 'views/statistics.html',
+        controller: 'StatisticsCtrl'
+      })
 
       //////////////////////////////////////////////////////////
       // ----------------PERSONS-----------------------------///
