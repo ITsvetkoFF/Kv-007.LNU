@@ -18,30 +18,6 @@ bar-chart .axis path, bar-chart .axis line {
   stroke-width: .5px;
 }
 
-/*--------sunChart--------*/
-sun-chart .node rect {
-  cursor: pointer;
-  fill: #fff;
-  fill-opacity: .5;
-  stroke: #3182bd;
-  stroke-width: 1.5px;
-}
-
-sun-chart .node text {
-  font: 10px sans-serif;
-  pointer-events: none;
-}
-sun-chart path{
-  stroke: #feb24c;
-  stroke-width : 2;
-  stroke-opacity: 1;
-}
-sun-chart path.link {
-  fill: none;
-  stroke: #9ecae1;
-  stroke-width: 1.5px;
-}
-
 /*-------dashed chart---------*/
 dash-board-chart path {  stroke: #fff; }
 dash-board-chart path:hover {  opacity:0.9; }
@@ -59,7 +35,7 @@ dash-board-chart .axis line {
 
 dash-board-chart .x.axis path {  display: none; }
 dash-board-chart .legend{
-  margin-bottom:76px;
+  margin-bottom:132px;
   display:inline-block;
   border-collapse: collapse;
   border-spacing: 0px;
@@ -73,21 +49,21 @@ dash-board-chart .legendFreq, .legendPerc{
   width:50px;
 }
 /*--------tree colapsablle--------*/
-tree-col-chart .node {
+tree-chart .node {
   cursor: pointer;
 }
 
-tree-col-chart .node circle {
+tree-chart .node circle {
   fill: #fff;
   stroke: steelblue;
   stroke-width: 3px;
 }
 
-tree-col-chart .node text {
+tree-chart .node text {
   font: 12px sans-serif;
 }
 
-tree-col-chart .link {
+tree-chart .link {
   fill: none;
   stroke: #ccc;
   stroke-width: 2px;

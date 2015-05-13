@@ -108,7 +108,7 @@ angular.module('admissionSystemApp')
 
       // function to handle pieChart.
       function pieChart(pD){
-        var pC ={},    pieDim ={w:250, h: 250};
+        var pC ={},    pieDim ={w:250, h: 400};
         pieDim.r = Math.min(pieDim.w, pieDim.h) / 2;
 
         // create svg for pie chart.
@@ -210,6 +210,9 @@ angular.module('admissionSystemApp')
       scope.$watch('data', function (data) {
 
         if(!data) return;
+
+        while (el.lastChild) el.removeChild(el.lastChild);
+        freqFields.length = 0;
 
         if (data.length){
           for (var k in data[0].freq){

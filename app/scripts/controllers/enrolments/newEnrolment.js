@@ -6,6 +6,9 @@ angular
     function ($scope, $stateParams, baseFormData, $state) {
       $scope.enrolmentId = $stateParams.id;
       $scope.entireEnrolment = {};
+      $scope.entireEnrolment.enrolment = {};
+      $scope.entireEnrolment.enrolment.isContract = 0;
+      $scope.entireEnrolment.enrolment.isState = 0;
 
       $scope.enrolTabs = baseFormData.tabs;
 
