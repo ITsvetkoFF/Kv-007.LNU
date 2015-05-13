@@ -150,7 +150,7 @@ angular
             .state('root.person.new.papers', {
               url: '/papers',
               templateUrl: '../views/person/tabsPerson/tab_papers.html',
-              controller: ''
+              controller: 'tabPersonPapers'
             })
             .state('root.person.new.personsubjects', {
               url: '/personsubjects',
@@ -190,7 +190,7 @@ angular
             .state('root.person.edit.papers', {
               url: '/papers',
               templateUrl: '../views/person/tabsPerson/tab_papers.html',
-              controller: ''
+              controller: 'tabPersonPapers'
             })
             .state('root.person.edit.personsubjects', {
               url: '/personsubjects',
@@ -245,7 +245,7 @@ angular
             .state('root.enrolment.new.enrolmentsubjects', {
               url: '/enrolmentsubjects',
               templateUrl: '../views/enrolment/tabsEnrolment/tab_enrolmentsubjects.html',
-              controller: ''
+              controller: 'enrolmentSubjects'
             })
             .state('root.enrolment.new.statuses', {
               url: '/statuses',

@@ -13,6 +13,8 @@ angular
       $scope.entireEnrolment.enrolment.isState = 0;
       $scope.entireEnrolment.enrolmentsubjects = [];
       $scope.entireEnrolment.benefits = [];
+      $scope.entireEnrolment.enrolment.specOfferId;
+      $scope.entireEnrolment.enrolment.personId;
 
       $scope.enrolTabs = baseFormData.tabs;
 
