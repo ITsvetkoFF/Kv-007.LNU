@@ -145,7 +145,7 @@ angular.module('admissionSystemApp')
           return getLargeDictionary('publicactivities/types');
         },
         getPublicActivitiesAwards: function (params) {
-          return getLargeDictionary('publicactivities/awards');
+          return getLargeDictionary('publicactivities/'+params+'/awards');
         },
         getEnrolmentsSubjects: function () {
           return getLargeDictionary('enrolments/subjects');
