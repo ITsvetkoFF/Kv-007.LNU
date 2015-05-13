@@ -8,14 +8,22 @@
 
 angular
 .module('admissionSystemApp')
-  .directive('adminunitsSelector', ['DictionariesSvc', 'Restangular', 'translHttpStatusSvc',
-    function (DictionariesSvc, Restangular, translHttpStatusSvc) {
+  .directive('adminunitsSelector', ['DictionariesSvc', 'Restangular', 'translHttpStatusSvc', '$state',
+    function (DictionariesSvc, Restangular, translHttpStatusSvc, $state) {
 
       adminunitsSelectorCtrl.$inject = ['$scope', 'DictionariesSvc'];
       function adminunitsSelectorCtrl ($scope, DictionariesSvc) {
 
         $scope.wholeAdress = [];
         $scope.adminUnitId = {};
+        if ($state.is('root.person.view.main') ||
+          $state.is('root.person.new.main') || $state.is('root.person.edit.main')) {
+          $scope.placeOfBirth = true;
+        }
+
+        if ($state.includes('root.person.view.*')) {
+          $scope.personView = true;
+        }
 
         Restangular.one('adminunits', 1).get().then(function (country) {
           $scope.adminunits = [country];

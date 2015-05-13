@@ -13,11 +13,13 @@
                 headers="headers"
                 getdata="getPersons(currentPage, itemsPerPage, userFilterPick, sort)"
                 newitemlinktitle ="Додати персону"
-                newitemstate="person.new.main"
+                newitemstate="root.person.new.main"
                 total="{{totalPersons}}"
                 on-delete="deletePerson(id)"
                 on-change="changePerson(id)"
-                currentstate="person.list">
+                on-view="viewPerson(id)"
+                is-view="true"
+                currentstate="root.person.list">
   </general-table>
 
 </div>

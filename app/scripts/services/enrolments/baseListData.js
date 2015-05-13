@@ -100,7 +100,7 @@ angular
         },
         {
           name: 'personId',
-          display: 'Персона',
+          display: 'Персона (id)',
           visible: true
         },
         {
@@ -111,17 +111,17 @@ angular
         {
           name: 'isState',
           display: 'Бюджет',
-          visible: true
+          visible: false
         },
         {
           name: 'isContract',
           display: 'Контракт',
-          visible: true
+          visible: false
         },
         {
           name: 'departmentId',
           display: 'Підрозділ',
-          visible: true
+          visible: false
         },
         {
           name: 'personPaperId',
@@ -156,7 +156,7 @@ angular
         {
           name: 'enrolmentTypeId',
           display: 'Тип поступлення',
-          visible: true
+          visible: false
         },
         {
           name: 'evDate',
@@ -179,14 +179,19 @@ angular
           visible: false
         }
       ],
-    cutHeaders: [
+    stateHeaders: [
       {
         name: 'id', display: '№',
+        visible: false
+      },
+      {
+        name: 'specOfferWaveId',
+        display: 'Хвиля вступу (id)',
         visible: true
       },
       {
-        name: 'specOfferId',
-        display: 'Пропозиція (id)',
+        name: 'enrolmentStatusTypeId',
+        display: 'Статус заяви',
         visible: true
       },
       {
@@ -198,68 +203,8 @@ angular
         name: 'isContract',
         display: 'Контракт',
         visible: true
-      },
-      {
-        name: 'departmentId',
-        display: 'Підрозділ',
-        visible: true
-      },
-      {
-        name: 'personPaperId',
-        display: 'Документи персони',
-        visible: false
-      },
-      {
-        name: 'mark',
-        display: 'Загальний бал',
-        visible: false
-      },
-      {
-        name: 'isPrivilege',
-        display: 'Наявність пільг',
-        visible: true
-      },
-      {
-        name: 'docSeries',
-        display: 'Серія док.',
-        visible: true
-      },
-      {
-        name: 'docNum',
-        display: 'Номер док.',
-        visible: true
-      },
-      {
-        name: 'isHostel',
-        display: 'Потреб. гуртож',
-        visible: true
-      },
-      {
-        name: 'enrolmentTypeId',
-        display: 'Тип поступлення',
-        visible: true
-      },
-      {
-        name: 'evDate',
-        display: 'Дата створення',
-        visible: false
-      },
-      {
-        name: 'begDate',
-        display: 'Дата дії (з)',
-        visible: true
-      },
-      {
-        name: 'endDate',
-        display: 'Дата дії (по)',
-        visible: false
-      },
-      {
-        name: 'parentId',
-        display: 'Ієрарх. ідетиф.',
-        visible: false
       }
-    ],
+      ],
     expandFilters: function (data, prop) {
       var neededObj = _.find(this.filters, {
         'property': prop
