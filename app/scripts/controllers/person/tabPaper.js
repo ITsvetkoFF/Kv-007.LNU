@@ -1,15 +1,16 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .controller('tabPersonPapers', ['$scope', '$http', '$modal', '$rootScope', 'DictionariesSvc', function ($scope, $http, $modal, $rootScope, DictionariesSvc) {
+  .controller('tabPersonPapers', ['$scope', '$http', '$modal', '$rootScope', 'DictionariesSvc',
+    function ($scope, $http, $modal, $rootScope, DictionariesSvc) {
 
     /* all ng-shows on a view*/
     $scope.isVisible = {
-      isSaveToTable:false,
-      isCreating:true,
-      isAddToTable :true,
-      publicActiveTable:false,
-      publicActivSelect : false
+      isSaveToTable: false,
+      isCreating: true,
+      isAddToTable: true,
+      publicActiveTable: false,
+      publicActivSelect: false
     };
 
     $scope.headers = [
@@ -68,11 +69,11 @@ angular.module('admissionSystemApp')
 
     /* function that's setting the children in our category of awards(if category have chosen, return all children from this category) */
     $scope.setAdditionalData = function (id) {
-      DictionariesSvc.getPublicActivitiesAwards(id).then(function (awards){
+      DictionariesSvc.getPublicActivitiesAwards(id).then(function (awards) {
         pushAwardsData(awards, publicAwards);
         $scope.newAddingData = [];
-        for(var a = 0; a < awards.length; a++){
-          if(awards[a].publicActivityId === id) {
+        for (var a = 0; a < awards.length; a++) {
+          if (awards[a].publicActivityId === id) {
             $scope.newAddingData.push(awards[a]);
           }
         }
@@ -88,7 +89,7 @@ angular.module('admissionSystemApp')
 
     /* the function that's adding the object to the row of table  */
     $scope.addToTable = function () {
-      var generetedId =  1 + Math.floor( Math.random() * (10000+1-1) );
+      var generetedId = 1 + Math.floor(Math.random() * (10000 + 1 - 1));
       var cloneMainNotDecode = _.clone($scope.currentObj);
       cloneMainNotDecode.uniqueID = generetedId;
       $scope.inputData.push(cloneMainNotDecode);
@@ -111,7 +112,7 @@ angular.module('admissionSystemApp')
 
     };
 
-    function decodeData (obj) {
+    function decodeData(obj) {
       obj.abbrName = paperUsageNames[obj.abbrName];
       obj.name = paperTypeNames[obj.name];
       obj.publicActivityTypeId = publicActivities[obj.publicActivityTypeId];
@@ -120,10 +121,10 @@ angular.module('admissionSystemApp')
     }
 
     /* the function that's deleting the object(row from table)  */
-    $scope.deleteData = function (item){
+    $scope.deleteData = function (item) {
 
-      var indexMainData = _.findIndex($scope.inputData, {uniqueID:item.uniqueID});
-      var indexDataDecoded = _.findIndex($scope.entirePerson.papers, {uniqueID:item.uniqueID});
+      var indexMainData = _.findIndex($scope.inputData, {uniqueID: item.uniqueID});
+      var indexDataDecoded = _.findIndex($scope.entirePerson.papers, {uniqueID: item.uniqueID});
 
       $scope.inputData.splice(indexMainData, 1);
       $scope.entirePerson.papers.splice(indexDataDecoded, 1);
@@ -135,9 +136,9 @@ angular.module('admissionSystemApp')
     /* the function that's editing the object, and let's to change current data in this object  */
     $scope.editData = function (item) {
 
-      objToEdit = _.find($scope.inputData, {uniqueID:item.uniqueID});
+      objToEdit = _.find($scope.inputData, {uniqueID: item.uniqueID});
       _.merge($scope.currentObj, objToEdit);
-      objToEditDecoded = _.find($scope.entirePerson.papers, {uniqueID:item.uniqueID});
+      objToEditDecoded = _.find($scope.entirePerson.papers, {uniqueID: item.uniqueID});
       $scope.addSelect(objToEdit.name);
       $scope.isVisible.isAddToTable = false;
       $scope.isVisible.isSaveToTable = true;
@@ -161,7 +162,7 @@ angular.module('admissionSystemApp')
         $scope.isVisible.publicActivSelect = true;
         $scope.isVisible.publicActiveTable = true;
       }
-      else{
+      else {
         $scope.isVisible.publicActivSelect = false;
       }
     };

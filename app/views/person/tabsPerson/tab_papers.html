@@ -38,7 +38,7 @@
     <!--is editing-->
     <div class="row">
       <div class="col-xs-2">
-        <button class="btn btn-xl btn-primary " ng-click="isVisible.isCreating = !isVisible.isCreating">  Додати предмет </button>
+        <button class="btn btn-xl btn-primary bottom-buffer" ng-click="isVisible.isCreating = !isVisible.isCreating">  Додати предмет </button>
       </div>
     </div>
 
@@ -118,30 +118,28 @@
 
       </div>
 
-      <div class = "row">
+      <div class = "row" ng-show = "isVisible.publicActivSelect">
         <div class="col-xs-4">
-          <label ng-show = "isVisible.publicActivSelect">Категорії нагород</label>
+          <label>Категорії нагород</label>
           <select ng-model="currentObj.publicActivityTypeId"
                   ng-options="opt.publicActivityTypeId as opt.name for opt in publicActiv"
                   class="form-control"
-                  ng-show = "isVisible.publicActivSelect"
                   ng-change="setAdditionalData(currentObj.publicActivityTypeId)"
             >
           </select>
         </div>
 
         <div class="col-xs-4">
-          <label ng-show = "isVisible.publicActivSelect">Нагорода</label>
+          <label>Нагорода</label>
           <select ng-model="currentObj.awardName"
                   ng-options="opt.id as opt.awardName for opt in newAddingData"
-                  class="form-control"
-                  ng-show = "isVisible.publicActivSelect">
+                  class="form-control">
           </select><br/>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-xs-2" id="subjPlus">
+        <div class="col-xs-2">
           <button class="btn btn-xl btn-success"  ng-show = "isVisible.isAddToTable" ng-click="addToTable()"><i class="fa fa-plus"></i> Додати</button>
           <button class="btn btn-xl btn-success" ng-show = "isVisible.isSaveToTable" ng-click="saveData()"><i class="fa fa-plus"></i> Зберегти</button>
         </div>
