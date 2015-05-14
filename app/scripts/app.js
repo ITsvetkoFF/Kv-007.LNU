@@ -12,7 +12,8 @@ angular
     'checklist-model',
     'toaster',
     'ngAnimate',
-    'ngStorage'
+    'ngStorage',
+    'brantwills.paging'
   ])
 
   .config(function ($stateProvider, $urlRouterProvider) {
@@ -149,7 +150,7 @@ angular
         // template: '<div ui-view="container"></div>'
       })
       .state('root.person.list', {
-        url: '/list?count',
+        url: '/list',
         views: {
           'container@': {
             templateUrl: '../views/person/list_person.html',
@@ -265,7 +266,7 @@ angular
         abstract: true
       })
       .state('root.enrolment.list', {
-        url: '/list?count',
+        url: '/list',
         views: {
           'container@': {
             templateUrl: '../views/enrolment/list_enrolments.html',
@@ -342,7 +343,6 @@ angular
       .otherwise('/specoffer/list');
   })
 
-  .
-  config(function (uiSelectConfig) {
+  .config(function (uiSelectConfig) {
     uiSelectConfig.theme = 'bootstrap';
   });
