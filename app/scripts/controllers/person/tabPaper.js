@@ -14,8 +14,7 @@ angular.module('admissionSystemApp')
       };
 
       $scope.headers = [
-        {name: 'abbrName', display: 'категорія документів'},
-        {name: 'name', display: 'назва документу'},
+        {name: 'paperTypeId', display: 'назва документу'},
         {name: 'docSeries', display: 'серія документу'},
         {name: 'docNum', display: 'номер документу'},
         {name: 'docDate', display: 'дата видачі'},
@@ -61,6 +60,11 @@ angular.module('admissionSystemApp')
         });
       };
 
+      //DictionariesSvc.getPaperTypes().then(function (paperType) {
+      //  pushData(paperType, paperTypeNames);
+      //  $scope.newData = paperType;
+      //});
+
       /* getting from service the categories of awards */
       DictionariesSvc.getPublicActivities().then(function (publicActiv) {
         $scope.publicActiv = publicActiv;
@@ -81,35 +85,41 @@ angular.module('admissionSystemApp')
 
       var cloneView,
         cloneViewDecode,
-        insideArray,
+        award = {},
         cloneMainNotDecode;
 
       /* the function that's adding the object to the row of table  */
       $scope.addToTable = function () {
         $scope.currentObj.docDate = $filter('date')($scope.currentObj.docDate, 'yyyy-MM-dd');
         cloneMainNotDecode = _.clone($scope.currentObj);
-        $scope.inputData.push(cloneMainNotDecode);
+        cloneMainNotDecode.award = award;
+        award.awardName = cloneMainNotDecode.awardName;
+        award.publicActivityTypeId = cloneMainNotDecode.publicActivityTypeId;
+        delete cloneMainNotDecode.awardName;
+        delete cloneMainNotDecode.publicActivityTypeId;
+        //delete cloneMainNotDecode.abbrName;
+        $scope.entirePerson.papers.push(cloneMainNotDecode);
 
         cloneView = _.clone($scope.currentObj);
-        insideArray = {};
-        cloneView['insideArray'] = insideArray;
         cloneViewDecode = decodeData(cloneView);
-        insideArray.awardName = cloneViewDecode.awardName;
-        insideArray.publicActivityTypeId = cloneViewDecode.publicActivityTypeId;
+        cloneView.award = award;
+        award.awardName = cloneViewDecode.awardName;
+        award.publicActivityTypeId = cloneViewDecode.publicActivityTypeId;
         delete cloneViewDecode.awardName;
         delete cloneViewDecode.publicActivityTypeId;
+        //delete cloneViewDecode.abbrName;
+        $scope.inputData.push(cloneViewDecode);
 
-        $scope.entirePerson.papers.push(cloneViewDecode);
         $scope.isVisible.isAddToTable = true;
         $scope.isVisible.isSaveToTable = false;
         $scope.currentObj = {};
-        _.merge(objToEditDecoded, decodeData($scope.currentObj));
+        //_.merge(objToEditDecoded, decodeData($scope.currentObj));
 
       };
 
       function decodeData(obj) {
         obj.abbrName = paperUsageNames[obj.abbrName];
-        obj.name = paperTypeNames[obj.name];
+        obj.paperTypeId = paperTypeNames[obj.paperTypeId];
         obj.publicActivityTypeId = publicActivities[obj.publicActivityTypeId];
         obj.awardName = publicAwards[obj.awardName];
         return obj;
@@ -128,10 +138,10 @@ angular.module('admissionSystemApp')
       /* the function that's editing the object, and let's to change current data in this object  */
       $scope.editData = function (item, idx) {
 
-        objToEdit = $scope.inputData[idx];
+        objToEdit = $scope.entirePerson.papers[idx];
         _.merge($scope.currentObj, objToEdit);
-        objToEditDecoded = $scope.entirePerson.papers[idx];
-        $scope.addSelect(objToEdit.name);
+        objToEditDecoded = $scope.inputData[idx];
+        $scope.addSelect(objToEdit.paperTypeId);
         $scope.isVisible.isAddToTable = false;
         $scope.isVisible.isSaveToTable = true;
       };
@@ -149,8 +159,8 @@ angular.module('admissionSystemApp')
       };
 
       /* the function that's adding the select with children of chosen category  */
-      $scope.addSelect = function (name) {
-        if (name === 29) {
+      $scope.addSelect = function (paperTypeId) {
+        if (paperTypeId === 29) {
           $scope.isVisible.publicActivSelect = true;
           $scope.isVisible.publicActiveTable = true;
         } else {
