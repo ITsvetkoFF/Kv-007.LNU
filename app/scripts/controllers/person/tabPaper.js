@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('admissionSystemApp')
-  .controller('tabPersonPapers', ['$scope', '$http', '$modal', '$rootScope', 'DictionariesSvc',
-    function ($scope, $http, $modal, $rootScope, DictionariesSvc) {
+  .controller('tabPersonPapers', ['$scope', '$http', '$modal', '$rootScope', 'DictionariesSvc', function ($scope, $http, $modal, $rootScope, DictionariesSvc) {
 
     /* all ng-shows on a view*/
     $scope.isVisible = {
@@ -37,10 +36,10 @@ angular.module('admissionSystemApp')
       });
     }
 
-    var paperTypeNames = [];
-    var paperUsageNames = [];
-    var publicAwards = [];
-    var publicActivities = [];
+    var paperTypeNames = [],
+      paperUsageNames = [],
+      publicAwards = [],
+      publicActivities = [];
 
     /* getting from service the categories of papers */
     DictionariesSvc.getPaperUsages().then(function (paperUsage) {
@@ -58,7 +57,7 @@ angular.module('admissionSystemApp')
             $scope.newData.push(paperType[i]);
           }
         }
-      })
+      });
     };
 
     /* getting from service the categories of awards */
@@ -70,22 +69,18 @@ angular.module('admissionSystemApp')
     /* function that's setting the children in our category of awards(if category have chosen, return all children from this category) */
     $scope.setAdditionalData = function (id) {
       DictionariesSvc.getPublicActivitiesAwards(id).then(function (awards) {
+        $scope.newAddingData = awards;
         pushAwardsData(awards, publicAwards);
-        $scope.newAddingData = [];
-        for (var a = 0; a < awards.length; a++) {
-          if (awards[a].publicActivityId === id) {
-            $scope.newAddingData.push(awards[a]);
-          }
-        }
-      })
+      });
     };
 
     $scope.currentObj = {};
     $scope.entirePerson.papers = [];
     $scope.inputData = [];
-    var cloneView;
-    var cloneViewDecode;
-    var insideArray;
+
+    var cloneView,
+      cloneViewDecode,
+      insideArray;
 
     /* the function that's adding the object to the row of table  */
     $scope.addToTable = function () {
@@ -161,8 +156,7 @@ angular.module('admissionSystemApp')
       if (name === 29) {
         $scope.isVisible.publicActivSelect = true;
         $scope.isVisible.publicActiveTable = true;
-      }
-      else {
+      } else {
         $scope.isVisible.publicActivSelect = false;
       }
     };
