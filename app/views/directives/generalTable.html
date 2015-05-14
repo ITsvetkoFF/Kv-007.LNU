@@ -71,7 +71,7 @@
               class="btn btn-primary btn-sm"
               ng-click="querySearchBy = '';
                         getdata({
-                            currentPage:currentPage,
+                            currentPage:page.current,
                             itemsPerPage:itemsPerPage,
                             userFilterPick:userFilterPick
                           })"
@@ -147,13 +147,16 @@
         </table>
       </div>
     </div>
+    <!-- ng-init="page = {}; page.current = 1" -->
     <div class="raw table-footer">
-      <pagination total-items="total"
+<!--       <pagination total-items="total"
+                  
                   ng-model="page.current"
                   items-per-page="itemsPerPage"
-                  ng-change="getdata({currentPage:currentPage, itemsPerPage:itemsPerPage, userFilterPick:userFilterPick})"
+                  ng-change="pageNumberChanged(page.current, itemsPerPage)"
+                  ng-click="paginationClick(page.current, itemsPerPage)"
                   num-pages="numPages"
-                  max-size="maxSize"
+                  max-size="5"
                   previous-text="&lsaquo;"
                   next-text="&rsaquo;"
                   first-text="&laquo;"
@@ -161,13 +164,34 @@
                   class="pagination-sm"
                   boundary-links="true"
                   rotate="false"
-        ></pagination>
+        ></pagination> -->
+          <!-- ul-class="{{ulClass}}" -->
+          <!-- active-class="{{activeClass}}" -->
+          <!-- disabled-class="{{disabledClass}}" -->
+          <!-- page="page.current"  -->
+          <pre>page{{page}}</pre>
+          <pre>currentPage{{currentPage}}</pre>
+          <!-- ng-init="currentPage = 1" -->
+        <paging
+          class="small"
+          page="currentPage"
+          page-size="itemsPerPage" 
+          total="total"
+          adjacent="2"
+          dots="2"
+          scroll-top="true" 
+          hide-if-empty="false"
+          show-prev-next="true"
+          paging-action="paginationClick('Paging Clicked', page, pageSize, total)">
+        </paging>  
+        <!-- ng-model="page.current" -->
+        <!-- ng-change="getdata({currentPage:currentPage, itemsPerPage:itemsPerPage, userFilterPick:userFilterPick})" -->
       <div class="btn-group pull-right">
         <button class="btn btn-default"
                 ng-repeat="opt in itemsPerPageOptions"
                 ng-model="$parent.itemsPerPage"
                 type="button"
-                ng-click="itemPerPageChanged(opt);"
+                ng-click="itemPerPageChanged(opt, currentPage);"
                 btn-radio="opt"
           >{{::opt}}
         </button>
