@@ -14,7 +14,8 @@ angular
       $scope.enrolmentId = $stateParams.id;
 
       if ($scope.enrolmentId) {
-        Restangular.one('specoffers', $scope.entireEnrolment.enrolment.specOfferId).getList('waves').then(function (waves) {
+        Restangular.one('specoffers', $scope.entireEnrolment.enrolment.specOfferId).getList('waves')
+          .then(function (waves) {
           $scope.wave = waves[waves.length - 1];
         });
 
@@ -29,7 +30,8 @@ angular
           });
         });
       } else {
-        Restangular.one('specoffers', $scope.entireEnrolment.enrolment.specOfferId).getList('waves').then(function (waves) {
+        Restangular.one('specoffers', $scope.entireEnrolment.enrolment.specOfferId).getList('waves')
+          .then(function (waves) {
           $scope.wave = waves[waves.length - 1];
           $scope.viewState = {};
           $scope.newState = {

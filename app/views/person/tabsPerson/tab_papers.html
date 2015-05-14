@@ -21,14 +21,14 @@
         <td>{{item.name}}</td>
         <td>{{item.docSeries}}</td>
         <td>{{item.docNum}}</td>
-        <td>{{item.dataIssued}}</td>
-        <td>{{item.dataDate}}</td>
+        <td>{{item.docDate}}</td>
+        <td>{{item.docIssued}}</td>
         <td ng-show = "isVisible.publicActiveTable">{{item.insideArray.publicActivityTypeId}}</td>
         <td ng-show = "isVisible.publicActiveTable">{{item.insideArray.awardName}}</td>
 
         <td class="editing">
-          <button class="btn btn-xs btn-warning" ng-click="editData(item)"><i class="fa fa-pencil-square-o"></i></button>
-          <button class="btn btn-xs btn-danger" ng-click="deleteData(item)"><i class="fa fa-times"></i></button>
+          <button class="btn btn-xs btn-warning" ng-click="editData(item, $index)"><i class="fa fa-pencil-square-o"></i></button>
+          <button class="btn btn-xs btn-danger" ng-click="deleteData($index)"><i class="fa fa-times"></i></button>
         </td>
       </tr>
     </table>
@@ -89,27 +89,24 @@
       <div class="row">
 
         <div class="col-xs-4">
-          <label>Дата видачі</label>
-          <input ng-model="currentObj.dataIssued"
+          <label>Дата видачі документу</label>
+          <input ng-model="currentObj.docDate"
+                 type="text"
                  datepicker-popup="yyyy-MM-dd"
                  is-open="isOpen"
                  ng-click = "isOpen = true"
                  close-text="Close"
-                 class="form-control"
                  class="form-control"
                  placeholder="РРРР-MM-ДД"
             >
         </div>
 
         <div class="col-xs-4">
-          <label>Дата завершення</label>
-          <input ng-model="currentObj.dataDate"
-                 datepicker-popup="yyyy-MM-dd"
-                 is-open="isOpen2"
-                 ng-click = "isOpen2 = true"
-                 close-text="Close"
+          <label>Ким видано документ</label>
+          <input ng-model="currentObj.docIssued"
+                 type="text"
                  class="form-control"
-                 placeholder="РРРР-MM-ДД"
+                 placeholder="ким видано"
             ><br/>
         </div>
 
