@@ -80,6 +80,7 @@ angular
           })
           .finally(function () {
             $scope.sweeper();
+            $rootScope.progress = undefined;
           });
       };
 
