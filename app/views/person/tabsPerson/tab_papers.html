@@ -1,6 +1,6 @@
 <div>
-  <form >
-    <table class="table table-hover">
+  <form>
+    <table class="table table-hover" ng-show="inputData.length">
       <thead>
       <tr>
 
@@ -9,8 +9,13 @@
         <td>{{headers[2].display}}</td>
         <td>{{headers[3].display}}</td>
         <td>{{headers[4].display}}</td>
-        <td ng-show = "isVisible.publicActiveTable">{{headers[5].display}}</td>
-        <td ng-show = "isVisible.publicActiveTable">{{headers[6].display}}</td>
+        <td>{{headers[5].display}}</td>
+        <td>{{headers[6].display}}</td>
+        <td ng-show="isVisible.publicActiveTable">{{headers[7].display}}</td>
+        <td ng-show="isVisible.publicActiveTable">{{headers[8].display}}</td>
+        <td ng-show="isVisible.studyTable">{{headers[9].display}}</td>
+        <td ng-show="isVisible.studyTable || isVisible.markTable">{{headers[10].display}}</td>
+        <td ng-show="isVisible.docPinTable">{{headers[11].display}}</td>
 
       </tr>
       </thead>
@@ -21,11 +26,17 @@
         <td>{{item.docNum}}</td>
         <td>{{item.docDate}}</td>
         <td>{{item.docIssued}}</td>
-        <td ng-show = "isVisible.publicActiveTable">{{item.award.publicActivityTypeId}}</td>
-        <td ng-show = "isVisible.publicActiveTable">{{item.award.awardName}}</td>
+        <td>{{item.isChecked ? '\u2713' : '\u2718'}}</td>
+        <td>{{item.isForeign ? '\u2713' : '\u2718'}}</td>
+        <td ng-show="isVisible.publicActiveTable">{{item.award.publicActivityTypeId}}</td>
+        <td ng-show="isVisible.publicActiveTable">{{item.award.publicActivityAwardId}}</td>
+        <td ng-show="isVisible.studyTable">{{item.honorsTypeId}}</td>
+        <td ng-show="isVisible.studyTable || isVisible.markTable">{{item.mark}}</td>
+        <td ng-show="isVisible.docPinTable">{{item.docPin}}</td>
 
         <td class="editing">
-          <button class="btn btn-xs btn-warning" ng-click="editData(item, $index)"><i class="fa fa-pencil-square-o"></i></button>
+          <button class="btn btn-xs btn-warning" ng-click="editData(item, $index)"><i class="fa fa-pencil-square-o"></i>
+          </button>
           <button class="btn btn-xs btn-danger" ng-click="deleteData($index)"><i class="fa fa-times"></i></button>
         </td>
       </tr>
@@ -34,7 +45,9 @@
     <!--is editing-->
     <div class="row">
       <div class="col-xs-2">
-        <button class="btn btn-xl btn-primary bottom-buffer" ng-click="isVisible.isCreating = !isVisible.isCreating"> Додати документ </button>
+        <button class="btn btn-xl btn-primary bottom-buffer" ng-click="isVisible.isCreating = !isVisible.isCreating">
+          Додати документ
+        </button>
       </div>
     </div>
 
@@ -46,17 +59,16 @@
             <label>Категорії документів</label>
             <select ng-model="currentObj.abbrName"
                     ng-options="opt.id as opt.abbrName for opt in paperUsage"
-                    class="form-control"
-                    ng-change="setNewData(currentObj.abbrName)">
+                    class="form-control">
             </select>
           </div>
 
           <div class="col-xs-4">
             <label>Назва документу</label>
             <select ng-model="currentObj.paperTypeId"
-                    ng-options="opt.id as opt.name for opt in newData"
+                    ng-options="opt.id as opt.name for opt in newData | filter: filterPaperTypes"
                     class="form-control"
-                    ng-change="addSelect(currentObj.paperTypeId)">
+                    ng-change="addSelect(currentObj)">
               >
             </select><br/>
           </div>
@@ -92,7 +104,7 @@
                  type="text"
                  datepicker-popup="yyyy-MM-dd"
                  is-open="isOpen"
-                 ng-click = "isOpen = true"
+                 ng-click="isOpen = true"
                  close-text="Close"
                  class="form-control"
                  placeholder="РРРР-MM-ДД"
@@ -110,7 +122,7 @@
 
       </div>
 
-      <div class = "row" ng-show = "isVisible.publicActivSelect">
+      <div class="row" ng-show="isVisible.publicActiveSelect">
         <div class="col-xs-4">
           <label>Категорії нагород</label>
           <select ng-model="currentObj.publicActivityTypeId"
@@ -123,17 +135,77 @@
 
         <div class="col-xs-4">
           <label>Нагорода</label>
-          <select ng-model="currentObj.awardName"
-                  ng-options="opt.id as opt.awardName for opt in newAddingData"
+          <select ng-model="currentObj.pickAward"
+                  ng-options="opt as opt.awardName for opt in newAddingData"
                   class="form-control">
           </select><br/>
         </div>
       </div>
 
+      <div class="row" ng-show="isVisible.studySelect || isVisible.markSelect">
+        <div class="col-xs-4">
+          <label>Середній бал</label>
+          <input ng-model="currentObj.mark"
+                 type="number"
+                 step="0.1"
+                 class="form-control"
+                 placeholder="середній бал"
+            ><br/>
+        </div>
+
+        <div class="col-xs-4" ng-show="!isVisible.markSelect">
+          <label>Тип відзнаки</label>
+          <select ng-model="currentObj.honorsTypeId"
+                  ng-options="opt.id as opt.name for opt in honorTypes"
+                  class="form-control">
+          </select>
+        </div>
+      </div>
+
+      <div class="row" ng-show="isVisible.docPinSelect">
+        <div class="col-xs-4">
+          <label>Пін­код сертифікату ЗНО</label>
+          <input ng-model="currentObj.docPin"
+                 type="text"
+                 class="form-control"
+                 placeholder="пін-код"
+            ><br/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-xs-4">
+            <div class="checkbox">
+              <label> <input type="checkbox"
+                             ng-model="currentObj.isChecked"
+                             ng-true-value="1"
+                             ng-false-value="0"
+                             ng-checked="currentObj.isChecked"> Документ звірен з оригіналом
+              </label>
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <div class="checkbox">
+              <label> <input type="checkbox"
+                             ng-model="currentObj.isForeign"
+                             ng-true-value="1"
+                             ng-false-value="0"
+                             ng-checked="currentObj.isForeign"> Документ іноземного зразка
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="row">
         <div class="col-xs-2">
-          <button class="btn btn-xl btn-success" ng-show = "isVisible.isAddToTable" ng-click="addToTable()"><i class="fa fa-plus"></i> Додати</button>
-          <button class="btn btn-xl btn-success" ng-show = "isVisible.isSaveToTable" ng-click="saveData()"><i class="fa fa-plus"></i> Зберегти</button>
+          <button class="btn btn-xl btn-success" ng-show="isVisible.isAddToTable" ng-click="addToTable()"><i
+            class="fa fa-plus"></i> Додати
+          </button>
+          <button class="btn btn-xl btn-success" ng-show="isVisible.isSaveToTable" ng-click="saveData()"><i
+            class="fa fa-plus"></i> Зберегти
+          </button>
         </div>
       </div>
     </div>
