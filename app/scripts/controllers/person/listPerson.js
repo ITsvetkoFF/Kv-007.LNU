@@ -32,7 +32,13 @@ angular.module('admissionSystemApp')
       };
 
       $scope.changePerson = function (id) {
-        $state.go('person.edit.main', {
+        $state.go('root.person.edit.main', {
+          id: id
+        });
+      };
+
+      $scope.viewPerson = function (id) {
+        $state.go('root.person.view.main', {
           id: id
         });
       };
