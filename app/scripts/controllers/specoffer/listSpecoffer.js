@@ -2,9 +2,9 @@
 
 angular.module('admissionSystemApp')
   .controller('ListSpecofferCtrl', ['$scope', '$filter', 'ngTableParams', 'SpecoffersService',
-    'decodeSpecofferSvc', '$modal', 'DictionariesSvc', 'Cookies', 'baseSpecofferData', 'copyTimeperiod',
+    'decodeSpecofferSvc', '$modal', 'DictionariesSvc', 'Cookies', 'baseSpecofferData', 'copyTimeperiod', '$rootScope',
     function ($scope, $filter, NgTableParams, SpecoffersService, decodeSpecofferSvc, $modal, DictionariesSvc, Cookies,
-              baseSpecofferData, copyTimeperiod) {
+              baseSpecofferData, copyTimeperiod, $rootScope) {
 
       $scope.isCollapsed = true;
       $scope.sweeper = function () {
@@ -74,8 +74,7 @@ angular.module('admissionSystemApp')
             }, function (error) {
               // error
             }, function (percentComplete) {
-              $scope.progress = percentComplete;
-              console.log($scope.progress);
+              $rootScope.progress = Math.round (percentComplete);
             });
           })
           .finally(function () {
