@@ -16,7 +16,12 @@ angular
       $scope.entireEnrolment.enrolment.specOfferId;
       $scope.entireEnrolment.enrolment.personId;
 
-      $scope.enrolTabs = baseFormData.tabs;
+
+      $scope.enrolTabs = angular.copy(baseFormData.tabs);
+
+      _.each($scope.enrolTabs, function (item) {
+        item.active =  $state.current.name === item.route.new || $state.current.name === item.route.edit;
+      });
 
       $scope.go = function (route) {
         if ($scope.enrolmentId) {
@@ -26,6 +31,10 @@ angular
         } else {
           $state.go(route.new);
         }
+      };
+
+      $scope.isExtendedTabsAvailable = function() {
+        return $scope.entireEnrolment.enrolment.specOfferId && $scope.entireEnrolment.enrolment.personId;
       };
 
       $scope.brosweOrEditEnrolment = function (enrolmentId) {

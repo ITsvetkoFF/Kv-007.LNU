@@ -20,9 +20,9 @@
     			<tabset>
        	 		<tab 	ng-repeat="t in enrolTabs"
        	 				 	heading="{{t.heading}}"
-       	 				 	ng-click="go(t.route)"
-       	 				 	ui-sref-active="active"
-                  disabled="!entireEnrolment.enrolment.specOfferId && !$scope.entireEnrolment.enrolment.personId">
+       	 				 	ng-click="isExtendedTabsAvailable() && go(t.route)"
+       	 				 	active="t.active"
+        					disabled="!isExtendedTabsAvailable()">
         		</tab>
     			</tabset>
     			<div ui-view></div>
