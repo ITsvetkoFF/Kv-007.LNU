@@ -6,6 +6,8 @@ angular.module('admissionSystemApp')
     function ($scope, personDecodeSvc, DictionariesSvc, basePersonData, Person, $state, getFiltredListSvc, toaster) {
 
       $scope.personDecoded = [];
+      var page = ($state.params.page) ? $state.params.page : '1',
+          itemsPerPage = ($state.params.count) ? $state.params.count : '10';
 
       $scope.getPersons = function (pageNumber, perPage, filters, sort) {
         getFiltredListSvc.getListPersons(pageNumber, perPage, filters, sort).then(function (res) {
@@ -15,6 +17,7 @@ angular.module('admissionSystemApp')
           toaster.pop('error', resp.messageType, resp.message);
         });
       };
+      $scope.getPersons(page, itemsPerPage);
 
       $scope.personFilters = basePersonData.filters;
       $scope.personSearch = basePersonData.search;

@@ -6,13 +6,18 @@ angular
     'baseListData', '$q', '$state',
     function ($scope, getFiltredListSvc, DictionariesSvc, baseListData, $q, $state) {
 
+      var page = ($state.params.page) ? $state.params.page : '1',
+          itemsPerPage = ($state.params.count) ? $state.params.count : '10';
+
+      $scope.currentPage = page;
       $scope.getEnrolments = function (pageNumber, perPage, filters, sort) {
+        $scope.currentPage = pageNumber;
         getFiltredListSvc.getListEnrolments(pageNumber, perPage, filters, sort).then(function (res) {
           $scope.enrolDecoded = res.data;
           $scope.totalEnrol = res.total;
         });
       };
-      $scope.demoClickedToasts = [];
+      $scope.getEnrolments(page, itemsPerPage);
 
       $scope.enrolSearch = baseListData.search;
       $scope.enrolHeaders = baseListData.headers;
