@@ -2,7 +2,8 @@
 
 angular.module('admissionSystemApp')
   .controller('tabPersonPapers', ['$scope', '$http', '$modal', '$rootScope', 'DictionariesSvc', '$filter', '$q',
-    function ($scope, $http, $modal, $rootScope, DictionariesSvc, $filter, $q) {
+    'paperDecodeSvc',
+    function ($scope, $http, $modal, $rootScope, DictionariesSvc, $filter, $q, paperDecodeSvc) {
 
       /* all ng-shows on a view*/
       $scope.isVisible = {
@@ -33,6 +34,38 @@ angular.module('admissionSystemApp')
         {name: 'mark', display: 'середній бал'},
         {name: 'docPin', display: 'пін-код'}
       ];
+
+      $scope.inputData = [];
+
+      $scope.$watchCollection('entirePerson.papers', function () {
+        for (var i = 0; i < $scope.entirePerson.papers.length; i++) {
+          $scope.inputData = [];
+          var tempObj = {};
+
+          (function (i) {
+
+            _.merge(tempObj, $scope.entirePerson.papers[i]);
+            paperDecodeSvc.paperDecoded(tempObj).then(function (res) {
+              $scope.inputData.push(res);
+
+              if (res.award) {
+                $scope.isVisible.publicActiveTable = true;
+              }
+              if (res.honorsTypeId) {
+                $scope.isVisible.studyTable = true;
+              }
+              if (res.mark) {
+                $scope.isVisible.markTable = true;
+              }
+              if (res.docPin) {
+                $scope.isVisible.docPinTable = true;
+              }
+
+            });
+
+          })(i);
+        }
+      });
 
       /* function that's making decoding in data */
       function pushData(data, array) {
@@ -79,7 +112,6 @@ angular.module('admissionSystemApp')
         return paper.paperUsageId === $scope.currentObj.abbrName;
       };
 
-      $scope.inputData = [];
       $scope.currentObj = {};
       $scope.currentObj.pickAward = {};
       $scope.currentObj.isChecked = 0;
@@ -150,6 +182,7 @@ angular.module('admissionSystemApp')
 
       /* the function that's editing the object, and let's to change current data in this object  */
       $scope.editData = function (item, idx) {
+        $scope.isVisible.isCreating = false;
         $scope.isVisible.publicActiveSelect = false;
         $scope.isVisible.docPinSelect = false;
         $scope.isVisible.studySelect = false;

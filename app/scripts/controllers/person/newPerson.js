@@ -40,7 +40,7 @@ angular.module('admissionSystemApp')
       $scope.deletePerson = function () {
         Person.deleteEntirePerson().then(function () {
           DictionariesSvc.clearStorageByRoute('persons');
-          $state.go('person.list');
+          $state.go('root.person.list');
         });
       };
 

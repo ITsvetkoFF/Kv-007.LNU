@@ -134,19 +134,19 @@ angular
           return getLargeDictionary('papers/types', params, false);
         },
         getPaperUsages: function () {
-          return getLargeDictionary('papers/usages');
+          return getLargeDictionary('papers/usages', false);
         },
         getHonorsTypes: function () {
-          return getLargeDictionary('honors/types');
+          return getLargeDictionary('honors/types', false);
         },
         getPublicActivities: function () {
-          return getLargeDictionary('publicactivities');
+          return getLargeDictionary('publicactivities', false);
         },
         getPublicActivitiesTypes: function () {
           return getLargeDictionary('publicactivities/types');
         },
         getPublicActivitiesAwards: function (params) {
-          return getLargeDictionary('publicactivities/' + params + '/awards');
+          return getLargeDictionary('publicactivities/' + params + '/awards', false);
         },
         getEnrolmentsSubjects: function () {
           return getLargeDictionary('enrolments/subjects');

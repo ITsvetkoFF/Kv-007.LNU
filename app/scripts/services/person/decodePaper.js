@@ -4,7 +4,7 @@ angular
   .module('admissionSystemApp')
   .factory('paperDecodeSvc', ['$q', 'DictionariesSvc', function ($q, DictionariesSvc) {
 
-    function decode(rawPapers) {
+    function decode(rawPaper) {
 
       var paperTypeNames = [],
         publicAwards1 = [],
@@ -38,20 +38,19 @@ angular
           pushAwardsData(res[3], publicAwards1);
           pushAwardsData(res[4], publicAwards2);
 
-          angular.forEach(rawPapers, function (item) {
-            item.paperTypeId = paperTypeNames[item.paperTypeId];
-            if (item.award && item.award.publicActivityAwardId < 64) {
-              item.publicActivityTypeId = 1;
-              item.publicActivityAwardId = publicAwards1[item.publicActivityAwardId];
-            } else if (item.award && item.award.publicActivityAwardId >= 64) {
-              item.publicActivityTypeId = 2;
-              item.publicActivityAwardId = publicAwards2[item.publicActivityAwardId];
-            }
-            if (item.honorsTypeId) {
-              item.honorsTypeId = decodeHonorTypes[item.honorsTypeId];
-            }
-          });
-          return rawPapers;
+          rawPaper.paperTypeId = paperTypeNames[rawPaper.paperTypeId];
+          if (rawPaper.award && rawPaper.award.publicActivityAwardId < 64) {
+            rawPaper.award.publicActivityAwardId = publicAwards1[rawPaper.award.publicActivityAwardId];
+            rawPaper.award.publicActivityTypeId = 'Всеукраїнські учнівські олімпіади із базових предметів (IV етап)';
+          } else if (rawPaper.award && rawPaper.award.publicActivityAwardId >= 64) {
+            rawPaper.award.publicActivityAwardId = publicAwards2[rawPaper.award.publicActivityAwardId];
+            rawPaper.award.publicActivityTypeId = 'Всеукраїнські конкурси — захисти науково-дослідницьких робіт учнів - членів Малої академії наук України';
+          }
+          if (rawPaper.honorsTypeId) {
+            rawPaper.honorsTypeId = decodeHonorTypes[rawPaper.honorsTypeId];
+          }
+
+          return rawPaper;
         });
     }
 
