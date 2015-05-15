@@ -2,8 +2,19 @@
 
 angular.module('admissionSystemApp')
   .controller('tabPersonPapers', ['$scope', '$http', '$modal', '$rootScope', 'DictionariesSvc', '$filter', '$q',
-    'paperDecodeSvc',
-    function ($scope, $http, $modal, $rootScope, DictionariesSvc, $filter, $q, paperDecodeSvc) {
+    'paperDecodeSvc', '$state', '$stateParams',
+    function ($scope, $http, $modal, $rootScope, DictionariesSvc, $filter, $q, paperDecodeSvc, $state,
+              $stateParams) {
+
+      if ($state.includes('root.person.view.*')) {
+        $scope.personView = true;
+      }
+
+      $scope.newDocument = function () {
+        $state.go('root.person.edit.papers', {
+          id: $stateParams.id
+        });
+      };
 
       /* all ng-shows on a view*/
       $scope.isVisible = {

@@ -48,7 +48,24 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row" ng-show="personView">
+  <form class="col-xs-12">
+    <div class="row" ng-show="personView && !inputData.length">
+      <div class="col-xs-10">
+        <h4>У даної персони немає документів</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-10">
+        <button class="btn btn-success top-buffer bottom-buffer" ng-click="newDocument()">
+          <i class="fa fa-plus"></i> Додати документ
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="row" ng-show="!personView">
   <form class="col-xs-12">
 
     <hr/>
