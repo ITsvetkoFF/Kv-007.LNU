@@ -1,5 +1,5 @@
-<div>
-  <form>
+<div class="row">
+  <div class="col-xs-12">
     <table class="table table-hover" ng-show="inputData.length">
       <thead>
       <tr>
@@ -28,8 +28,12 @@
         <td>{{item.docIssued}}</td>
         <td>{{item.isChecked ? '\u2713' : '\u2718'}}</td>
         <td>{{item.isForeign ? '\u2713' : '\u2718'}}</td>
-        <td ng-show="isVisible.publicActiveTable || item.award.publicActivityTypeId">{{item.award.publicActivityTypeId}}</td>
-        <td ng-show="isVisible.publicActiveTable || item.award.publicActivityAwardId">{{item.award.publicActivityAwardId}}</td>
+        <td ng-show="isVisible.publicActiveTable || item.award.publicActivityTypeId">
+          {{item.award.publicActivityTypeId}}
+        </td>
+        <td ng-show="isVisible.publicActiveTable || item.award.publicActivityAwardId">
+          {{item.award.publicActivityAwardId}}
+        </td>
         <td ng-show="isVisible.studyTable || item.honorsTypeId">{{item.honorsTypeId}}</td>
         <td ng-show="isVisible.studyTable || isVisible.markTable || item.mark">{{item.mark}}</td>
         <td ng-show="isVisible.docPinTable || item.docPin">{{item.docPin}}</td>
@@ -41,6 +45,12 @@
         </td>
       </tr>
     </table>
+  </div>
+</div>
+
+<div class="row">
+  <form class="col-xs-12">
+
     <hr/>
     <!--is editing-->
     <div class="row">

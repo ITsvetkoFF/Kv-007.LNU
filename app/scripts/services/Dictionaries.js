@@ -24,6 +24,7 @@ angular
 
       function getLargeDictionary (route, customParams, ifCache) {
         var deferred = $q.defer(),
+          dictionaryItems = [],
           limit,
           offset,
           i;
@@ -31,19 +32,19 @@ angular
         ifCache = (ifCache === undefined) ? true : ifCache;
 
         if (storage[route] && ifCache) {
-          deferred.resolve(storage[route]);
+          return storage[route];
         } else {
-          storage[route] = [];
+          storage[route] = deferred.promise;
           limit = 300;
           offset = 0;
 
           $http(requestConfig(route, limit, offset, customParams)).success(function callBack (data) {
 
             for (i = 0; i < data.resources.length; i += 1) {
-              storage[route].push(data.resources[i]);
+              dictionaryItems.push(data.resources[i]);
             }
             if (data.resources.length < limit) {
-              deferred.resolve(storage[route]);
+              deferred.resolve(dictionaryItems);
               return;
             }
             offset += limit;
@@ -55,7 +56,7 @@ angular
           });
         }
 
-        return deferred.promise;
+        return storage[route];
       }
 
       return {
@@ -134,19 +135,19 @@ angular
           return getLargeDictionary('papers/types', params, false);
         },
         getPaperUsages: function () {
-          return getLargeDictionary('papers/usages', false);
+          return getLargeDictionary('papers/usages');
         },
         getHonorsTypes: function () {
-          return getLargeDictionary('honors/types', false);
+          return getLargeDictionary('honors/types');
         },
         getPublicActivities: function () {
-          return getLargeDictionary('publicactivities', false);
+          return getLargeDictionary('publicactivities');
         },
         getPublicActivitiesTypes: function () {
           return getLargeDictionary('publicactivities/types');
         },
         getPublicActivitiesAwards: function (params) {
-          return getLargeDictionary('publicactivities/' + params + '/awards', false);
+          return getLargeDictionary('publicactivities/' + params + '/awards');
         },
         getEnrolmentsSubjects: function () {
           return getLargeDictionary('enrolments/subjects');
