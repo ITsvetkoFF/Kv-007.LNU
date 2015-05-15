@@ -71,7 +71,7 @@ angular
       .state('root.specoffer.new.main', {
         url: '/',
         templateUrl: '../views/specoffer/tabsSpecoffer/tab_specoffer.html',
-        controller: 'tabProposalCtrl'
+        controller: 'NewSpecofferCtrl'
       })
       .state('root.specoffer.new.subjects', {
         url: '/subjects',
@@ -150,7 +150,7 @@ angular
         // template: '<div ui-view="container"></div>'
       })
       .state('root.person.list', {
-        url: '/list',
+        url: '/list?count',
         views: {
           'container@': {
             templateUrl: '../views/person/list_person.html',
@@ -266,7 +266,7 @@ angular
         abstract: true
       })
       .state('root.enrolment.list', {
-        url: '/list',
+        url: '/list?count',
         views: {
           'container@': {
             templateUrl: '../views/enrolment/list_enrolments.html',
@@ -343,6 +343,7 @@ angular
       .otherwise('/specoffer/list');
   })
 
-  .config(function (uiSelectConfig) {
+  .
+  config(function (uiSelectConfig) {
     uiSelectConfig.theme = 'bootstrap';
   });
