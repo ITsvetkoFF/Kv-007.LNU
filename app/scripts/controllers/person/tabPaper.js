@@ -48,7 +48,6 @@ angular.module('admissionSystemApp')
       }
 
       var paperTypeNames = [],
-        paperUsageNames = [],
         publicAwards = [],
         publicActivities = [],
         decodeHonorTypes = [];
@@ -60,7 +59,6 @@ angular.module('admissionSystemApp')
         DictionariesSvc.getHonorsTypes()
       ])
         .then(function (res) {
-          pushData(res[0], paperUsageNames);
           $scope.paperUsage = res[0];
           pushData(res[1], paperTypeNames);
           $scope.newData = res[1];
@@ -133,7 +131,6 @@ angular.module('admissionSystemApp')
       };
 
       function decodeData(obj) {
-        obj.abbrName = paperUsageNames[obj.abbrName];
         obj.paperTypeId = paperTypeNames[obj.paperTypeId];
         obj.publicActivityTypeId = publicActivities[obj.publicActivityTypeId];
         obj.publicActivityAwardId = publicAwards[obj.publicActivityAwardId];
@@ -158,6 +155,10 @@ angular.module('admissionSystemApp')
         $scope.isVisible.studySelect = false;
         $scope.isVisible.markSelect = false;
 
+        objToEdit = {};
+        objToEditDecoded = {};
+        $scope.currentObj = {};
+
         objToEdit = $scope.entirePerson.papers[idx];
         _.merge($scope.currentObj, objToEdit);
         objToEditDecoded = $scope.inputData[idx];
@@ -172,10 +173,10 @@ angular.module('admissionSystemApp')
           }
         });
 
-        if (objToEdit.award.publicActivityAwardId < 64) {
+        if (objToEdit.award && objToEdit.award.publicActivityAwardId < 64) {
           $scope.currentObj.publicActivityTypeId = 1;
           $scope.setAdditionalData($scope.currentObj.publicActivityTypeId);
-        } else if (objToEdit.award.publicActivityAwardId >= 64) {
+        } else if (objToEdit.award && objToEdit.award.publicActivityAwardId >= 64) {
           $scope.currentObj.publicActivityTypeId = 2;
           $scope.setAdditionalData($scope.currentObj.publicActivityTypeId);
         }
